@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>訪視單後台管理平台</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ControlPanel2.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/xlsx.core.min.js"></script>
+    <script type="text/javascript" src="js/FileSaver.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/ControlPanel2.js"></script>
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" data-spy="affix">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">訪視單後台管理平台</a>
+                <button type="button" class="btn btn-default navbar-btn" id="Showbtn2">匯出表單</button>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar end -->
+    <div class="panel panel-default" id="s0">
+        <div class="panel-heading">病人資料匯入系統</div>
+        <div class="panel-body">
+            <div class="btn-group-toolbar" data-toggle="buttons">
+                <label class="btn btn-primary Small-Width" id="btnQ0-1-1">
+                    <input type="radio" name="Q0-1" id="Q0-1-1" value="1">從檔案匯入
+                </label>
+                <label class="btn btn-primary Small-Width" id="btnQ0-1-2">
+                    <input type="radio" name="Q0-1" id="Q0-1-2" value="2">臨時新增
+                </label>
+            </div>
+            <div id="Show0">
+                <br> 請選擇檔案 :
+                <br>
+                <input type="file" id="excel-file">
+                <br>
+                <br>
+            </div>
+            <div id="Show1">
+                <br>
+                <div class="radio">
+                    <div class="row">
+                        <p class="col-md-3"></p>
+                        <p class="col-md-2">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：
+                            <input type="text" id="info01" style="height:1.5em" size=15>
+                        </p>
+                        <p class="col-md-2">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;別：
+                            <select id="info02">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </p>
+                        <p class="col-md-2">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;齡：
+                            <input type="text" id="info03" style="height:1.5em" size=15>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-3"></p>
+                        <p class="col-md-2">病&nbsp;&nbsp;歷&nbsp;&nbsp;號：
+                            <input type="text" id="info04" style="height:1.6em" size=15>
+                        </p>
+                        <p class="col-md-2">床&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;號：
+                            <input type="text" id="info05" style="height:1.5em" size=15>
+                        </p>
+                        <p class="col-md-2">序&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;號：
+                            <input type="text" id="info06" style="height:1.5em" size=15>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-3"></p>
+                        <p class="col-md-2">日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期：
+                            <input type="text" id="info07" style="height:1.5em" size=15>
+                        </p>
+                        <p class="col-md-2">診&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;斷：
+                            <input type="text" id="info08" style="height:1.5em" size=15>
+                        </p>
+                        <p class="col-md-2">術&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式：
+                            <input type="text" id="info09" style="height:1.5em" size=15>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-3"></p>
+                        <p class="col-md-2">手術醫師：
+                            <input type="text" id="info10" style="height:1.5em" size=15>
+                        </p>
+                        <p class="col-md-2">科&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;別：
+                            <select name="division" id="info11">
+                                <option data-id="1" value="1">大外科</option>
+                                <option data-id="2" value="2">小外科</option>
+                            </select>
+                            <span id="Textdivision1">
+                            <span id="info12">
+                                <select name="bigout">
+                                    <option value="1">一般外科</option>
+                                    <option value="2">胸腔外科</option>
+                                    <option value="3">神經外科</option>
+                                    <option value="4">整形外科</option>
+                                    <option value="5">乳房外科</option>
+                                    <option value="6">心臟外科</option>
+                                    <option value="7">小兒外科</option>
+                                </select>
+                            </span>
+                            </span>
+                            <span id="info13"></span>
+                            <span id="info14"></span>
+                        </p>
+                        <p class="col-md-3">麻醉結束時間：
+                            <input type="text" id="info15" style="height:1.5em" size=15>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-3"></p>
+                        <p class="col-md-2">麻&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式：
+                            <input type="text" id="info16" style="height:1.6em" size=15>
+                        </p>
+                        <p class="col-md-2">A&nbsp;&nbsp;S&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;：
+                            <span id="asa">
+                                <select id="info17">
+                                    <option value="1">I</option>
+                                    <option value="2">II</option>
+                                    <option value="3">III</option>
+                                    <option value="4">IV</option>
+                                    <option value="5">V</option>
+                                    <option value="6">VI</option>
+                                    <option value="7">IE</option>
+                                    <option value="8">IIE</option>
+                                    <option value="9">IIIE</option>
+                                    <option value="10">IVE</option>
+                                    <option value="11">VE</option>
+                                    <option value="12">VIE</option>
+                                </select>
+                            </span>
+                        </p>
+                        <p class="col-md-2">麻醉醫師：
+                            <select name="doc" id="info18">
+                                <option value="1">謝承原</option>
+                                <option value="2">劉映汝</option>
+                                <option value="3">林怡萱</option>
+                                <option value="4">王曼玲</option>
+                                <option value="5">吳峻宇</option>
+                                <option value="6">莊岳勳</option>
+                                <option value="7">許彥鈞</option>
+                                <option value="8">王憶嘉 </option>
+                                <option value="9">周韋翰</option>
+                                <option value="10">蔡奉芳</option>
+                                <option value="11">洪明輝</option>
+                                <option value="12">黃信豪</option>
+                                <option value="13">劉治民</option>
+                                <option value="14">林峯盛</option>
+                                <option value="15">林至芃</option>
+                                <option value="16">葉育彰</option>
+                                <option value="17">詹光政</option>
+                                <option value="18">蕭柏妮</option>
+                                <option value="19">葉惠敏</option>
+                                <option value="20">趙安怡</option>
+                                <option value="21">林佩玲</option>
+                                <option value="22">黃啟祥</option>
+                                <option value="23">李宗勳</option>
+                                <option value="24">范守仁</option>
+                                <option value="25">鄭雅蓉</option>
+                                <option value="26">孫維仁</option>
+                                <option value="27">王明鉅</option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+                <div id="Show1btn" align='center'>
+                    <button type='button' id='Showbtn1' align='center'>新增病人資料</button>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div id="htmlout"></div>
+        </div>
+</body>
+
+</html>
