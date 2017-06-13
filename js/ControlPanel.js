@@ -155,6 +155,77 @@
 
         });
 
+        $("#Showbtn3").click(function() {
+
+            //console.log('start');
+            //var files = e.target.files;
+            //console.log(files[0]);
+            var fileReader = new FileReader();
+
+            fileReader.onload = function(ev) {
+                var data = ev.target.result
+
+                var workbook = XLSX.read(data, {
+                    type: 'binary'
+                });
+
+                document.getElementById('htmlout').innerHTML = "";
+                var result = [];
+                workbook.SheetNames.forEach(function(sheetName) {
+                    var htmlstr = XLSX.write(workbook, {
+                        sheet: sheetName,
+                        type: 'binary',
+                        bookType: 'html'
+                    });
+                    var wstemp1 = XLSX.write(workbook, {
+                        sheet: sheetName,
+                        type: 'binary',
+                        bookType: 'csv'
+                    });
+
+                    wstemp = wstemp1.split("\n");
+
+                    //var wstemp3 =   
+
+                    document.getElementById('htmlout').innerHTML += htmlstr;
+                    //RowCnt++;
+                    $("#T0").remove();
+                    console.log(htmlstr);
+                });
+                $("#Show2btn").show();
+                //document.getElementById('btn').innerHTML = "<br><br>"
+                RowCnt = 0;
+
+                while ($("#T" + (RowCnt + 2)).length == 1) {
+                    RowCnt++;
+                }
+                console.log(RowCnt);
+
+            };
+
+            var oReq = new XMLHttpRequest();
+
+            oReq.open("GET", "https://pandelaz.github.io/NTUTForm/ControlPanel_TestFile.xlsx", true);
+            oReq.responseType = "blob";
+            oReq.onload = function(e) {
+              var bbuffer = oReq.response; // not responseText
+              //console.log(bbuffer);
+              fileReader.readAsBinaryString(bbuffer);
+              /* ... */
+            }
+            oReq.send();
+
+            //fileReader.readAsBinaryString(files[0]);
+       
+
+
+
+        });
+
+
+
+
+
         function Mfunction() {
             if ($("#info02").val() == 1)
                 return ("M");
