@@ -56,11 +56,11 @@ $(document).ready(function() {
 
         patient_info["其他交班事項"] = $("#TQ1").val();
 
-        patient_info["備袋"] = $("#p2").val();
+        patient_info["備袋"] = $("#p2").html();
 
         patient_info["備袋狀況"] = RadioCkeck("3");
 
-        patient_info["U1126"] = $("#p4").val();
+        patient_info["U1126"] = $("#p4").html();
 
         patient_info["用藥資料單完成"] = RadioCkeck("5");
 
