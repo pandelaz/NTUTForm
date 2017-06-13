@@ -286,7 +286,7 @@ $(document).ready(function() {
             if (pertemp == "") {
                 pertemp = "已完成";
             } else {
-                pertemp = "|已完成";
+                pertemp = pertemp + "|已完成";
             }
         }
 
