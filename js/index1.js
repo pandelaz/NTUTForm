@@ -343,11 +343,11 @@ $(document).ready(function() {
     $("#Q5-1-3").click(function() {
         if (cnt513 == 0) {
             cnt513 = 1;
-            //$("#Q5-1-3").attr("class", "btn btn-danger");
+            $("#Q5-1-3").attr("class", "btn btn-danger");
             $("#Q5-1-3Text").show();
         } else {
             cnt513 = 0;
-            //$("#Q5-1-3").attr("class", "btn btn-primary");
+            $("#Q5-1-3").attr("class", "btn btn-primary");
             $("#Q5-1-3Text").hide();
         }
     });
