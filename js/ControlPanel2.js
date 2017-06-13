@@ -565,7 +565,7 @@
                         window.indexedDB.deleteDatabase("TestDatabase");
                         window.indexedDB.deleteDatabase("Form1Database");
                         window.indexedDB.deleteDatabase("Form2Database");
-                        window.indexedDB.deleteDatabase("Form3Database");
+                        window.indexedDB.deleteDatabase("From3Database");
                         location.assign(window.location.href);
 
                     }
