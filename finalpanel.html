@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>訪視單後台管理平台</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ControlPanel.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/Blob.js"></script>
+    <script type="text/javascript" src="js/FileSaver.js"></script>
+    <script type="text/javascript" src="js/finalpanel.js"></script>
+
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" data-spy="affix">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">訪視單後臺管理平台</a>
+                <button type="button" class="btn btn-default navbar-btn" id="Showbtn3">Test Excel</button>
+            </div>
+            <div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#s0">訪問後匯出系統</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar end -->
+    <div class="panel panel-default" id="s0">
+        <div class="panel-heading">訪問後匯出系統</div>
+        <div class="panel-body">
+            <div class="btn-group-toolbar" data-toggle="buttons">
+                <label class="btn btn-primary Small-Width" id="btnQ0-1-1">
+                    <input type="radio" name="Q0-1" id="Q0-1-1" value="1">從檔案匯入
+                </label>
+            </div>
+            <div id="Show0">
+                <br> 請選擇檔案 :
+                <br>
+                <input type="file" id="excel-file">
+                <br>
+                <br>
+            </div>            
+            
+            <div id="htmlout"></div>
+
+            <div id="Show2btn" align='center'><br><br><button type='button' align='center' id='Showbtn2'>匯出至資料庫</button></div>
+        </div>
+    </div>
+</body>
+
+</html>
