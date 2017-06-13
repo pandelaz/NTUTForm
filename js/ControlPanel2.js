@@ -566,6 +566,7 @@
                         window.indexedDB.deleteDatabase("Form1Database");
                         window.indexedDB.deleteDatabase("Form2Database");
                         window.indexedDB.deleteDatabase("Form3Database");
+                        location.assign(window.location.href);
 
                     }
                 };
@@ -585,6 +586,86 @@
             };
             //===========================================
         }
+
+        $("#Showbtn3").click(function() {
+            //console.log('start');
+            //var files = e.target.files;
+            //console.log(files);
+            var fileReader = new FileReader();
+
+            fileReader.onload = function(ev) {
+                var data = ev.target.result
+
+                var workbook = XLSX.read(data, {
+                    type: 'binary'
+                });
+
+                document.getElementById('htmlout').innerHTML = "";
+                var result = [];
+                workbook.SheetNames.forEach(function(sheetName) {
+                    //=========================================================================
+                    //html顯示表格
+                    var htmlstr = XLSX.write(workbook, {
+                        sheet: sheetName,
+                        type: 'binary',
+                        bookType: 'html'
+                    });
+                    RowCnt = -1;
+                    document.getElementById('htmlout').innerHTML = htmlstr;
+                    while ($("#T" + (RowCnt + 1)).length == 1) {
+                        RowCnt++;
+                    }
+                    //console.log(RowCnt);
+
+                    var temp = htmlstr.split("</td>");
+                    console.log(temp);
+                    var temp2 = temp[0].split("<td>");
+                    htmlstr = temp2[0] + "<td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
+                    //console.log(temp);
+                    var i = 0;
+
+                    for (i = 15; i < temp.length - 1; i = i + 15) {
+                        //console.log(i);
+                        var temp3 = temp[i].split("<td>");
+                        var temp4 = temp[i + 6].split("<td>");
+
+                        htmlstr += temp3[0] + temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
+                        htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + (i / 15) + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
+                        htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + (i / 15) + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
+                        htmlstr += "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + (i / 15) + "a3' href='index2.html?ssn=" + temp4[1] + "'>未填</a></td>";
+                    }
+                    htmlstr += temp[temp.length - 1];
+                    //console.log(htmlstr);
+                    document.getElementById('htmlout').innerHTML = htmlstr;
+                    $("#s0").height("auto");
+                    //console.log(htmlstr);
+                    //=========================================================================
+                    //儲存病人資訊至DB
+                    var patient_info = to_json(workbook);
+
+                    write_to_db(db, patient_info.SheetJS);
+
+                }); //workbook.SheetNames.forEach
+            }; //fileReader.onload
+
+            var oReq = new XMLHttpRequest();
+
+            oReq.open("GET", "https://pandelaz.github.io/NTUTForm/ControlPanel2_TestFile.xlsx", true);
+            oReq.responseType = "blob";
+            oReq.onload = function(e) {
+              var bbuffer = oReq.response; // not responseText
+              //console.log(bbuffer);
+              fileReader.readAsBinaryString(bbuffer);
+              /* ... */
+            }
+            oReq.send();
+
+            
+
+
+        });
+
+
         $("#Showbtn2").click(function() {
 
             //console.log($("#htmlout").html());
