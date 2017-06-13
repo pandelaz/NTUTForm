@@ -140,10 +140,12 @@
            for (var i = 1; i <= 5; i++) {
                try {
                    //if ($('input[name=Q1-' + i + ']:checked').val() != undefined) {
-                   var t = $('#btnQ1-' + i + '-' + $('input[name=Q1-' + i + ']:checked').val()).html().split(">");
-                   var t1 = t[1].split("\n");
+                   //var t = $('#btnQ1-' + i + '-' + $('input[name=Q1-' + i + ']:checked').val()).html().split(">");
+                   //var t1 = t[1].split("\n");
+
+                   var t1 = RadioCkeck("1-" + i);
                    //console.log($("#s1-" + i).find(".panel-heading").html() + " : " + t1[0]);
-                   patient_info[$("#s1-" + i).find(".panel-heading").html()] = t1[0];
+                   patient_info[$("#s1-" + i).find(".panel-heading").html()] = t1;
                    if (i == 2) {
                        //console.log($("Q1-2Text").html());
                        patient_info["回答者-其他回答者"] = $("#TQ1-2").val();
