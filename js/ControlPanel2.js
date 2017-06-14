@@ -131,7 +131,7 @@
             }
         }
         //================================================
-        function write_temp_html(vardb, data,curl) {
+        function write_temp_html(vardb, data, curl) {
             //console.log(vardb);
             var transaction = vardb.transaction(["mList"], "readwrite");
             //console.log(data);
@@ -224,6 +224,12 @@
             while ($("#T" + (RowCnt + 1)).length == 1) {
                 RowCnt++;
             }
+            
+            //console.log(RowCnt);
+            if (RowCnt == -1) {
+                $("#htmlout").html("<table><tr id='T0'><td>姓名</td><td>年齡</td><td>病歷號</td><td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td></tr></table>");
+                RowCnt++;
+            }
             RowCnt++;
             $("table").html($("table").html() +
                 "<tr id='T" + RowCnt + "'>" +
@@ -235,7 +241,9 @@
                 "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
                 "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
                 "</tr>");
-            console.log(RowCnt);
+            //console.log(RowCnt);
+
+
 
             var wstemp = [{
                 "機號": "",
@@ -294,7 +302,7 @@
                     type: 'binary'
                 });
 
-                document.getElementById('htmlout').innerHTML = "";
+                //document.getElementById('htmlout').innerHTML = "";
                 var result = [];
                 workbook.SheetNames.forEach(function(sheetName) {
                     //=========================================================================
@@ -305,16 +313,25 @@
                         bookType: 'html'
                     });
                     RowCnt = -1;
-                    document.getElementById('htmlout').innerHTML = htmlstr;
                     while ($("#T" + (RowCnt + 1)).length == 1) {
                         RowCnt++;
                     }
+
+                    //document.getElementById('htmlout').innerHTML = htmlstr;
+
                     //console.log(RowCnt);
 
                     var temp = htmlstr.split("</td>");
-                    console.log(temp);
+                    //console.log(temp);
                     var temp2 = temp[0].split("<td>");
-                    htmlstr = temp2[0] + "<td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
+
+                    if (RowCnt == -1) {
+                        htmlstr = temp2[0] + "<td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
+                        RowCnt++;
+                    } else {
+                        var temp5 = $("#htmlout").html().split("</table>");
+                        htmlstr = temp5[0];
+                    }
                     //console.log(temp);
                     var i = 0;
 
@@ -322,17 +339,22 @@
                         //console.log(i);
                         var temp3 = temp[i].split("<td>");
                         var temp4 = temp[i + 6].split("<td>");
-
+                        RowCnt++;
                         htmlstr += temp3[0] + temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
-                        htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + (i / 15) + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
-                        htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + (i / 15) + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
-                        htmlstr += "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + (i / 15) + "a3' href='index2.html?ssn=" + temp4[1] + "'>未填</a></td>";
+                        htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
+                        htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
+                        htmlstr += "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + temp4[1] + "'>未填</a></td>";
                     }
                     htmlstr += temp[temp.length - 1];
-                    //console.log(htmlstr);
+                    //console.log(temp[temp.length - 1]);
                     document.getElementById('htmlout').innerHTML = htmlstr;
                     $("#s0").height("auto");
-                    //console.log(htmlstr);
+                    console.log(htmlstr);
+
+
+
+
+
                     //=========================================================================
                     //儲存病人資訊至DB
                     var patient_info = to_json(workbook);
@@ -446,25 +468,25 @@
                             ArrForm2[0][f2cnt] = f2db1;
                             f2cnt++;
                         }
-                        var f2cnt1=1;
-                        var f2cnt2=0;
+                        var f2cnt1 = 1;
+                        var f2cnt2 = 0;
 
                         for (var f2db in Form2db) {
-                          ArrForm2[f2cnt1] = new Array();
-                          for (var f2db1 in Form2db[f2db]) {
-                              //console.log(Form1db[f1db][f1db1]);
-                              
-                              ArrForm2[f2cnt1][f2cnt2] = Form2db[f2db][f2db1];
-                              f2cnt2++;
-                          }
-                          f2cnt1++;  
-                          f2cnt2=0;                      
+                            ArrForm2[f2cnt1] = new Array();
+                            for (var f2db1 in Form2db[f2db]) {
+                                //console.log(Form1db[f1db][f1db1]);
+
+                                ArrForm2[f2cnt1][f2cnt2] = Form2db[f2db][f2db1];
+                                f2cnt2++;
+                            }
+                            f2cnt1++;
+                            f2cnt2 = 0;
                         }
                         console.log(Form2db);
                         console.log(ArrForm2);
 
                         ReadF3db(people_id);
-                        
+
                     }
                 };
 
@@ -515,19 +537,19 @@
                             ArrForm3[0][f3cnt] = f3db1;
                             f3cnt++;
                         }
-                        var f3cnt1=1;
-                        var f3cnt2=0;
+                        var f3cnt1 = 1;
+                        var f3cnt2 = 0;
 
                         for (var f3db in Form3db) {
-                          ArrForm3[f3cnt1] = new Array();
-                          for (var f3db1 in Form3db[f3db]) {
-                              //console.log(Form1db[f1db][f1db1]);
-                              
-                              ArrForm3[f3cnt1][f3cnt2] = Form3db[f3db][f3db1];
-                              f3cnt2++;
-                          }
-                          f3cnt1++;  
-                          f3cnt2=0;                      
+                            ArrForm3[f3cnt1] = new Array();
+                            for (var f3db1 in Form3db[f3db]) {
+                                //console.log(Form1db[f1db][f1db1]);
+
+                                ArrForm3[f3cnt1][f3cnt2] = Form3db[f3db][f3db1];
+                                f3cnt2++;
+                            }
+                            f3cnt1++;
+                            f3cnt2 = 0;
                         }
                         //console.log(Form3db);
                         //console.log(ArrForm3);
@@ -653,14 +675,14 @@
             oReq.open("GET", "https://pandelaz.github.io/NTUTForm/ControlPanel2_TestFile2.xlsx", true);
             oReq.responseType = "blob";
             oReq.onload = function(e) {
-              var bbuffer = oReq.response; // not responseText
-              //console.log(bbuffer);
-              fileReader.readAsBinaryString(bbuffer);
-              /* ... */
+                var bbuffer = oReq.response; // not responseText
+                //console.log(bbuffer);
+                fileReader.readAsBinaryString(bbuffer);
+                /* ... */
             }
             oReq.send();
 
-            
+
 
 
         });
@@ -718,19 +740,19 @@
                             ArrForm1[0][f1cnt] = f1db1;
                             f1cnt++;
                         }
-                        var f1cnt1=1;
-                        var f1cnt2=0;
+                        var f1cnt1 = 1;
+                        var f1cnt2 = 0;
 
                         for (var f1db in Form1db) {
-                          ArrForm1[f1cnt1] = new Array();
-                          for (var f1db1 in Form1db[f1db]) {
-                              //console.log(Form1db[f1db][f1db1]);
-                              
-                              ArrForm1[f1cnt1][f1cnt2] = Form1db[f1db][f1db1];
-                              f1cnt2++;
-                          }
-                          f1cnt1++;  
-                          f1cnt2=0;                      
+                            ArrForm1[f1cnt1] = new Array();
+                            for (var f1db1 in Form1db[f1db]) {
+                                //console.log(Form1db[f1db][f1db1]);
+
+                                ArrForm1[f1cnt1][f1cnt2] = Form1db[f1db][f1db1];
+                                f1cnt2++;
+                            }
+                            f1cnt1++;
+                            f1cnt2 = 0;
                         }
                         console.log(ArrForm1);
 
@@ -816,7 +838,7 @@
                     "HtmlTemp": $("#htmlout").html()
                 }];
                 //console.log(htemp[0]);
-                write_temp_html(db, htemp[0],$("#" + e.target.id).attr('href'));
+                write_temp_html(db, htemp[0], $("#" + e.target.id).attr('href'));
                 console.log($("#" + e.target.id).attr('href'));
 
                 //=============================================================
