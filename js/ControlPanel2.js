@@ -193,6 +193,7 @@
         $("#Show1").hide();
         $("#Show0").hide();
         $("#Show1btn").hide();
+        $("#info13").hide();
 
         $("#division").change(function() {
             var id = $("#division").find(':selected').data('id');
@@ -622,7 +623,7 @@
                     type: 'binary'
                 });
 
-                document.getElementById('htmlout').innerHTML = "";
+                //document.getElementById('htmlout').innerHTML = "";
                 var result = [];
                 workbook.SheetNames.forEach(function(sheetName) {
                     //=========================================================================
@@ -633,16 +634,25 @@
                         bookType: 'html'
                     });
                     RowCnt = -1;
-                    document.getElementById('htmlout').innerHTML = htmlstr;
                     while ($("#T" + (RowCnt + 1)).length == 1) {
                         RowCnt++;
                     }
+
+                    //document.getElementById('htmlout').innerHTML = htmlstr;
+
                     //console.log(RowCnt);
 
                     var temp = htmlstr.split("</td>");
-                    console.log(temp);
+                    //console.log(temp);
                     var temp2 = temp[0].split("<td>");
-                    htmlstr = temp2[0] + "<td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
+
+                    if (RowCnt == -1) {
+                        htmlstr = temp2[0] + "<td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
+                        RowCnt++;
+                    } else {
+                        var temp5 = $("#htmlout").html().split("</table>");
+                        htmlstr = temp5[0];
+                    }
                     //console.log(temp);
                     var i = 0;
 
@@ -650,22 +660,27 @@
                         //console.log(i);
                         var temp3 = temp[i].split("<td>");
                         var temp4 = temp[i + 6].split("<td>");
-
+                        RowCnt++;
                         htmlstr += temp3[0] + temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
-                        htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + (i / 15) + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
-                        htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + (i / 15) + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
-                        htmlstr += "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + (i / 15) + "a3' href='index2.html?ssn=" + temp4[1] + "'>未填</a></td>";
+                        htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
+                        htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
+                        htmlstr += "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + temp4[1] + "'>未填</a></td>";
                     }
                     htmlstr += temp[temp.length - 1];
-                    //console.log(htmlstr);
+                    //console.log(temp[temp.length - 1]);
                     document.getElementById('htmlout').innerHTML = htmlstr;
                     $("#s0").height("auto");
                     //console.log(htmlstr);
+
                     //=========================================================================
                     //儲存病人資訊至DB
                     var patient_info = to_json(workbook);
 
                     write_to_db(db, patient_info.SheetJS);
+
+                    //=========================================================================
+
+
 
                 }); //workbook.SheetNames.forEach
             }; //fileReader.onload
@@ -849,6 +864,25 @@
             }
         });
 
+       $("#info11").change(function() {
+           id = $("#info11").find(':selected').data('id');
+           //或是以下方式也可以
+           //id= $(this).find(':selected').attr('data-id');              
+
+           if (id == 1) {
+               //$("#division1Text").remove();
+               //$("#division3Text").remove();
+               $("#info13").hide();
+               $("#info12").show();
+           }
+           if (id == 2) {
+               $("#info12").hide();
+               $("#info13").show();
+
+               //$("#division2Text").remove();
+               //$("#Textdivision3").append('<span id="division3Text"><select name="bigout"><option value="1">骨科</option><option value="2">泌尿科</option><option value="3">耳鼻喉科</option><option value="4">牙科</option><option value="5">皮膚科</option><option value="6">疼痛科</option></select></span>');
+           }
+       });
 
 
     });
