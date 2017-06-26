@@ -2461,6 +2461,7 @@ pre code {
 
 @media (min-width:992px) {
     .col-md-1,
+    .col-md-1-5,
     .col-md-10,
     .col-md-11,
     .col-md-12,
@@ -2473,6 +2474,9 @@ pre code {
     .col-md-8,
     .col-md-9 {
         float: left
+    }
+    .col-md-1-5 {
+        width: 12.4995%
     }
     .col-md-12 {
         width: 100%
@@ -3662,7 +3666,7 @@ textarea.input-lg {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
-    font-size: 14px;
+    /*font-size: 14px;*/
     font-weight: 400;
     line-height: 1.42857143;
     text-align: center;
