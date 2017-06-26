@@ -12,7 +12,7 @@
     <script src="js/index.js"></script>
 </head>
 
-<body>
+<body id="body" style="font-size: 14px;">
     <!-- navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" data-spy="affix">
         <div class="container-fluid">
@@ -24,7 +24,8 @@
                 </button>
                 <a class="navbar-brand" href="#">麻醉術後訪視單</a>
                 <a class="btn btn-default navbar-btn" id="saveinfo" href="ControlPanel2.html">儲存</a>
-                
+                <input type="button" class="btn btn-default navbar-btn" id="fontbig" value="＋">
+                <input type="button" class="btn btn-default navbar-btn" id="fontsmall" value="－">
             </div>
             <div>
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -76,21 +77,31 @@
             <div class="panel panel-default" id="s0">
                 <div class="panel-heading">病人資訊</div>
                 <div class="panel-body">
-                    <p id="ss01" class="col-md-4">姓&nbsp;&nbsp;&nbsp;名：</p>
-                    <p id="ss02" class="col-md-4">床&nbsp;&nbsp;&nbsp;號：</p>
-                    <p id="ss03" class="col-md-4">性&nbsp;&nbsp;&nbsp;別：</p>
-                    <p id="ss04" class="col-md-4">年&nbsp;&nbsp;&nbsp;齡：</p>
-                    <p id="ss05" class="col-md-4">序&nbsp;&nbsp;&nbsp;號：</p>
-                    <p id="ss06" class="col-md-4">診&nbsp;&nbsp;&nbsp;斷：</p>
-                    <p id="ss07" class="col-md-4">日&nbsp;&nbsp;&nbsp;期：</p>
-                    <p id="ss08" class="col-md-4">術&nbsp;&nbsp;&nbsp;式：</p>
-                    <p id="ss09" class="col-md-4">A&nbsp;S&nbsp;A&nbsp;：</p>
-                    <p id="ss010" class="col-md-4">科&nbsp;&nbsp;&nbsp;別：</p>
-                    <p id="ss011" class="col-md-4">麻&nbsp;&nbsp;&nbsp;式：</p>
-                    <p id="ss012" class="col-md-4">病歷號：</p>
-                    <p id="ss013" class="col-md-4">手術醫師：</p>
-                    <p id="ss014" class="col-md-4">麻醉醫師：</p>
-                    <p id="ss015" class="col-md-4">麻醉結束時間：</p>
+                    <div class="row">
+                        <p class="col-md-4">姓&nbsp;&nbsp;&nbsp;名：<input id="ss01" type="text" value="" size="25"></p>
+                        <p class="col-md-4">床&nbsp;&nbsp;&nbsp;號：<input id="ss02" type="text" value="" size="25"></p>
+                        <p class="col-md-4">性&nbsp;&nbsp;&nbsp;別：<input id="ss03" type="text" value="" size="25"></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-4">年&nbsp;&nbsp;&nbsp;齡：<input id="ss04" type="text" value="" size="25"></p>
+                        <p class="col-md-4">序&nbsp;&nbsp;&nbsp;號：<input id="ss05" type="text" value="" size="25"></p>
+                        <p class="col-md-4">診&nbsp;&nbsp;&nbsp;斷：<input id="ss06" type="text" value="" size="25"></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-4">日&nbsp;&nbsp;&nbsp;期：<input id="ss07" type="text" value="" size="25"></p>
+                        <p class="col-md-4">術&nbsp;&nbsp;&nbsp;式：<input id="ss08" type="text" value="" size="25"></p>
+                        <p class="col-md-4">A&nbsp;S&nbsp;A&nbsp;：<input id="ss09" type="text" value="" size="25"></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-4">科&nbsp;&nbsp;&nbsp;別：<input id="ss010" type="text" value="" size="25"></p>
+                        <p class="col-md-4">麻&nbsp;&nbsp;&nbsp;式：<input id="ss011" type="text" value="" size="25"></p>
+                        <p class="col-md-4">病歷號：<input id="ss012" type="text" value="" size="25"></p>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-4">手術醫師：<input id="ss013" type="text" value="" size="24"></p>
+                        <p class="col-md-4">麻醉醫師：<input id="ss014" type="text" value="" size="24"></p>
+                        <p class="col-md-4">麻醉結束時間：<input id="ss015" type="text" value="" size="20"></p>
+                    </div>
                 </div>
             </div>
             <!-- Question0 end -->
@@ -447,7 +458,7 @@
                                     </label>
                                 </div>
                                 <span id="Q2-5Text">
-                                    <br><br>疼痛程度 : <input type="text" size="5" id="TQ2-5" style="height:1.5em;" />分
+                                    <br><br>疼痛程度 : <input type="text" size="5" id="QT2-5" style="height:1.5em;" />分
                                     <br><br>處置狀況<br>
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-primary" id="btnQ2-5-3-1">
@@ -947,14 +958,14 @@
                             <hr>呼吸抑制&nbsp;&nbsp;
                             <div class="btn-group-toolbar" data-toggle="buttons">
                                 <label class="btn btn-primary Large-Width" id="btnQs3-2-1-1">
-                                    <input type="radio" name="Qs3-2-1" id="Qs3-2-1-1" value="1">無
+                                    <input type="radio" name="Qs3-2-1" id="Qs3-2-1-1" value="1">無                 
                                 </label>
                                 <label class="btn btn-primary Large-Width" id="btnQs3-2-1-2">
-                                    <input type="radio" name="Qs3-2-1" id="Qs3-2-1-2" value="2">輕微
-                                    < 10次/分 </label>
-                                        <label class="btn btn-primary Large-Width" id="btnQs3-2-1-3">
-                                            <input type="radio" name="Qs3-2-1" id="Qs3-2-1-3" value="3">嚴重
-                                            < 8次/分 </label>
+                                    <input type="radio" name="Qs3-2-1" id="Qs3-2-1-2" value="2">輕微 10次/分 
+                                </label>
+                                <label class="btn btn-primary Large-Width" id="btnQs3-2-1-3">
+                                    <input type="radio" name="Qs3-2-1" id="Qs3-2-1-3" value="3">嚴重 8次/分 
+                                </label>
                             </div>
                             <br>
                             <br>嗜睡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
