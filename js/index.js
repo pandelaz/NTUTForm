@@ -67,13 +67,13 @@
                var Today = new Date();
                //document.write("今天日期是 " + Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
                $("#ss07").append(Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "  " + Today.getHours() + ":" + Today.getMinutes());
-               $("#ss012").append(request.result.病歷號);
-               $("#ss01").append(request.result.姓名);
-               $("#ss03").append(request.result.性別);
-               $("#ss04").append(request.result.年齡);
-               $("#ss06").append(request.result.診斷);
-               $("#ss08").append(request.result.術式);
-               $("#ss014").append(request.result.麻VS);
+               $("#ss012").attr("value", request.result.病歷號);
+               $("#ss01").attr("value", request.result.姓名);
+               $("#ss03").attr("value", request.result.性別);
+               $("#ss04").attr("value", request.result.年齡);
+               $("#ss06").attr("value", request.result.診斷);
+               $("#ss08").attr("value", request.result.術式);
+               $("#ss014").attr("value", request.result.麻VS);
 
                patient_info['機號'] = request.result.機號;
                patient_info['刀序1'] = request.result.刀序1;
@@ -140,12 +140,10 @@
            for (var i = 1; i <= 5; i++) {
                try {
                    //if ($('input[name=Q1-' + i + ']:checked').val() != undefined) {
-                   //var t = $('#btnQ1-' + i + '-' + $('input[name=Q1-' + i + ']:checked').val()).html().split(">");
-                   //var t1 = t[1].split("\n");
-
-                   var t1 = RadioCkeck("1-" + i);
+                   var t = $('#btnQ1-' + i + '-' + $('input[name=Q1-' + i + ']:checked').val()).html().split(">");
+                   var t1 = t[1].split("\n");
                    //console.log($("#s1-" + i).find(".panel-heading").html() + " : " + t1[0]);
-                   patient_info[$("#s1-" + i).find(".panel-heading").html()] = t1;
+                   patient_info[$("#s1-" + i).find(".panel-heading").html()] = t1[0];
                    if (i == 2) {
                        //console.log($("Q1-2Text").html());
                        patient_info["回答者-其他回答者"] = $("#TQ1-2").val();
@@ -1011,9 +1009,21 @@
            });
 
        });
-
-
-
+       
+        var font=14;
+       $("#fontbig").click(function() {
+           if(font<=18){
+                font=font+1;
+                $("#body").attr("style", "font-size:"+font+"px;");
+           }
+        });
+       
+       $("#fontsmall").click(function() {
+           if(font>=14){
+                font=font-1;
+                $("#body").attr("style", "font-size:"+font+"px;");
+           }
+        });
        //
    });
 

@@ -74,6 +74,7 @@
 
 
         db = opendb("TestDatabase", "病歷號");
+        console.log("Test");
         //================================================
         function opendb(dbname, KeyPathStr) {
             var request = indexedDB.open(dbname);
@@ -92,11 +93,9 @@
                     alert("not found!");
                 };
                 request1.onsuccess = function(event) {
-                    // Do something with the request.result!
-                    //alert("Name for SSN 沈xx is " + request.result.姓名);
-                    //console.log(request.result);
                     $("#htmlout").html(request1.result.HtmlTemp);
                     $("#btnQ0-1-1").hide();
+                    console.log(db);
                 };
                 //=======================================
             };
@@ -840,7 +839,8 @@
             //console.log(e.target.id.search("Fbtn"));
             if (e.target.id.search("Fbtn") >= 0) {
                 e.preventDefault();
-                $("#" + e.target.id).html("已填");
+                var Today = new Date();
+                $("#" + e.target.id).html((Today.getMonth() + 1) + "/" + Today.getDate() + "  " + Today.getHours() + ":" + Today.getMinutes());
                 var etemp = e.target.id.split("n");
                 var etemp2 = etemp[1].split("a");
                 $("#T" + etemp2[0]).html($("#T" + etemp2[0]).html().replace(("btn-danger" + etemp2[1]), "btn-default disabled"));

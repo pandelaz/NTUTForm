@@ -62,7 +62,7 @@
     $(document).ready(function() {
 
         var RowCnt = 0;
-        var wstemp;
+        var wstemp = new Array();
 
         $("#Show1").hide();
         $("#Show0").hide();
@@ -74,15 +74,15 @@
             var id = $("#info11").find(':selected').data('id');
 
             if (id == 1) {
-                $("#info12").remove();
-                $("#info14").remove();
-                $("#info13").append('<span id="division2Text"><select name="bigout"><option value="1">一般外科</option><option value="2">胸腔外科</option><option value="3">神經外科</option><option value="4">整形外科</option><option value="5">乳房外科</option><option value="6">心臟外科</option><option value="7">小兒外科</option></select></span>');
+                $("#info12").show();
+                $("#division3Text").remove();
+                //$("#info13").append('<span id="division2Text"><select name="bigout"><option value="1">一般外科</option><option value="2">胸腔外科</option><option value="3">神經外科</option><option value="4">整形外科</option><option value="5">乳房外科</option><option value="6">心臟外科</option><option value="7">小兒外科</option></select></span>');
 
             }
             if (id == 2) {
-                $("#info12").remove();
-                $("#info13").remove();
-                $("#info14").append('<span id="division3Text"><select name="bigout"><option value="1">骨科</option><option value="2">泌尿科</option><option value="3">耳鼻喉科</option><option value="4">牙科</option><option value="5">皮膚科</option><option value="6">疼痛科</option></select></span>');
+                $("#info12").hide();
+                //$("#info13").remove();
+                $("#info14").append('<span id="division3Text"><select name="bigout"><option value="1">骨科</option><option value="2">泌尿科</option><option value="3">耳鼻喉科</option><option value="4">牙科</option><option value="5">皮膚科</option><option value="6">疼痛科</option><option value="7">其他</option></select></span>');
             }
         });
 
@@ -97,10 +97,24 @@
             $("#Show1btn").show();
         });
         $("#Showbtn1").click(function() {
-            RowCnt++;
-            $("table").append("<tr id='T" + (RowCnt+1) + "'>" +
+
+            RowCnt = -1;
+            while ($("#T" + (RowCnt + 2)).length == 1) {
+                RowCnt++;
+            }
+
+            console.log(RowCnt);
+
+            if(RowCnt == -1) {
+                $("#htmlout").html("<table><tr id='T1'><td></td><td>機號</td><td colspan='2'>刀序</td><td>姓名</td><td>病房</td><td>病歷號</td><td>性別</td><td>年齡</td><td>診斷</td><td>術式</td><td>天數</td><td>麻VS</td><td>備註</td><td>入帳</td></tr></table>");
+                wstemp[0] = new Array();
+                wstemp[0] = "機號,刀序,,姓名,病房,病歷號,性別,年齡,診斷,術式,天數,麻VS,備註,入帳";
+                RowCnt++;
+            }
+            //htmlout
+            $("table").append("<tr id='T" + (RowCnt+2) + "'>" +
                 "<td>" +
-                "<input type='checkbox' name='CC' value=RR id='R" + (RowCnt+1) + "'>" +
+                "<input type='checkbox' name='CC' value=RR id='R" + (RowCnt+2) + "'>" +
                 "</td>" +
                 "<td></td>" +
                 "<td></td>" +
@@ -117,9 +131,13 @@
                 "<td></td>" +
                 "<td></td>" +
                 "</tr>");
-            console.log($("table").html());
+            RowCnt++;
+            console.log($("#htmlout").html());
 
-            wstemp[RowCnt+1] = new Array();
+            //wstemp[RowCnt] = new Array();
+            //wstemp[RowCnt] = "";
+
+            
 /*
             wstemp[RowCnt][0] = ""; //機號
             wstemp[RowCnt][1] = ""; //刀序1
@@ -136,7 +154,7 @@
             wstemp[RowCnt][12] = ""; //備註
             wstemp[RowCnt][13] = ""; //入帳
 */
-            wstemp[RowCnt+1] = "" + "," +
+            wstemp[RowCnt] = "" + "," +
                              "" + "," + 
                              "" + "," + 
                              $("#info01").val() + "," + 
@@ -150,7 +168,7 @@
                              $("#info18").val() + "," +
                              "" + "," + 
                              "";
-
+            $("#Show2btn").show();                 
             console.log(wstemp);
 
         });
@@ -169,7 +187,7 @@
                     type: 'binary'
                 });
 
-                document.getElementById('htmlout').innerHTML = "";
+                //document.getElementById('htmlout').innerHTML = "";
                 var result = [];
                 workbook.SheetNames.forEach(function(sheetName) {
                     var htmlstr = XLSX.write(workbook, {
@@ -183,19 +201,61 @@
                         bookType: 'csv'
                     });
 
-                    wstemp = wstemp1.split("\n");
+                    RowCnt = -1;
+                    while ($("#T" + (RowCnt + 2)).length == 1) {
+                        RowCnt++;
+                    }
+                    console.log("before:" + RowCnt);
+                    var wwstemp = wstemp1.split("\n");
+                    var tcnt;
 
-                    //var wstemp3 =   
+                    for(tcnt = 2;tcnt<wwstemp.length;tcnt++) {
+                        wstemp[tcnt+RowCnt-1] = new Array();
+                        wstemp[tcnt+RowCnt-1] = wwstemp[tcnt];
+                    }
+                    //console.log(wstemp);
+                      
+                    if(RowCnt == -1) {
+                        document.getElementById('htmlout').innerHTML += htmlstr;
+                    } else {
 
-                    document.getElementById('htmlout').innerHTML += htmlstr;
+                        //var temp5 = $("#htmlout").html().split("</table>");
+                        var t;
+                        htmlstr = "<table><tr id='T1'><td></td><td>機號</td><td colspan='2'>刀序</td><td>姓名</td><td>病房</td><td>病歷號</td><td>性別</td><td>年齡</td><td>診斷</td><td>術式</td><td>天數</td><td>麻VS</td><td>備註</td><td>入帳</td></tr>";
+                        for(t=1;t<wstemp.length-1;t++) {
+                            var wwwstemp = wstemp[t].split(",");
+                            htmlstr += "<tr id='T" + (t+1) + "'>" +
+                                        "<td>" +
+                                        "<input type='checkbox' name='CC' value=RR id='R" + (t+1) + "'>" +
+                                        "</td>" +
+                                        "<td>" + wwwstemp[0] + "</td>" +
+                                        "<td>" + wwwstemp[1] + "</td>" +
+                                        "<td>" + wwwstemp[2] + "</td>" +
+                                        "<td>" + wwwstemp[3] + "</td>" +
+                                        "<td>" + wwwstemp[4] + "</td>" +
+                                        "<td>" + wwwstemp[5] + "</td>" +
+                                        "<td>" + wwwstemp[6] + "</td>" +
+                                        "<td>" + wwwstemp[7] + "</td>" +
+                                        "<td>" + wwwstemp[8] + "</td>" +
+                                        "<td>" + wwwstemp[9] + "</td>" +
+                                        "<td>" + wwwstemp[10] + "</td>" +
+                                        "<td>" + wwwstemp[11] + "</td>" +
+                                        "<td>" + wwwstemp[12] + "</td>" +
+                                        "<td>" + wwwstemp[13] + "</td>" +
+                                        "</tr>";
+                        }
+                        document.getElementById('htmlout').innerHTML = htmlstr + "</table>";
+                    }
+                    
                     //RowCnt++;
                     $("#T0").remove();
-                    console.log(htmlstr);
+                    console.log($("#htmlout").html());
+                    //console.log(htmlstr);
                 });
+
                 $("#Show2btn").show();
                 //document.getElementById('btn').innerHTML = "<br><br>"
-                RowCnt = 0;
-
+                RowCnt = -1;
                 while ($("#T" + (RowCnt + 2)).length == 1) {
                     RowCnt++;
                 }
@@ -255,7 +315,7 @@
                     type: 'binary'
                 });
 
-                document.getElementById('htmlout').innerHTML = "";
+                //document.getElementById('htmlout').innerHTML = "";
                 var result = [];
                 workbook.SheetNames.forEach(function(sheetName) {
                     var htmlstr = XLSX.write(workbook, {
@@ -269,19 +329,60 @@
                         bookType: 'csv'
                     });
 
-                    wstemp = wstemp1.split("\n");
+                    RowCnt = -1;
+                    while ($("#T" + (RowCnt + 2)).length == 1) {
+                        RowCnt++;
+                    }
 
-                    //var wstemp3 =   
+                    //console.log("before:" + RowCnt);
+                    var wwstemp = wstemp1.split("\n");
+                    var tcnt;
 
-                    document.getElementById('htmlout').innerHTML += htmlstr;
+                    for(tcnt = 2;tcnt<wwstemp.length;tcnt++) {
+                        wstemp[tcnt+RowCnt-1] = new Array();
+                        wstemp[tcnt+RowCnt-1] = wwstemp[tcnt];
+                    }
+                    //console.log(wstemp);
+                      
+                    if(RowCnt == -1) {
+                        document.getElementById('htmlout').innerHTML += htmlstr;
+                    } else {
+
+                        //var temp5 = $("#htmlout").html().split("</table>");
+                        var t;
+                        htmlstr = "<table><tr id='T1'><td></td><td>機號</td><td colspan='2'>刀序</td><td>姓名</td><td>病房</td><td>病歷號</td><td>性別</td><td>年齡</td><td>診斷</td><td>術式</td><td>天數</td><td>麻VS</td><td>備註</td><td>入帳</td></tr>";
+                        for(t=1;t<wstemp.length-1;t++) {
+                            var wwwstemp = wstemp[t].split(",");
+                            htmlstr += "<tr id='T" + (t+1) + "'>" +
+                                        "<td>" +
+                                        "<input type='checkbox' name='CC' value=RR id='R" + (t+1) + "'>" +
+                                        "</td>" +
+                                        "<td>" + wwwstemp[0] + "</td>" +
+                                        "<td>" + wwwstemp[1] + "</td>" +
+                                        "<td>" + wwwstemp[2] + "</td>" +
+                                        "<td>" + wwwstemp[3] + "</td>" +
+                                        "<td>" + wwwstemp[4] + "</td>" +
+                                        "<td>" + wwwstemp[5] + "</td>" +
+                                        "<td>" + wwwstemp[6] + "</td>" +
+                                        "<td>" + wwwstemp[7] + "</td>" +
+                                        "<td>" + wwwstemp[8] + "</td>" +
+                                        "<td>" + wwwstemp[9] + "</td>" +
+                                        "<td>" + wwwstemp[10] + "</td>" +
+                                        "<td>" + wwwstemp[11] + "</td>" +
+                                        "<td>" + wwwstemp[12] + "</td>" +
+                                        "<td>" + wwwstemp[13] + "</td>" +
+                                        "</tr>";
+                        }
+                        document.getElementById('htmlout').innerHTML = htmlstr + "</table>";
+                    }
+                    
                     //RowCnt++;
                     $("#T0").remove();
-                    console.log(htmlstr);
+                    console.log($("#htmlout").html());
                 });
                 $("#Show2btn").show();
                 //document.getElementById('btn').innerHTML = "<br><br>"
-                RowCnt = 0;
-
+                RowCnt = -1;
                 while ($("#T" + (RowCnt + 2)).length == 1) {
                     RowCnt++;
                 }
@@ -299,7 +400,7 @@
             var i = 0;
             var testout = new Array();
             testout[0] = new Array();
-            testout[0] = wstemp[1].split(",");
+            testout[0] = wstemp[0].split(",");
             testout[0][1]="刀序1";
             testout[0][2]="刀序2";
             /*
@@ -326,11 +427,11 @@
                     
                     testoutcnt++;
                     testout[testoutcnt] = new Array();
-                    testout[testoutcnt] = wstemp[i].split(",");
+                    testout[testoutcnt] = wstemp[i-1].split(",");
                     //var changetemp = testout[testoutcnt][0];
                     //testout[testoutcnt][0] = testout[testoutcnt][3];
                     //testout[testoutcnt][3] = changetemp;
-                    console.log(wstemp[i]);
+                    console.log(wstemp[i-1]);
                     $("#T" + i).remove();
 
                 } else {

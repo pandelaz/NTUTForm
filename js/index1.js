@@ -98,12 +98,12 @@ $(document).ready(function() {
             $("#Qtime1").html((Today.getMonth() + 1) + " 月 " + Today.getDate() + " 日");
             $("#Qtime2").html(Today.getHours() + " 點 " + Today.getMinutes() + " 分");
             //$("#ss012").append(request.result.病歷號);
-            $("#ss01").append(request.result.姓名);
-            $("#ss03").append(request.result.性別);
-            $("#ss04").append(request.result.年齡);
-            $("#ss06").append(request.result.診斷);
-            $("#ss07").append(request.result.術式);
-            $("#ss014").append(request.result.麻VS);
+            $("#ss01").attr("value", request.result.姓名);
+            $("#ss03").attr("value", request.result.性別);
+            $("#ss04").attr("value", request.result.年齡);
+            $("#ss06").attr("value", request.result.診斷);
+            $("#ss07").attr("value", request.result.術式);
+            $("#ss014").attr("value", request.result.麻VS);
 
             //patient_info['機號'] = request.result.機號;
             //patient_info['刀序1'] = request.result.刀序1;
@@ -286,7 +286,7 @@ $(document).ready(function() {
             if (pertemp == "") {
                 pertemp = "已完成";
             } else {
-                pertemp = pertemp + "|已完成";
+                pertemp = "|已完成";
             }
         }
 
@@ -439,6 +439,20 @@ $(document).ready(function() {
         $("#Q5-6-4-1Text").hide();
         $("#Q5-6-4-2Text").show();
     });*/
+    var font=14;
+       $("#fontbig").click(function() {
+           if(font<=18){
+                font=font+1;
+                $("#body").attr("style", "font-size:"+font+"px;");
+           }
+        });
+       
+       $("#fontsmall").click(function() {
+           if(font>=14){
+                font=font-1;
+                $("#body").attr("style", "font-size:"+font+"px;");
+           }
+        });
 });
 
 $(document).on('click', '.navbar-collapse.in', function(e) {
