@@ -224,15 +224,16 @@
             while ($("#T" + (RowCnt + 1)).length == 1) {
                 RowCnt++;
             }
-            
+            //"<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + ">+</a>"
             //console.log(RowCnt);
             if (RowCnt == -1) {
-                $("#htmlout").html("<table><tr id='T0'><td>姓名</td><td>年齡</td><td>病歷號</td><td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td></tr></table>");
+                $("#htmlout").html("<table><tr id='T0'><td></td><td>姓名</td><td>年齡</td><td>病歷號</td><td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td></tr></table>");
                 RowCnt++;
             }
             RowCnt++;
             $("table").html($("table").html() +
                 "<tr id='T" + RowCnt + "'>" +
+                "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" +"</td>" + 
                 "<td>" + $("#info01").val() + "</td>" +
                 "<td>" + $("#info03").val() + "</td>" +
                 "<td>" + $("#info04").val() + "</td>" +
@@ -326,7 +327,7 @@
                     var temp2 = temp[0].split("<td>");
 
                     if (RowCnt == -1) {
-                        htmlstr = temp2[0] + "<td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
+                        htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
                         RowCnt++;
                     } else {
                         var temp5 = $("#htmlout").html().split("</table>");
@@ -340,7 +341,9 @@
                         var temp3 = temp[i].split("<td>");
                         var temp4 = temp[i + 6].split("<td>");
                         RowCnt++;
-                        htmlstr += temp3[0] + temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
+                        htmlstr += temp3[0];
+                        htmlstr += "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" +"</td>";
+                        htmlstr += temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
                         htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
                         htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
                         htmlstr += "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + temp4[1] + "'>未填</a></td>";
@@ -646,7 +649,7 @@
                     var temp2 = temp[0].split("<td>");
 
                     if (RowCnt == -1) {
-                        htmlstr = temp2[0] + "<td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
+                        htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
                         RowCnt++;
                     } else {
                         var temp5 = $("#htmlout").html().split("</table>");
@@ -660,10 +663,13 @@
                         var temp3 = temp[i].split("<td>");
                         var temp4 = temp[i + 6].split("<td>");
                         RowCnt++;
-                        htmlstr += temp3[0] + temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
+                        htmlstr += temp3[0];
+                        htmlstr += "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" +"</td>";
+                        htmlstr += temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
                         htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
                         htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
                         htmlstr += "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + temp4[1] + "'>未填</a></td>";
+                        
                     }
                     htmlstr += temp[temp.length - 1];
                     //console.log(temp[temp.length - 1]);
@@ -861,6 +867,80 @@
 
 
                 //=============================================================
+            } else if(e.target.id.search("Plusbtn") >= 0) {
+                var temp = e.target.id.split("Plusbtn");
+                console.log($("#T"+temp[1]).html().split("</td>"));
+
+                var temp0 = $("#T"+temp[1]).html().split("</td>")
+
+                var temp1 = temp0[1].split("<td>");
+                var temp2 = temp0[2].split("<td>");
+                var temp3 = temp0[3].split("<td>");
+
+                //=======================================
+                var transaction = db.transaction(["mList"]);
+                var objectStore = transaction.objectStore("mList");
+                var request1 = objectStore.get(temp3[1]);
+                request1.onerror = function(event) {
+                    // Handle errors!
+                    alert("not found!");
+                };
+                request1.onsuccess = function(event) {
+                    //request1.result
+                    if(temp3[1].search("-") == -1) {
+                        temp3[1] = temp3[1] + "-2";
+                    } else {
+                        var temp31 = temp3[1].split("-");
+                        temp3[1] = temp31[0] + "-" + (parseInt(temp31[1])+1);
+                    }
+
+                    var temp4 = temp0[4].split("<td>");
+                    RowCnt = -1;
+                    while ($("#T" + (RowCnt + 1)).length == 1) {
+                        RowCnt++;
+                    }                
+
+                    RowCnt++;
+                    $("table").html($("table").html() +
+                        "<tr id='T" + RowCnt + "'>" +
+                        "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" +"</td>" + 
+                        "<td>" + temp1[1] + "</td>" +
+                        "<td>" + temp2[1] + "</td>" +
+                        "<td>" + temp3[1] + "</td>" +
+                        "<td>" + temp4[1] + "</td>" +
+                        "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp3[1] + "'>未填</a></td>" +
+                        "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp3[1] + "'>未填</a></td>" +
+                        "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + temp3[1] + "'>未填</a></td>" +
+                        "</tr>");
+                    
+                    var wstemp = [{
+                        "機號": request1.result.機號,
+                        "刀序1": request1.result.刀序1,
+                        "刀序2": request1.result.刀序2,
+                        "姓名": temp1[1],
+                        "病房": temp4[1],
+                        "病歷號": temp3[1],
+                        "性別": request1.result.性別,
+                        "年齡": temp2[1],
+                        "診斷": request1.result.診斷,
+                        "術式": request1.result.術式,
+                        "天數": request1.result.天數,
+                        "麻VS": request1.result.麻VS,
+                        "備註": request1.result.備註,
+                        "入帳": request1.result.入帳,
+                    }];
+
+                    write_to_db(db, wstemp);
+                    
+                };
+                //=======================================
+
+
+
+
+
+
+
             }
         });
 
