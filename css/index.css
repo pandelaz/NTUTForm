@@ -22,19 +22,19 @@ body{
 
 
     .Small-Width {
-        width: 80px;
+        width: 120px;
     }
     .Middle-Width {
-        width: 100px;
+        width: 140px;
     }
     .Large-Width {
-        width: 150px;
-    }
-    .Max-Width {
         width: 220px;
     }
+    .Max-Width {
+        width: 340px;
+    }
     .Maxx-Width {
-        width: 250px;
+        width: 380px;
     }
     .test-height {
         height: 150px;

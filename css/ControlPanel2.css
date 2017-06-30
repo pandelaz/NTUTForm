@@ -85,7 +85,7 @@ body {
     border-color: #d43f3a
 }
 .Small-Width {
-    width: 120px;
+    width: 140px;
 }
 
 .btn-primary:active,
@@ -109,3 +109,4 @@ body {
     background-color: brown;
     border-color: brown;
 }
+
