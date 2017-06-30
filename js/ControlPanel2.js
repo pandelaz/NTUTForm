@@ -61,6 +61,19 @@
     }
 
     $(document).ready(function() {
+        var font = 14;
+        $("#fontbig").click(function() {
+                font = font + 1;
+                $("#body").attr("style", "font-size:" + font + "px;");
+            
+        });
+
+        $("#fontsmall").click(function() {
+            if (font >= 14) {
+                font = font - 1;
+                $("#body").attr("style", "font-size:" + font + "px;");
+            }
+        });
 
         var RowCnt = 0;
 

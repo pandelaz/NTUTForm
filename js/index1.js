@@ -749,10 +749,9 @@ $(document).ready(function() {
     });*/
     var font = 14;
     $("#fontbig").click(function() {
-        if (font <= 18) {
             font = font + 1;
             $("#body").attr("style", "font-size:" + font + "px;");
-        }
+        
     });
 
     $("#fontsmall").click(function() {
