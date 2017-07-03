@@ -3,6 +3,15 @@ $(document).ready(function() {
         cnt5221 = 0,
         cnt5224 = 0,
         cntasa = 0,
+        cnt222 = 0,
+        cnt223 = 0,
+        cnt225 = 0,
+        cnt232 = 0,
+        cnt233 = 0,
+        cnt235 = 0,  
+        cnt5N2 = 0,     
+        cnt5N3 = 0,  
+        cnt5N5 = 0,   
         id = 1;
 
     $("#Q5-1-3Text").hide();
@@ -17,6 +26,29 @@ $(document).ready(function() {
     $("#QC5-4-1-1SEL1").show();
     $("#QC5-4-1-1SEL2").hide();
     $("#QC5-4-1-1SEL3").hide();
+    $('#B2-2-2').hide();
+    $('#B2-2-3').hide();
+    $('#B2-2-5').hide();
+    $('#B2-3-2').hide();
+    $('#B2-3-3').hide();
+    $('#B2-3-5').hide();
+    $('#B5-N-2').hide();
+    $('#B5-N-5').hide();
+
+//新增1    
+    $("#Q5-3-1").hide();
+    $("#Q5-3-2").hide();
+    $("#Q5-3-3").hide();
+    $("#Q5-3-4").hide();
+    $("#Q5-3-5").hide();
+    $("#Q5-3-6").hide();
+    $("#QT5-3-1").hide();
+    $("#QT5-3-2").hide();
+    $("#QT5-3-3").hide();
+    $("#QT5-3-4").hide();
+    $("#QT5-3-5").hide();
+//新增1 END 
+
     /*
     patient_info["開始使用時間"] = "";
     patient_info["麻醉結束時間"] = "";
@@ -339,14 +371,6 @@ $(document).ready(function() {
                     $("#FF11").val(patient_info['處置']);
 
                 };
-
-
-
-
-
-
-
-
             };
             // This event is only implemented in recent browsers
             request1.onupgradeneeded = function(event) {
@@ -362,8 +386,6 @@ $(document).ready(function() {
     };
 
     //=================================================================================
-
-
 
     function RadioCkeck(QNum) {
         var valtemp = $('input[name=Q' + QNum + ']:checked').val();
@@ -648,6 +670,148 @@ $(document).ready(function() {
         console.log(patient_info);
     });
 
+
+    $("#btnQ5-N-2").click(function() {
+        if(cnt5N2==0) {
+            $('#B5-N-2').show();
+            cnt5N2=1;
+        } else if(cnt5N3 == 0) {
+            $('#B5-N-2').hide();
+            cnt5N2=0;
+        } else {
+           cnt5N2=0; 
+        }
+    });
+    $("#btnQ5-N-3").click(function() {
+        if(cnt5N3==0) {
+            $('#B5-N-2').show();
+            cnt5N3=1;
+        } else if(cnt5N2 == 0){
+            $('#B5-N-2').hide();
+            cnt5N3=0;
+        } else {
+           cnt5N3=0; 
+        } 
+    });
+    $("#btnQ5-N-5").click(function() {
+        if(cnt5N5==0) {
+            $('#B5-N-5').show();
+            cnt5N5=1;
+        } else if(cnt5N2 == 0){
+            $('#B5-N-5').hide();
+            cnt5N5=0;
+        }
+    });
+
+    $("#btnQ2-2-1").click(function() {
+        $('#Q2-2-2').prop('checked', "false");
+        $('#btnQ2-2-2').removeClass('active');
+        $('#Q2-2-3').prop('checked', "false");
+        $('#btnQ2-2-3').removeClass('active');
+        $('#Q2-2-4').prop('checked', "false");
+        $('#btnQ2-2-4').removeClass('active');  
+        $('#Q2-2-5').prop('checked', "false");
+        $('#btnQ2-2-5').removeClass('active');  
+        $('#B2-2-2').hide();
+        $('#B2-2-3').hide();
+        $('#B2-2-5').hide(); 
+        cnt222=0;  
+        cnt223=0;
+        cnt225=0;
+    });
+    $("#btnQ2-2-2").click(function() {
+        $('#Q2-2-1').prop('checked', "false");
+        $('#btnQ2-2-1').removeClass('active');
+        if(cnt222==0) {
+            $('#B2-2-2').show();
+            cnt222=1;
+        } else {
+            $('#B2-2-2').hide();
+            cnt222=0;
+        }
+    });
+    $("#btnQ2-2-3").click(function() {
+        $('#Q2-2-1').prop('checked', "false");
+        $('#btnQ2-2-1').removeClass('active');
+        if(cnt223==0) {
+            $('#B2-2-3').show();
+            cnt223=1;
+        } else {
+            $('#B2-2-3').hide();
+            cnt223=0;
+        }
+    });
+    $("#btnQ2-2-4").click(function() {
+        $('#Q2-2-1').prop('checked', "false");
+        $('#btnQ2-2-1').removeClass('active');
+    });
+    $("#btnQ2-2-5").click(function() {
+        $('#Q2-2-1').prop('checked', "false");
+        $('#btnQ2-2-1').removeClass('active');
+        if(cnt225==0) {
+            $('#B2-2-5').show();
+            cnt225=1;
+        } else {
+            $('#B2-2-5').hide();
+            cnt225=0;
+        }
+    });
+
+    $("#btnQ2-3-1").click(function() {
+        $('#Q2-3-2').prop('checked', "false");
+        $('#btnQ2-3-2').removeClass('active');
+        $('#Q2-3-3').prop('checked', "false");
+        $('#btnQ2-3-3').removeClass('active');
+        $('#Q2-3-4').prop('checked', "false");
+        $('#btnQ2-3-4').removeClass('active');  
+        $('#Q2-3-5').prop('checked', "false");
+        $('#btnQ2-3-5').removeClass('active');
+        $('#B2-3-2').hide();
+        $('#B2-3-3').hide();
+        $('#B2-3-5').hide();
+        cnt232=0;  
+        cnt233=0;
+        cnt235=0;
+    });
+
+    $("#btnQ2-3-2").click(function() {
+        $('#Q2-3-1').prop('checked', "false");
+        $('#btnQ2-3-1').removeClass('active');
+        if(cnt232==0) {
+            $('#B2-3-2').show();
+            cnt232=1;
+        } else {
+            $('#B2-3-2').hide();
+            cnt232=0;
+        }
+    });
+    $("#btnQ2-3-3").click(function() {
+        $('#Q2-3-1').prop('checked', "false");
+        $('#btnQ2-3-1').removeClass('active');
+        if(cnt233==0) {
+            $('#B2-3-3').show();
+            cnt233=1;
+        } else {
+            $('#B2-3-3').hide();
+            cnt233=0;
+        }
+    });
+    $("#btnQ2-3-4").click(function() {
+        $('#Q2-3-1').prop('checked', "false");
+        $('#btnQ2-3-1').removeClass('active');
+    });
+    $("#btnQ2-3-5").click(function() {
+        $('#Q2-3-1').prop('checked', "false");
+        $('#btnQ2-3-1').removeClass('active');
+        if(cnt235==0) {
+            $('#B2-3-5').show();
+            cnt235=1;
+        } else {
+            $('#B2-3-5').hide();
+            cnt235=0;
+        }
+    });
+
     $("#Q5-1-3").click(function() {
         if (cnt513 == 0) {
             cnt513 = 1;
@@ -683,7 +847,93 @@ $(document).ready(function() {
             $("#Q5-2-2-4Text").hide();
         }
     });
-
+//新增2
+    $("#Q5-3-2-1").change(function() {
+        $("#Q5-3-1").show();
+        $("#Q5-3-2").hide();
+        $("#Q5-3-3").hide();
+        $("#Q5-3-4").hide();
+        $("#Q5-3-5").hide();
+        $("#Q5-3-6").hide();
+        $(window).resize();
+    });
+    
+    $("#Q5-3-2-2").change(function() {
+        $("#Q5-3-1").hide();
+        $("#Q5-3-2").show();
+        $("#Q5-3-3").show();
+        $("#Q5-3-4").hide();
+        $("#Q5-3-5").hide();
+        $("#Q5-3-6").show();
+        $(window).resize();
+    });
+    
+    $("#Q5-3-2-3").change(function() {
+        $("#Q5-3-1").hide();
+        $("#Q5-3-2").show();
+        $("#Q5-3-3").hide();
+        $("#Q5-3-4").show();
+        $("#Q5-3-5").hide();
+        $("#Q5-3-6").show();
+        $(window).resize();
+    });
+    
+    $("#Q5-3-2-4").change(function() {
+        $("#Q5-3-1").hide();
+        $("#Q5-3-2").hide();
+        $("#Q5-3-3").hide();
+        $("#Q5-3-4").hide();
+        $("#Q5-3-5").show();
+        $("#Q5-3-6").show();
+        $(window).resize();
+    });
+    
+    $("#Q5-3-3-3").change(function() {        
+        $("#QT5-3-1").show();        
+        $(window).resize();
+    });    
+    $("#Q5-3-3-1,#Q5-3-3-2").change(function() {        
+        $("#QT5-3-1").hide();        
+        $(window).resize();
+    });
+    
+    $("#Q5-3-5-8").change(function() {        
+        $("#QT5-3-2").show();        
+        $(window).resize();
+    });    
+    $("#Q5-3-5-1,#Q5-3-5-2,#Q5-3-5-3,#Q5-3-5-4,#Q5-3-5-5,#Q5-3-5-6,#Q5-3-5-7").change(function() {        
+        $("#QT5-3-2").hide();        
+        $(window).resize();
+    });
+    
+    $("#Q5-3-4-4").change(function() {        
+        $("#QT5-3-3").show();        
+        $(window).resize();
+    });    
+    $("#Q5-3-4-1,#Q5-3-4-2,#Q5-3-4-3").change(function() {        
+        $("#QT5-3-3").hide();        
+        $(window).resize();
+    });
+    
+     $("#Q5-3-6-3").change(function() {        
+        $("#QT5-3-4").show();        
+        $(window).resize();
+    });    
+    $("#Q5-3-6-1,#Q5-3-6-2").change(function() {        
+        $("#QT5-3-4").hide();        
+        $(window).resize();
+    });
+    
+     $("#Q5-3-7-3").change(function() {        
+        $("#QT5-3-5").show();        
+        $(window).resize();
+    });    
+    $("#Q5-3-7-1,#Q5-3-7-2").change(function() {        
+        $("#QT5-3-5").hide();        
+        $(window).resize();
+    });
+//新增 END
+/*
     $("#Qn5-4-1-1").change(function() {
 
         $("#QC5-4-1-1").show();
@@ -737,7 +987,7 @@ $(document).ready(function() {
         $("#QC5-4-1-3").hide();
         $(window).resize();
     });
-
+*/
     //-------------------------Q5-6-------------------------
     /*$("#Q5-6-4-1").change(function() {
         $("#Q5-6-4-1Text").show();
