@@ -62,8 +62,8 @@
     $(document).ready(function() {
         var font = 14;
         $("#fontbig").click(function() {
-                font = font + 1;
-                $("#body").attr("style", "font-size:" + font + "px;");
+            font = font + 1;
+            $("#body").attr("style", "font-size:" + font + "px;");
 
         });
 
@@ -118,16 +118,16 @@
 
             console.log(RowCnt);
 
-            if(RowCnt == -1) {
+            if (RowCnt == -1) {
                 $("#htmlout").html("<table><tr id='T1'><td></td><td>機號</td><td colspan='2'>刀序</td><td>姓名</td><td>病房</td><td>病歷號</td><td>性別</td><td>年齡</td><td>診斷</td><td>術式</td><td>天數</td><td>麻VS</td><td>備註</td><td>入帳</td></tr></table>");
                 wstemp[0] = new Array();
                 wstemp[0] = "機號,刀序,,姓名,病房,病歷號,性別,年齡,診斷,術式,天數,麻VS,備註,入帳";
                 RowCnt++;
             }
             //htmlout
-            $("table").append("<tr id='T" + (RowCnt+2) + "'>" +
+            $("table").append("<tr id='T" + (RowCnt + 2) + "'>" +
                 "<td>" +
-                "<input type='checkbox' name='CC' value=RR id='R" + (RowCnt+2) + "'>" +
+                "<input type='checkbox' name='CC' value=RR id='R" + (RowCnt + 2) + "'>" +
                 "</td>" +
                 "<td></td>" +
                 "<td></td>" +
@@ -150,38 +150,38 @@
             //wstemp[RowCnt] = new Array();
             //wstemp[RowCnt] = "";
 
-            
-/*
-            wstemp[RowCnt][0] = ""; //機號
-            wstemp[RowCnt][1] = ""; //刀序1
-            wstemp[RowCnt][2] = ""; //刀序2
-            wstemp[RowCnt][3] = $("#info01").val(); //姓名
-            wstemp[RowCnt][4] = ""; //病房
-            wstemp[RowCnt][5] = $("#info04").val(); //病歷號
-            wstemp[RowCnt][6] = Mfunction(); //性別
-            wstemp[RowCnt][7] = $("#info03").val(); //年齡
-            wstemp[RowCnt][8] = $("#info08").val(); //診斷
-            wstemp[RowCnt][9] = $("#info09").val(); //術式
-            wstemp[RowCnt][10] = ""; //天數
-            wstemp[RowCnt][11] = $("#info18").val(); //麻VS
-            wstemp[RowCnt][12] = ""; //備註
-            wstemp[RowCnt][13] = ""; //入帳
-*/
+
+            /*
+                        wstemp[RowCnt][0] = ""; //機號
+                        wstemp[RowCnt][1] = ""; //刀序1
+                        wstemp[RowCnt][2] = ""; //刀序2
+                        wstemp[RowCnt][3] = $("#info01").val(); //姓名
+                        wstemp[RowCnt][4] = ""; //病房
+                        wstemp[RowCnt][5] = $("#info04").val(); //病歷號
+                        wstemp[RowCnt][6] = Mfunction(); //性別
+                        wstemp[RowCnt][7] = $("#info03").val(); //年齡
+                        wstemp[RowCnt][8] = $("#info08").val(); //診斷
+                        wstemp[RowCnt][9] = $("#info09").val(); //術式
+                        wstemp[RowCnt][10] = ""; //天數
+                        wstemp[RowCnt][11] = $("#info18").val(); //麻VS
+                        wstemp[RowCnt][12] = ""; //備註
+                        wstemp[RowCnt][13] = ""; //入帳
+            */
             wstemp[RowCnt] = "" + "," +
-                             "" + "," + 
-                             "" + "," + 
-                             $("#info01").val() + "," + 
-                             "" + "," + 
-                             $("#info04").val() + "," +
-                             Mfunction() + "," +
-                             $("#info03").val() + "," +
-                             $("#info08").val() + "," +
-                             $("#info09").val() + "," +
-                             "" + "," + 
-                             $("#info18").val() + "," +
-                             "" + "," + 
-                             "";
-            $("#Show2btn").show();                 
+                "" + "," +
+                "" + "," +
+                $("#info01").val() + "," +
+                "" + "," +
+                $("#info04").val() + "," +
+                Mfunction() + "," +
+                $("#info03").val() + "," +
+                $("#info08").val() + "," +
+                $("#info09").val() + "," +
+                "" + "," +
+                $("#info18").val() + "," +
+                "" + "," +
+                "";
+            $("#Show2btn").show();
             console.log(wstemp);
 
         });
@@ -218,48 +218,51 @@
                     while ($("#T" + (RowCnt + 2)).length == 1) {
                         RowCnt++;
                     }
-                    console.log("before:" + RowCnt);
+                    //console.log("before:" + RowCnt);
                     var wwstemp = wstemp1.split("\n");
                     var tcnt;
 
-                    for(tcnt = 2;tcnt<wwstemp.length;tcnt++) {
-                        wstemp[tcnt+RowCnt-1] = new Array();
-                        wstemp[tcnt+RowCnt-1] = wwstemp[tcnt];
+                    for (tcnt = 2; tcnt < wwstemp.length; tcnt++) {
+                        wstemp[tcnt + RowCnt - 1] = new Array();
+                        wstemp[tcnt + RowCnt - 1] = wwstemp[tcnt];
                     }
                     //console.log(wstemp);
-                      
-                    if(RowCnt == -1) {
+
+                    if (RowCnt == -1) {
                         document.getElementById('htmlout').innerHTML += htmlstr;
+                        console.log("test");
                     } else {
 
                         //var temp5 = $("#htmlout").html().split("</table>");
                         var t;
                         htmlstr = "<table><tr id='T1'><td></td><td>機號</td><td colspan='2'>刀序</td><td>姓名</td><td>病房</td><td>病歷號</td><td>性別</td><td>年齡</td><td>診斷</td><td>術式</td><td>天數</td><td>麻VS</td><td>備註</td><td>入帳</td></tr>";
-                        for(t=1;t<wstemp.length-1;t++) {
+                        for (t = 1; t < wstemp.length - 1; t++) {
                             var wwwstemp = wstemp[t].split(",");
-                            htmlstr += "<tr id='T" + (t+1) + "'>" +
-                                        "<td>" +
-                                        "<input type='checkbox' name='CC' value=RR id='R" + (t+1) + "'>" +
-                                        "</td>" +
-                                        "<td>" + wwwstemp[0] + "</td>" +
-                                        "<td>" + wwwstemp[1] + "</td>" +
-                                        "<td>" + wwwstemp[2] + "</td>" +
-                                        "<td>" + wwwstemp[3] + "</td>" +
-                                        "<td>" + wwwstemp[4] + "</td>" +
-                                        "<td>" + wwwstemp[5] + "</td>" +
-                                        "<td>" + wwwstemp[6] + "</td>" +
-                                        "<td>" + wwwstemp[7] + "</td>" +
-                                        "<td>" + wwwstemp[8] + "</td>" +
-                                        "<td>" + wwwstemp[9] + "</td>" +
-                                        "<td>" + wwwstemp[10] + "</td>" +
-                                        "<td>" + wwwstemp[11] + "</td>" +
-                                        "<td>" + wwwstemp[12] + "</td>" +
-                                        "<td>" + wwwstemp[13] + "</td>" +
-                                        "</tr>";
+                            htmlstr += "<tr id='T" + (t + 1) + "'>" +
+                                "<td>" +
+                                "<input type='checkbox' name='CC' value=RR id='R" + (t + 1) + "'>" +
+                                "</td>" +
+                                "<td>" + wwwstemp[0] + "</td>" +
+                                "<td>" + wwwstemp[1] + "</td>" +
+                                "<td>" + wwwstemp[2] + "</td>" +
+                                "<td>" + wwwstemp[3] + "</td>" +
+                                "<td>" + wwwstemp[4] + "</td>" +
+                                "<td>" + wwwstemp[5] + "</td>" +
+                                "<td>" + wwwstemp[6] + "</td>" +
+                                "<td>" + wwwstemp[7] + "</td>" +
+                                "<td>" + wwwstemp[8] + "</td>" +
+                                "<td>" + wwwstemp[9] + "</td>" +
+                                "<td>" + wwwstemp[10] + "</td>" +
+                                "<td>" + wwwstemp[11] + "</td>" +
+                                "<td>" + wwwstemp[12] + "</td>" +
+                                "<td>" + wwwstemp[13] + "</td>" +
+                                "</tr>";
+                            //console.log(wwwstemp);
+                            s
                         }
                         document.getElementById('htmlout').innerHTML = htmlstr + "</table>";
                     }
-                    
+
                     //RowCnt++;
                     $("#T0").remove();
                     console.log($("#htmlout").html());
@@ -273,7 +276,7 @@
                     RowCnt++;
                 }
                 console.log(RowCnt);
-
+                select_item();
             };
 
             var oReq = new XMLHttpRequest();
@@ -281,22 +284,98 @@
             oReq.open("GET", "https://pandelaz.github.io/NTUTForm/ControlPanel_TestFile.xlsx", true);
             oReq.responseType = "blob";
             oReq.onload = function(e) {
-              var bbuffer = oReq.response; // not responseText
-              //console.log(bbuffer);
-              fileReader.readAsBinaryString(bbuffer);
-              /* ... */
+                var bbuffer = oReq.response; // not responseText
+                //console.log(bbuffer);
+                fileReader.readAsBinaryString(bbuffer);
+                /* ... */
             }
             oReq.send();
 
             //fileReader.readAsBinaryString(files[0]);
-            
-       
+
+
 
 
 
         });
+        $("#testtt1").on("click", "input[name='choose']", function() {
+            console.log($(this).attr('id'));
+            //$("#R2").prop('checked', true); 點選
+            var i = 0;
+
+            var this_tmp = $(this).attr('id').split("_");
+            var this_floor = this_tmp[1];
+            var this_type = this_tmp[2];
+
+            var tmp_floor = new Array(RowCnt);
+            var tmp_type = new Array(RowCnt);
+            var htmlstr = "";
+
+            for (i = 2; i <= (RowCnt + 1); i++) {
+                var tmp = $("#T" + i).html().split("<td>");
+                var tmp2 = tmp[6].split("</td>");
+                tmp_floor[i - 2] = tmp2[0].substring(1, 2);
+                tmp_type[i - 2] = tmp2[0].substring(2, 3);
+
+                if (tmp_floor[i - 2] == this_floor && tmp_type[i - 2] == this_type) {
+                    if ($(this).prop('checked'))
+                        $("#R" + i).prop('checked', true);
+                    else
+                        $("#R" + i).prop('checked', false);
+                    //console.log(tmp_floor[i - 2]);
+                    //console.log(this_floor);
+                }
+            }
+        });
 
 
+        function select_item() {
+            var i = 0;
+            var tmp_floor = new Array(RowCnt);
+            var tmp_type = new Array(RowCnt);
+            var htmlstr = "";
+            for (i = 2; i <= (RowCnt + 1); i++) {
+                var tmp = $("#T" + i).html().split("<td>");
+                var tmp2 = tmp[6].split("</td>");
+                tmp_floor[i - 2] = tmp2[0].substring(0, 2);
+                tmp_type[i - 2] = tmp2[0].substring(2, 3);
+                //console.log(tmp2[0]);
+            }
+            //console.log(tmp_floor);
+            //console.log(tmp_type);
+            //"<input type='checkbox' name='choose' id='R" + (t + 1) + "'>"
+
+            for (i = 1; i <= 10; i++) {
+                var j = 0;
+                var if_A = 0;
+                var if_B = 0;
+                var if_C = 0;
+                var if_PW = 0;
+
+                for (j = 0; j < RowCnt; j++) {
+                    if (i == tmp_floor[j]) {
+                        if (tmp_type[j] == "A" && if_A == 0) {
+                            htmlstr += "<input type='checkbox' name='choose' id='choose_" + i + "_A'>&nbsp;" + i + "A&nbsp;&nbsp;&nbsp;";
+                            if_A = 1;
+                        } else if (tmp_type[j] == "B" && if_B == 0) {
+                            htmlstr += "<input type='checkbox' name='choose' id='choose_" + i + "_B'>&nbsp;" + i + "B&nbsp;&nbsp;&nbsp;";
+                            if_B = 1;
+                        } else if (tmp_type[j] == "C" && if_C == 0) {
+                            htmlstr += "<input type='checkbox' name='choose' id='choose_" + i + "_C'>&nbsp;" + i + "C&nbsp;&nbsp;&nbsp;";
+                            if_C = 1;
+                        } else if (tmp_type[j] == "P" && if_PW == 0) {
+                            htmlstr += "<input type='checkbox' name='choose' id='choose_" + i + "_PW'>&nbsp;" + i + "PW&nbsp;&nbsp;&nbsp;";
+                            if_PW = 1;
+                        }
+                        if (if_A && if_B && if_C && if_PW)
+                            j = RowCnt;
+                    }
+                }
+            }
+            //console.log(htmlstr);
+            $("#testtt1").html(htmlstr);
+
+        }
 
 
 
@@ -306,15 +385,16 @@
             else
                 return ("F");
         }
+
         function to_json(workbook) {
-          var result = {};
-          workbook.SheetNames.forEach(function(sheetName) {
-            var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-            if(roa.length > 0){
-              result[sheetName] = roa;
-            }
-          });
-          return result;
+            var result = {};
+            workbook.SheetNames.forEach(function(sheetName) {
+                var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                if (roa.length > 0) {
+                    result[sheetName] = roa;
+                }
+            });
+            return result;
         }
         $('#excel-file').change(function(e) {
             console.log('start');
@@ -352,44 +432,44 @@
                     var wwstemp = wstemp1.split("\n");
                     var tcnt;
 
-                    for(tcnt = 2;tcnt<wwstemp.length;tcnt++) {
-                        wstemp[tcnt+RowCnt-1] = new Array();
-                        wstemp[tcnt+RowCnt-1] = wwstemp[tcnt];
+                    for (tcnt = 2; tcnt < wwstemp.length; tcnt++) {
+                        wstemp[tcnt + RowCnt - 1] = new Array();
+                        wstemp[tcnt + RowCnt - 1] = wwstemp[tcnt];
                     }
                     //console.log(wstemp);
-                      
-                    if(RowCnt == -1) {
+
+                    if (RowCnt == -1) {
                         document.getElementById('htmlout').innerHTML += htmlstr;
                     } else {
 
                         //var temp5 = $("#htmlout").html().split("</table>");
                         var t;
                         htmlstr = "<table><tr id='T1'><td></td><td>機號</td><td colspan='2'>刀序</td><td>姓名</td><td>病房</td><td>病歷號</td><td>性別</td><td>年齡</td><td>診斷</td><td>術式</td><td>天數</td><td>麻VS</td><td>備註</td><td>入帳</td></tr>";
-                        for(t=1;t<wstemp.length-1;t++) {
+                        for (t = 1; t < wstemp.length - 1; t++) {
                             var wwwstemp = wstemp[t].split(",");
-                            htmlstr += "<tr id='T" + (t+1) + "'>" +
-                                        "<td>" +
-                                        "<input type='checkbox' name='CC' value=RR id='R" + (t+1) + "'>" +
-                                        "</td>" +
-                                        "<td>" + wwwstemp[0] + "</td>" +
-                                        "<td>" + wwwstemp[1] + "</td>" +
-                                        "<td>" + wwwstemp[2] + "</td>" +
-                                        "<td>" + wwwstemp[3] + "</td>" +
-                                        "<td>" + wwwstemp[4] + "</td>" +
-                                        "<td>" + wwwstemp[5] + "</td>" +
-                                        "<td>" + wwwstemp[6] + "</td>" +
-                                        "<td>" + wwwstemp[7] + "</td>" +
-                                        "<td>" + wwwstemp[8] + "</td>" +
-                                        "<td>" + wwwstemp[9] + "</td>" +
-                                        "<td>" + wwwstemp[10] + "</td>" +
-                                        "<td>" + wwwstemp[11] + "</td>" +
-                                        "<td>" + wwwstemp[12] + "</td>" +
-                                        "<td>" + wwwstemp[13] + "</td>" +
-                                        "</tr>";
+                            htmlstr += "<tr id='T" + (t + 1) + "'>" +
+                                "<td>" +
+                                "<input type='checkbox' name='CC' value=RR id='R" + (t + 1) + "'>" +
+                                "</td>" +
+                                "<td>" + wwwstemp[0] + "</td>" +
+                                "<td>" + wwwstemp[1] + "</td>" +
+                                "<td>" + wwwstemp[2] + "</td>" +
+                                "<td>" + wwwstemp[3] + "</td>" +
+                                "<td>" + wwwstemp[4] + "</td>" +
+                                "<td>" + wwwstemp[5] + "</td>" +
+                                "<td>" + wwwstemp[6] + "</td>" +
+                                "<td>" + wwwstemp[7] + "</td>" +
+                                "<td>" + wwwstemp[8] + "</td>" +
+                                "<td>" + wwwstemp[9] + "</td>" +
+                                "<td>" + wwwstemp[10] + "</td>" +
+                                "<td>" + wwwstemp[11] + "</td>" +
+                                "<td>" + wwwstemp[12] + "</td>" +
+                                "<td>" + wwwstemp[13] + "</td>" +
+                                "</tr>";
                         }
                         document.getElementById('htmlout').innerHTML = htmlstr + "</table>";
                     }
-                    
+
                     //RowCnt++;
                     $("#T0").remove();
                     console.log($("#htmlout").html());
@@ -401,7 +481,7 @@
                     RowCnt++;
                 }
                 console.log(RowCnt);
-
+                select_item();
             };
 
             fileReader.readAsBinaryString(files[0]);
@@ -415,8 +495,8 @@
             var testout = new Array();
             testout[0] = new Array();
             testout[0] = wstemp[0].split(",");
-            testout[0][1]="刀序1";
-            testout[0][2]="刀序2";
+            testout[0][1] = "刀序1";
+            testout[0][2] = "刀序2";
             /*
             testout[0][0]="s0";
             testout[0][1]="s1";
@@ -436,16 +516,16 @@
             //console.log(testout[0]);
             var testoutcnt = 0;
 
-            for (i = 2; i <= RowCnt+2; i++) {
+            for (i = 2; i <= RowCnt + 2; i++) {
                 if ($("#R" + i).prop('checked')) {
-                    
+
                     testoutcnt++;
                     testout[testoutcnt] = new Array();
-                    testout[testoutcnt] = wstemp[i-1].split(",");
+                    testout[testoutcnt] = wstemp[i - 1].split(",");
                     //var changetemp = testout[testoutcnt][0];
                     //testout[testoutcnt][0] = testout[testoutcnt][3];
                     //testout[testoutcnt][3] = changetemp;
-                    console.log(wstemp[i-1]);
+                    console.log(wstemp[i - 1]);
                     $("#T" + i).remove();
 
                 } else {
