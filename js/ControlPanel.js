@@ -364,7 +364,7 @@
                             htmlstr += "<input type='checkbox' name='choose' id='choose_" + i + "_C'>&nbsp;" + i + "C&nbsp;&nbsp;&nbsp;";
                             if_C = 1;
                         } else if (tmp_type[j] == "P" && if_PW == 0) {
-                            htmlstr += "<input type='checkbox' name='choose' id='choose_" + i + "_PW'>&nbsp;" + i + "PW&nbsp;&nbsp;&nbsp;";
+                            htmlstr += "<input type='checkbox' name='choose' id='choose_" + i + "_P'>&nbsp;" + i + "PW&nbsp;&nbsp;&nbsp;";
                             if_PW = 1;
                         }
                         if (if_A && if_B && if_C && if_PW)
