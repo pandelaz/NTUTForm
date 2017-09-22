@@ -30,7 +30,22 @@
           cnt513 = 0,
           cntasa = 0,
           id = 0,
-          id2 = 0;
+          id2 = 0,
+		  hd1 = 1,
+		hd2 = 1,
+		hd3 = 1,
+		hd4 = 1,
+		hd5 = 1,
+		hd6 = 0,
+		hd7 = 1,
+		hd8 = 1,
+		hd9 = 1,
+		hd10 = 1,
+		hd11 = 1,
+		hd12 = 1,
+		hd13 = 1,
+		hd14 = 1,
+		hd15 = 1;
 
       $("#Ds3-2").hide();
       $("#s4-2").hide();
@@ -64,6 +79,56 @@
       $("#Q5-0Text").hide();
       $("#Q5-0-3Text").hide();
       $("#Q5-0-4Text").hide();
+	  
+	  $("#QQ1-1").hide("fast");
+	 $("#QQ1-2").hide("fast");
+	$("#QQ1-3").hide("fast");
+	$("#QQ1-4").hide("fast");
+	$("#QQ1-5").hide("fast");
+	$("#QQ1-6").hide("fast");
+
+	$("#QQ1-7").hide("fast");
+	$("#QQ1-8").hide("fast");
+	$("#QQ1-9").hide("fast");
+	$("#QQ1-10").hide("fast");
+	$("#QQ1-11").hide("fast");
+	//$("#QQ1-12").hide("fast");
+	$("#QQ1-13").hide("fast");
+	$("#QQ1-14").hide("fast");
+	$("#QQ1-15").hide("fast");
+	$("#QQ1-16").hide("fast");
+	  
+	  $("#btnQ2-1-1").addClass("active");
+	$("#Q2-1-1").prop("checked", true);
+	  $("#btnQ2-2-1").addClass("active");
+	$("#Q2-2-1").prop("checked", true);
+	  $("#btnQ2-3-1").addClass("active");
+	$("#Q2-3-1").prop("checked", true);
+	  $("#btnQ2-3-1").addClass("active");
+	$("#Q2-3-1").prop("checked", true);
+	  $("#btnQ2-4-1").addClass("active");
+	$("#Q2-4-1").prop("checked", true);
+	  $("#btnQ2-5-1").addClass("active");
+	$("#Q2-5-1").prop("checked", true);
+	  $("#btnQ2-6-1").addClass("active");
+	$("#Q2-6-1").prop("checked", true);
+	  $("#btnQ2-7-1").addClass("active");
+	$("#Q2-7-1").prop("checked", true);
+	  $("#btnQ2-8-1").addClass("active");
+	$("#Q2-8-1").prop("checked", true);
+	  $("#btnQ2-9-1").addClass("active");
+	$("#Q2-9-1").prop("checked", true);
+	  $("#btnQ2-10-1").addClass("active");
+	$("#Q2-10-1").prop("checked", true);
+	  $("#btnQ2-11-1").addClass("active");
+	$("#Q2-11-1").prop("checked", true);
+	  $("#btnQ2-13-1").addClass("active");
+	$("#Q2-13-1").prop("checked", true);
+	  $("#btnQ3-1-1").addClass("active");
+	$("#Q3-1-1").prop("checked", true);
+	  $("#btnQ3-2-1").addClass("active");
+	$("#Q3-2-1").prop("checked", true);
+	  
 
       //var hostname= document.hostname;
 
@@ -93,17 +158,17 @@
           //console.log(db);
           var transaction = db.transaction(["mList"]);
           var objectStore = transaction.objectStore("mList");
+          
+          if(htemp[1].search("-") != -1) {
+            hhtemp = htemp[1];
+            //historyDB = 1;
+            var htemp1 = htemp[1].split("-");
 
-          if (htemp[1].search("-") != -1) {
-              hhtemp = htemp[1];
-              //historyDB = 1;
-              var htemp1 = htemp[1].split("-");
-
-              if (htemp1[1] == "2") {
-                  htemp[1] = htemp1[0];
-              } else {
-                  htemp[1] = htemp1[0] + "-" + (parseInt(htemp1[1]) - 1);
-              }
+            if(htemp1[1] == "2") {
+              htemp[1] = htemp1[0];
+            } else {
+              htemp[1] = htemp1[0] + "-" + (parseInt(htemp1[1])-1);
+            }
 
           }
           console.log(hhtemp);
@@ -119,12 +184,12 @@
               var Today = new Date();
               //document.write("今天日期是 " + Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
               $("#ss07").append(Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "  " + Today.getHours() + ":" + Today.getMinutes());
-              if (hhtemp != 0 && hhtemp != undefined) {
-                  $("#ss012").attr("value", hhtemp);
+              if(hhtemp != 0 && hhtemp != undefined) {
+                $("#ss012").attr("value", hhtemp);
               } else {
-                  $("#ss012").attr("value", request.result.病歷號);
+                $("#ss012").attr("value", request.result.病歷號);
               }
-
+              
               $("#ss01").attr("value", request.result.姓名);
               $("#ss03").attr("value", request.result.性別);
               $("#ss04").attr("value", request.result.年齡);
@@ -176,94 +241,94 @@
                       alert("not found!");
                   };
                   request2.onsuccess = function(event) {
-                      if (request2.result != undefined)
-                          patient_info = request2.result;
-                      console.log(patient_info);
+                    if (request2.result != undefined)
+                        patient_info = request2.result;
+                    console.log(patient_info);
 
-                      SelectRadio("1-1", patient_info['訪視地點'], "病房", "ICU", "POR", "電訪");
+                    SelectRadio("1-1", patient_info['訪視地點'], "病房", "ICU", "POR", "電訪");
 
-                      SelectRadio("1-2", patient_info['回答者'], "本人", "家屬", "看護", "其他");
-                      SetText("Q1-2Text", "TQ1-2", patient_info['回答者-其他回答者'], patient_info['回答者'], "其他");
+                    SelectRadio("1-2", patient_info['回答者'], "本人", "家屬", "看護", "其他");
+                    SetText("Q1-2Text", "TQ1-2", patient_info['回答者-其他回答者'], patient_info['回答者'], "其他");     
 
-                      SelectRadio("1-3", patient_info['訪視時間點(麻醉後)'], "02~24hr", "24~48hr", ">72hr");
+                    SelectRadio("1-3", patient_info['訪視時間點(麻醉後)'], "02~24hr", "24~48hr", ">72hr");
 
-                      SelectRadio("1-4", patient_info['麻醉前訪視滿意度'], "非常滿意", "滿意", "普通", "不滿意", "非常不滿意", "無法表達");
-                      SetText("Q1-4Text", "TQ1-4", patient_info['麻醉前訪視滿意度-其他'], patient_info['麻醉前訪視滿意度'], "無法表達");
+                    SelectRadio("1-4", patient_info['麻醉前訪視滿意度'], "非常滿意", "滿意", "普通","不滿意","非常不滿意","無法表達");
+                    SetText("Q1-4Text", "TQ1-4", patient_info['麻醉前訪視滿意度-其他'], patient_info['麻醉前訪視滿意度'], "無法表達"); 
 
-                      SelectRadio("1-5", patient_info['麻醉滿意度'], "非常滿意", "滿意", "普通", "不滿意", "非常不滿意", "無法表達");
-                      SetText("Q1-5Text", "TQ1-5", patient_info['麻醉滿意度-其他'], patient_info['麻醉前訪視滿意度'], "無法表達");
+                    SelectRadio("1-5", patient_info['麻醉滿意度'], "非常滿意", "滿意", "普通","不滿意","非常不滿意","無法表達");
+                    SetText("Q1-5Text", "TQ1-5", patient_info['麻醉滿意度-其他'], patient_info['麻醉前訪視滿意度'], "無法表達");                  
 
-                      SelectRadio("2-0", patient_info['麻醉後相關問題'], "可以表達或評估", "無法表達或評估");
+                    SelectRadio("2-0", patient_info['麻醉後相關問題'], "可以表達或評估", "無法表達或評估");
 
-                      SelectCheckbox("2-1", patient_info['麻醉前後的不舒服'], "無", "焦慮緊張", "肚子餓", "感覺寒冷", "傷口疼痛", "其他", "無法表達");
-                      SetText("Q2-1-6Text", "TQ2-1-6", patient_info['麻醉前後的不舒服-其他'], patient_info['麻醉前後的不舒服'], "其他");
-                      SetText("Q2-1-7Text", "TQ2-1-7", patient_info['麻醉前後的不舒服-最不舒服為'], patient_info['麻醉前後的不舒服'], "無法表達");
+                    SelectCheckbox("2-1", patient_info['麻醉前後的不舒服'], "無", "焦慮緊張", "肚子餓", "感覺寒冷", "傷口疼痛", "其他", "無法表達");
+                    SetText("Q2-1-6Text", "TQ2-1-6", patient_info['麻醉前後的不舒服-其他'], patient_info['麻醉前後的不舒服'], "其他"); 
+                    SetText("Q2-1-7Text", "TQ2-1-7", patient_info['麻醉前後的不舒服-最不舒服為'], patient_info['麻醉前後的不舒服'], "無法表達");
 
-                      SelectRadio("2-2", patient_info['全身麻醉中甦醒'], "無", "疑似有(聽到聲音或記憶不完全)", "有(可以清楚描述手術過程)");
+                    SelectRadio("2-2", patient_info['全身麻醉中甦醒'], "無", "疑似有(聽到聲音或記憶不完全)", "有(可以清楚描述手術過程)");
 
-                      SelectRadio("2-3", patient_info['喉嚨痛'], "無", "有");
-                      SetText("Q2-3Text", "TQ2-3", patient_info['喉嚨痛-疼痛程度'], patient_info['喉嚨痛'], "有");
-                      SelectRadio("2-3-3", patient_info['喉嚨痛-處置狀況'], "無處置", "處置有改善", "處置未改善");
+                    SelectRadio("2-3", patient_info['喉嚨痛'], "無", "有");
+                    SetText("Q2-3Text", "TQ2-3", patient_info['喉嚨痛-疼痛程度'], patient_info['喉嚨痛'], "有");
+                    SelectRadio("2-3-3", patient_info['喉嚨痛-處置狀況'], "無處置", "處置有改善", "處置未改善");
 
-                      SelectRadio("2-4", patient_info['聲音沙啞'], "無", "有、但仍可發聲", "有、且無法發聲");
-                      SelectRadio("2-4-3", patient_info['聲音沙啞-處置狀況'], "無處置", "處置有改善", "處置未改善");
+                    SelectRadio("2-4", patient_info['聲音沙啞'], "無", "有、但仍可發聲", "有、且無法發聲");
+                    SelectRadio("2-4-3", patient_info['聲音沙啞-處置狀況'], "無處置", "處置有改善", "處置未改善");
+                    
+                    SelectRadio("2-5", patient_info['頭痛'], "無", "有");
+                    SetText("Q2-5Text", "TQ2-5", patient_info['頭痛-疼痛程度'], patient_info['頭痛'], "有");
+                    SelectRadio("2-5-3", patient_info['頭痛-處置狀況'], "無處置", "處置有改善", "處置未改善");
+                      
+                    SelectRadio("2-6", patient_info['眩暈'], "無", "輕微(1-3)", "中度(4-6)", "嚴重(7-10)");
+                    SelectRadio("2-6-5", patient_info['眩暈-處置狀況'], "無處置", "處置有改善", "處置未改善");
+                    
+                    SelectRadio("2-7", patient_info['噁心'], "無", "輕微(不影響日常)", "中度(有時影響日常)", "嚴重(無法進行日常)");
+                    SelectRadio("2-7-5", patient_info['噁心-處置狀況'], "無處置", "處置有改善", "處置未改善");
+                    
+                    SelectRadio("2-8", patient_info['嘔吐'], "無", "有", "不清楚確實次數");
+                    SetText("Q2-81Text", "TQ2-8", patient_info['嘔吐-嘔吐次數'], patient_info['嘔吐'], "有");
+                    SelectRadio("2-8-4", patient_info['嘔吐-處置狀況'], "無處置", "處置有改善", "處置未改善");
+                      
+                    SelectRadio("2-9", patient_info['排尿困難'], "無", "術前已經 on Foley", "輕微可自解", "須處置");
+                    SelectRadio("2-9-5", patient_info['排尿困難-處置方式'], "單導", "on Foley");
+                      
+                    SelectRadio("2-10", patient_info['神經損傷'], "無", "部分運動喪失及輕微感覺或感覺正常", "完全運動喪失及輕微感覺或感覺正常", "完全運動及感覺喪失");
 
-                      SelectRadio("2-5", patient_info['頭痛'], "無", "有");
-                      SetText("Q2-5Text", "TQ2-5", patient_info['頭痛-疼痛程度'], patient_info['頭痛'], "有");
-                      SelectRadio("2-5-3", patient_info['頭痛-處置狀況'], "無處置", "處置有改善", "處置未改善");
-
-                      SelectRadio("2-6", patient_info['眩暈'], "無", "輕微(1-3)", "中度(4-6)", "嚴重(7-10)");
-                      SelectRadio("2-6-5", patient_info['眩暈-處置狀況'], "無處置", "處置有改善", "處置未改善");
-
-                      SelectRadio("2-7", patient_info['噁心'], "無", "輕微(不影響日常)", "中度(有時影響日常)", "嚴重(無法進行日常)");
-                      SelectRadio("2-7-5", patient_info['噁心-處置狀況'], "無處置", "處置有改善", "處置未改善");
-
-                      SelectRadio("2-8", patient_info['嘔吐'], "無", "有", "不清楚確實次數");
-                      SetText("Q2-81Text", "TQ2-8", patient_info['嘔吐-嘔吐次數'], patient_info['嘔吐'], "有");
-                      SelectRadio("2-8-4", patient_info['嘔吐-處置狀況'], "無處置", "處置有改善", "處置未改善");
-
-                      SelectRadio("2-9", patient_info['排尿困難'], "無", "術前已經 on Foley", "輕微可自解", "須處置");
-                      SelectRadio("2-9-5", patient_info['排尿困難-處置方式'], "單導", "on Foley");
-
-                      SelectRadio("2-10", patient_info['神經損傷'], "無", "部分運動喪失及輕微感覺或感覺正常", "完全運動喪失及輕微感覺或感覺正常", "完全運動及感覺喪失");
-
-                      SelectRadio("2-11", patient_info['譫妄 Delirium'], "無", "有");
-                      SetText("Q2-111Text", "TQ2-11", patient_info['譫妄 Delirium-症狀'], patient_info['譫妄 Delirium'], "有");
-
-                      SelectRadio("2-12", patient_info['Apfel score'], "抽菸", "暈動史");
-
-                      SelectRadio("2-13", patient_info['眼部受傷'], "無", "有");
-                      SetText("Q2-131Text", "TQ2-13", patient_info['眼部受傷-部位'], patient_info['眼部受傷'], "有");
-
-                      SelectRadio("2-14", patient_info['PDPH'], "無", "有");
-                      SetText("Q2-141Text", "TQ2-14", patient_info['PDPH-分'], patient_info['PDPH'], "有");
-                      SelectRadio("2-14-3", patient_info['PDPH-處置狀況'], "無處置", "處置有改善", "處置未改善");
-
-                      $("#TQ2-15").val(patient_info['麻醉後相關問題-其他']);
-
-                      SelectRadio("3-0", patient_info['術後疼痛評估'], "可以表達或評估", "無法表達或評估");
-
-                      SelectRadio("3-1", patient_info['傷口疼痛'], "無", "有");
-                      SetText("Q3-1Text", "TQ3-1", patient_info['傷口疼痛-分'], patient_info['傷口疼痛'], "有");
-
-                      SelectRadio("3-2", patient_info['止痛方式'], "沒用藥", "病房止痛", "自費止痛");
-
-                      SelectRadio("s3-2-1", patient_info['呼吸抑制'], "無", "輕微 10次/分", "嚴重 8次/分");
-
-                      SelectRadio("s3-2-2", patient_info['嗜睡'], "無", "聲音可喚醒", "物理刺激可喚醒", "無法喚醒");
-
-                      SelectRadio("s3-2-3", patient_info['搔癢'], "無", "不須抓癢", "須抓癢但未破皮", "抓癢抓至破皮");
-
-                      SelectRadio("s3-2-4", patient_info['感覺阻斷'], "無", "感覺減弱", "只能感覺到觸碰", "完全沒有感覺");
-
-                      SelectRadio("s3-2-5", patient_info['運動阻斷'], "無", "膝蓋手肘尚可移動", "只可移動腳掌手掌", "完全無法移動");
-
-                      SelectRadio("5-0", patient_info['訪視結果'], "訪視後處置", "未完成訪視");
-                      SelectRadio("s5-0-1", patient_info['訪視後處置'], "訪視完成並結案", "通知主治醫師");
-                      SelectRadio("s5-0-2", patient_info['通知主治醫師'], "再訪", "處置方式", "直接結案");
-                      SelectRadio("s5-0-3", patient_info['未完成訪視'], "已出院", "病人不在", "睡覺中", "其他");
-                      SetText("Q5-0-3Text", "TQs5-0-2", patient_info['通知主治醫師-處置方式'], patient_info['通知主治醫師'], "處置方式");
-                      SetText("Q5-0-211Text", "TQs5-0-3", patient_info['未完成訪視-其他'], patient_info['未完成訪視'], "其他");
+                    SelectRadio("2-11", patient_info['譫妄 Delirium'], "無", "有");
+                    SetText("Q2-111Text", "TQ2-11", patient_info['譫妄 Delirium-症狀'], patient_info['譫妄 Delirium'], "有");
+                    
+                    SelectRadio("2-12", patient_info['Apfel score'], "抽菸", "暈動史");
+                      
+                    SelectRadio("2-13", patient_info['眼部受傷'], "無", "有");
+                    SetText("Q2-131Text", "TQ2-13", patient_info['眼部受傷-部位'], patient_info['眼部受傷'], "有");
+                      
+                    SelectRadio("2-14", patient_info['PDPH'], "無", "有");
+                    SetText("Q2-141Text", "TQ2-14", patient_info['PDPH-分'], patient_info['PDPH'], "有");
+                    SelectRadio("2-14-3", patient_info['PDPH-處置狀況'], "無處置", "處置有改善", "處置未改善");
+                      
+                    $("#TQ2-15").val(patient_info['麻醉後相關問題-其他']);
+                    
+                    SelectRadio("3-0", patient_info['術後疼痛評估'], "可以表達或評估", "無法表達或評估");
+                      
+                    SelectRadio("3-1", patient_info['傷口疼痛'], "無", "有");
+                    SetText("Q3-1Text", "TQ3-1", patient_info['傷口疼痛-分'], patient_info['傷口疼痛'], "有");
+                      
+                    SelectRadio("3-2", patient_info['止痛方式'], "沒用藥", "病房止痛", "自費止痛");
+                    
+                    SelectRadio("s3-2-1", patient_info['呼吸抑制'], "無", "輕微 10次/分", "嚴重 8次/分");
+                      
+                    SelectRadio("s3-2-2", patient_info['嗜睡'], "無", "聲音可喚醒", "物理刺激可喚醒", "無法喚醒");
+                      
+                    SelectRadio("s3-2-3", patient_info['搔癢'], "無", "不須抓癢", "須抓癢但未破皮", "抓癢抓至破皮");
+                      
+                    SelectRadio("s3-2-4", patient_info['感覺阻斷'], "無", "感覺減弱", "只能感覺到觸碰", "完全沒有感覺");
+                      
+                    SelectRadio("s3-2-5", patient_info['運動阻斷'], "無", "膝蓋手肘尚可移動", "只可移動腳掌手掌", "完全無法移動");
+                      
+                    SelectRadio("5-0", patient_info['訪視結果'], "訪視後處置", "未完成訪視");                    
+                    SelectRadio("s5-0-1", patient_info['訪視後處置'], "訪視完成並結案", "通知主治醫師");                    
+                    SelectRadio("s5-0-2", patient_info['通知主治醫師'], "再訪", "處置方式", "直接結案");                      
+                    SelectRadio("s5-0-3", patient_info['未完成訪視'], "已出院", "病人不在", "睡覺中", "其他");                   
+                    SetText("Q5-0-3Text", "TQs5-0-2", patient_info['通知主治醫師-處置方式'], patient_info['通知主治醫師'], "處置方式");
+                    SetText("Q5-0-211Text", "TQs5-0-3", patient_info['未完成訪視-其他'], patient_info['未完成訪視'], "其他");
                   };
 
 
@@ -304,28 +369,26 @@
               return "";
           }
       }
-
       function CheckboxCkeck(QNum) {
-          var n = $('input[name=Q' + QNum + ']:checked').length;
-          var rt = "";
-          if (n > 0) {
-              $('input[name=Q' + QNum + ']:checked').each(function() {
-                  var valtemp = $(this).val();
-                  //console.log(valtemp);
-                  if (valtemp != undefined) {
-                      t = $('#btnQ' + QNum + '-' + valtemp).html().split(">");
-                      t1 = t[1].split("\n");
-                      if (rt != "")
-                          rt = rt + "|" + t1[0];
-                      else
-                          rt = t1[0];
-                  }
-              });
-              return rt;
-          }
+        var n = $('input[name=Q' + QNum + ']:checked').length;
+        var rt="";
+        if (n > 0){
+            $('input[name=Q' + QNum + ']:checked').each(function(){
+                var valtemp = $(this).val();
+                //console.log(valtemp);
+                if (valtemp != undefined) {
+                    t = $('#btnQ' + QNum + '-' + valtemp).html().split(">");
+                    t1 = t[1].split("\n");
+                    if(rt!="")
+                      rt = rt + "|" + t1[0];
+                    else
+                      rt = t1[0];
+                }
+            });
+            return rt;
+        }
 
       }
-
       function RadioSet(QNum) {
           $('#Q' + QNum).prop('checked', "true");
           $('#btnQ' + QNum).addClass('active');
@@ -384,20 +447,20 @@
           if (Qtext == "" || Qtext == undefined || Qtext == "undefined") {} else {
 
 
-              if (Qtext == c1)
-                  RadioSet((QNum + "-1"));
-              if (Qtext.search(c2) != -1)
-                  RadioSet((QNum + "-2"));
-              if (Qtext.search(c3) != -1)
-                  RadioSet((QNum + "-3"));
-              if (Qtext.search(c4) != -1)
-                  RadioSet((QNum + "-4"));
-              if (Qtext.search(c5) != -1)
-                  RadioSet((QNum + "-5"));
-              if (Qtext.search(c6) != -1)
-                  RadioSet((QNum + "-6"));
-              if (Qtext.search(c7) != -1)
-                  RadioSet((QNum + "-7"));
+              if(Qtext == c1)
+                RadioSet((QNum + "-1"));
+              if(Qtext.search(c2) != -1)
+                RadioSet((QNum + "-2"));
+              if(Qtext.search(c3) != -1)
+                RadioSet((QNum + "-3"));
+              if(Qtext.search(c4) != -1)
+                RadioSet((QNum + "-4"));
+              if(Qtext.search(c5) != -1)
+                RadioSet((QNum + "-5"));
+              if(Qtext.search(c6) != -1)
+                RadioSet((QNum + "-6"));
+              if(Qtext.search(c7) != -1)
+                RadioSet((QNum + "-7"));              
           }
       }
 
@@ -571,12 +634,12 @@
               patient_info["訪視後處置"] = Qs501Temp;
 
               if (Qs501Temp == "通知主治醫師") {
-
+                  
                   var Qs502Temp = RadioCkeck("s5-0-2");
                   patient_info["通知主治醫師"] = Qs502Temp;
-
+                  
                   patient_info["未完成訪視"] = "";
-
+                  
                   if (Qs502Temp == "處置方式") {
                       patient_info["通知主治醫師-處置方式"] = $("#TQs5-0-2").val();
                       patient_info["未完成訪視-其他"] = "";
@@ -593,14 +656,14 @@
               }
 
           } else if (Q50Temp == "未完成訪視") {
-
+              
               patient_info["通知主治醫師"] = "";
-
+              
               var Qs503Temp = RadioCkeck("s5-0-3")
               patient_info["未完成訪視"] = Qs503Temp;
-
+              
               patient_info["通知主治醫師-處置方式"] = "";
-
+              
               if (Qs503Temp == "其他") {
                   patient_info["未完成訪視-其他"] = $("#TQs5-0-3").val();
               } else {
@@ -680,7 +743,7 @@
       //-------------------------Q1-5-------------------------
       $("#Q1-5-4,#Q1-5-5,#Q1-5-6").change(function() {
           if (cnt5 == 0) {
-              $("#Q1-5Text").show();
+             $("#Q1-5Text").show();
               cnt5++;
           }
 
@@ -706,14 +769,11 @@
       $("#btnQ2-1-1").click(function() {
           if (cnt211 == 0) {
               $("#btnQ2-1-2").removeClass("active");
-              $("#Q2-1-2").prop("checked", false);
               $("#btnQ2-1-3").removeClass("active");
               $("#btnQ2-1-4").removeClass("active");
               $("#btnQ2-1-5").removeClass("active");
               $("#btnQ2-1-6").removeClass("active");
               $("#btnQ2-1-7").removeClass("active");
-              
-
               if (cnt71 == 1) {
                   $("#Q2-1-6Text").hide();
                   cnt71 = 0;
@@ -727,10 +787,7 @@
           } else {
               cnt211 = 0;
           }
-          if ($("#Q2-1-2").prop("checked"))
-              console.log("按");
-          else
-              console.log("沒");
+
       });
       $("#btnQ2-1-6").click(function() {
           if (cnt71 == 0) {
@@ -758,7 +815,7 @@
               cnt211 = 0;
           }
       });
-
+ 
       $("#Q2-3-2").change(function() {
           $("#Q2-3Text").show();
       });
@@ -769,7 +826,7 @@
       $("#Q2-4-2,#Q2-4-3").change(function() {
 
           if (cnt10 == 0) {
-              $("#Q2-4Text").show();
+             $("#Q2-4Text").show();
               cnt10++;
           }
 
@@ -781,7 +838,7 @@
 
       //-------------------------Q2-5-------------------------
       $("#Q2-5-2").change(function() {
-          $("#Q2-5Text").show();
+         $("#Q2-5Text").show();
       });
       $("#Q2-5-1").change(function() {
           $("#Q2-5Text").hide();
@@ -854,7 +911,7 @@
 
       });
       $("#Q2-11-1").change(function() {
-          $("#Q2-111Text").hide();
+         $("#Q2-111Text").hide();
 
       });
 
@@ -873,13 +930,13 @@
           var t = $("#ss011").val();
           if (t == "全麻") {
               $("#s2-14").show();
-          } else {
+         } else {
               $("#s2-14").hide();
           }
       });
 
       $("#Q2-14-2").change(function() {
-          $("#Q2-141Text").show();
+           $("#Q2-141Text").show();
 
       });
       $("#Q2-14-1").change(function() {
@@ -995,21 +1052,21 @@
       });
 
       $("#Q5-0-1").change(function() {
-
+          
           $("#Q5-0-4Text").hide();
-
+          
           $("#Q5-0-211Text").hide();
           $("#Q5-0Text").show();
 
           $("#Qs5-0-1-2").change(function() {
-              $("#Q5-0-2Text").show();
+               $("#Q5-0-2Text").show();
               $("#Qs5-0-2-1,#Qs5-0-2-3").change(function() {
                   $("#Q5-0-3Text").hide();
               });
 
 
               $("#Qs5-0-2-2").change(function() {
-                  $("#Q5-0-3Text").show();
+                   $("#Q5-0-3Text").show();
               });
 
           });
@@ -1026,7 +1083,7 @@
           $("#Q5-0-2Text").hide();
           $("#Q5-0-4Text").show();
           $("#Qs5-0-3-4").change(function() {
-              $("#Q5-0-211Text").show();
+               $("#Q5-0-211Text").show();
           });
           $("#Qs5-0-3-1,#Qs5-0-3-2,#Qs5-0-3-3").change(function() {
               $("#Q5-0-211Text").hide();
@@ -1036,8 +1093,8 @@
 
       var font = 14;
       $("#fontbig").click(function() {
-          font = font + 1;
-          $("#body").attr("style", "font-size:" + font + "px;");
+              font = font + 1;
+              $("#body").attr("style", "font-size:" + font + "px;");
       });
 
       $("#fontsmall").click(function() {
@@ -1046,6 +1103,152 @@
               $("#body").attr("style", "font-size:" + font + "px;");
           }
       });
+	  
+	  $("#hide7").click(function() {
+        if (hd1 == 0) {
+            $("#QQ1-1").hide("fast");
+			hd1=1;
+        }else{
+			$("#QQ1-1").show("fast");
+			hd1=0;
+		}
+    });
+	$("#hide8").click(function() {
+        if (hd2 == 0) {
+            $("#QQ1-2").hide("fast");
+			hd2=1;
+        }else{
+			$("#QQ1-2").show("fast");
+			hd2=0;
+		}
+    });
+	$("#hide9").click(function() {
+        if (hd3 == 0) {
+            $("#QQ1-3").hide("fast");
+			hd3=1;
+        }else{
+			$("#QQ1-3").show("fast");
+			hd3=0;
+		}
+    });
+	$("#hide10").click(function() {
+        if (hd4 == 0) {
+            $("#QQ1-4").hide("fast");
+			hd4=1;
+        }else{
+			$("#QQ1-4").show("fast");
+			hd4=0;
+		}
+    });
+	$("#hide11").click(function() {
+        if (hd5 == 0) {
+            $("#QQ1-5").hide("fast");
+			hd5=1;
+        }else{
+			$("#QQ1-5").show("fast");
+			hd5=0;
+		}
+    });
+	$("#hide12").click(function() {
+        if (hd6 == 0) {
+            $("#QQ1-6").hide("fast");
+			hd6=1;
+        }else{
+			$("#QQ1-6").show("fast");
+			hd6=0;
+		}
+    });
+	   $("#hide13").click(function() {
+        if (hd1 == 0) {
+            $("#QQ1-7").hide("fast");
+			hd1=1;
+        }else{
+			$("#QQ1-7").show("fast");
+			hd1=0;
+		}
+    });
+	$("#hide14").click(function() {
+        if (hd2 == 0) {
+            $("#QQ1-8").hide("fast");
+			hd2=1;
+        }else{
+			$("#QQ1-8").show("fast");
+			hd2=0;
+		}
+    });
+	$("#hide15").click(function() {
+        if (hd3 == 0) {
+            $("#QQ1-9").hide("fast");
+			hd3=1;
+        }else{
+			$("#QQ1-9").show("fast");
+			hd3=0;
+		}
+    });
+	$("#hide16").click(function() {
+        if (hd4 == 0) {
+            $("#QQ1-10").hide("fast");
+			hd4=1;
+        }else{
+			$("#QQ1-10").show("fast");
+			hd4=0;
+		}
+    });
+	$("#hide17").click(function() {
+        if (hd5 == 0) {
+            $("#QQ1-11").hide("fast");
+			hd5=1;
+        }else{
+			$("#QQ1-11").show("fast");
+			hd5=0;
+		}
+    });
+	$("#hide18").click(function() {
+        if (hd6 == 0) {
+            $("#QQ1-12").hide("fast");
+			hd6=1;
+        }else{
+			$("#QQ1-12").show("fast");
+			hd6=0;
+		}
+    });
+	   $("#hide19").click(function() {
+        if (hd1 == 0) {
+            $("#QQ1-13").hide("fast");
+			hd1=1;
+        }else{
+			$("#QQ1-13").show("fast");
+			hd1=0;
+		}
+    });
+	$("#hide20").click(function() {
+        if (hd2 == 0) {
+            $("#QQ1-14").hide("fast");
+			hd2=1;
+        }else{
+			$("#QQ1-14").show("fast");
+			hd2=0;
+		}
+    });
+	$("#hide21").click(function() {
+        if (hd3 == 0) {
+            $("#QQ1-15").hide("fast");
+			hd3=1;
+        }else{
+			$("#QQ1-15").show("fast");
+			hd3=0;
+		}
+    });
+	$("#hide22").click(function() {
+        if (hd4 == 0) {
+            $("#QQ1-16").hide("fast");
+			hd4=1;
+        }else{
+			$("#QQ1-16").show("fast");
+			hd4=0;
+		}
+    });
+	  
       //
   });
 
