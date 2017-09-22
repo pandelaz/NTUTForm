@@ -1,41 +1,35 @@
 $(document).ready(function() {
-    var cnt513 = 0,
+    var cnt51211 = 0,
+        cnt51212 = 0,
+        cnt51214 = 0,
+        cnt51411 = 0,
+        cnt51412 = 0,
+        cnt51414 = 0,
+        cnt513 = 0,
         cnt5221 = 0,
         cnt5224 = 0,
+        cnt5232 = 0,
+        cnt5233 = 0,
+        cnt5234 = 0,
         cntasa = 0,
-        cnt222 = 0,
-        cnt223 = 0,
-        cnt225 = 0,
-        cnt232 = 0,
-        cnt233 = 0,
-        cnt235 = 0,  
-        cnt5N2 = 0,     
-        cnt5N3 = 0,  
-        cnt5N5 = 0,   
-        id = 1;
-
+        id = 1,
+        Q21 = 0,
+        Q33 = 0;
+    
     $("#Q5-1-3Text").hide();
+    $("#Q5-1-2-1Btn").hide();
+    $("#Q5-1-2-1-1Text").hide();
+    $("#Q5-1-2-1-2Text").hide();
+    $("#Q5-1-2-1-4Text").hide();
+    $("#Q5-1-4-1Btn").hide();
+    $("#Q5-1-4-1-1Text").hide();
+    $("#Q5-1-4-1-2Text").hide();
+    $("#Q5-1-4-1-4Text").hide();
     $("#Q5-2-2-1Text").hide();
     $("#Q5-2-2-4Text").hide();
-    $("#QC5-4-1-1").hide();
-    $("#QC5-4-1-2").hide();
-    $("#QC5-4-1-3").hide();
-    $("#QC5-4-1-4").hide();
-    $("#Q5-6-4-2Text").hide();
-    $("#Q5-6-4-1Text").hide();
-    $("#QC5-4-1-1SEL1").show();
-    $("#QC5-4-1-1SEL2").hide();
-    $("#QC5-4-1-1SEL3").hide();
-    $('#B2-2-2').hide();
-    $('#B2-2-3').hide();
-    $('#B2-2-5').hide();
-    $('#B2-3-2').hide();
-    $('#B2-3-3').hide();
-    $('#B2-3-5').hide();
-    $('#B5-N-2').hide();
-    $('#B5-N-5').hide();
-
-//新增1    
+    $("#Q5-2-3-2Text").hide();
+    $("#Q5-2-3-3Text").hide();
+    $("#Q5-2-3-4Text").hide();
     $("#Q5-3-1").hide();
     $("#Q5-3-2").hide();
     $("#Q5-3-3").hide();
@@ -44,11 +38,15 @@ $(document).ready(function() {
     $("#Q5-3-6").hide();
     $("#QT5-3-1").hide();
     $("#QT5-3-2").hide();
-    $("#QT5-3-3").hide();
-    $("#QT5-3-4").hide();
-    $("#QT5-3-5").hide();
-//新增1 END 
-
+    $("#QT5-3-3-1,#QT5-3-3-2,#QT5-3-3-3,#QT5-3-3-4,#QT5-3-3-5").hide();
+    $("#QT5-3-4-1,#QT5-3-4-2,#QT5-3-4-3,#QT5-3-4-4,#QT5-3-4-5").hide();
+    $("#QT5-3-5-1,#QT5-3-5-2,#QT5-3-5-3,#QT5-3-5-4,#QT5-3-5-5").hide();    
+    $("#Q5-6-4-2Text").hide();
+    $("#Q5-6-4-1Text").hide();
+    $("#QC5-4-1-1SEL1").show();
+    $("#QC5-4-1-1SEL2").hide();
+    $("#QC5-4-1-1SEL3").hide();
+    $("#FF9-1Btn").hide();
     /*
     patient_info["開始使用時間"] = "";
     patient_info["麻醉結束時間"] = "";
@@ -160,24 +158,21 @@ $(document).ready(function() {
             //$("#ss012").append(request.result.病歷號);
             $("#ss01").attr("value", request.result.姓名);
             $("#ss03").attr("value", request.result.性別);
-            $("#ss04").attr("value", request.result.年齡);
-            $("#ss06").attr("value", request.result.診斷);
+            $("#ss04").attr("value", request.result.年齡);            
             $("#ss07").attr("value", request.result.術式);
-            $("#ss014").attr("value", request.result.麻VS);
 
             //patient_info['機號'] = request.result.機號;
             //patient_info['刀序1'] = request.result.刀序1;
             //patient_info['刀序2'] = request.result.刀序2;
             patient_info['姓名'] = request.result.姓名;
             patient_info['病房'] = request.result.病房;
-
             patient_info['病歷號'] = request.result.病歷號;
-
-
             patient_info['性別'] = request.result.性別;
             patient_info['年齡'] = request.result.年齡;
             patient_info['診斷'] = request.result.診斷;
             patient_info['術式'] = request.result.術式;
+            
+            
             //patient_info['天數'] = request.result.天數;
             //patient_info['麻VS'] = request.result.麻VS;
             //patient_info['備註'] = request.result.備註;
@@ -204,134 +199,30 @@ $(document).ready(function() {
                         patient_info = request2.result;
                     console.log(patient_info);
 
-                    SelectCheckbox("5-2-2", patient_info['個人史'], "藥物過敏", "腸胃潰瘍史", "藥癮/毒癮患者", "長期使用opioids");
+                    SelectCheckbox("Q5-2-2", patient_info['個人史'], "藥物過敏", "腸胃潰瘍史", "藥癮/毒癮患者", "長期使用opioids");
                     SetText("Q5-2-2-1Text", "QT5-2-2-1", patient_info['藥物過敏'], patient_info['個人史'], "藥物過敏");
                     SetText("Q5-2-2-4Text", "QT5-2-2-4", patient_info['長期使用opioids'], patient_info['個人史'], "長期使用opioids");
-
-                    var temp = patient_info['開始使用時間'].split(":");
-                    $("#StartHour").val(temp[0]);
-                    $("#StartMin").val(temp[1]);
-
-                    temp = patient_info['麻醉結束時間'].split(":");
+                    
+                    var temp = patient_info['麻醉結束時間'].split(":");
                     $("#EndHour").val(temp[0]);
                     $("#EndMin").val(temp[1]);
 
-                    if (patient_info['臨時上機'] == "臨時上機") {
-                        cnt513 = 1;
-                        $("#Q5-1-3").attr("class", "btn btn-danger");
-                        $("#Q5-1-3Text").show();
+                    var temp = patient_info['預計使用期間'].split(":");
+                    $("#StartMonth").val(temp[0]);
+                    $("#StartDay").val(temp[1]);
+                    
+                    $("#Q5-1-1").val(patient_info["已知用藥-Zfran"]);                    
+                    
+                    
+                    SelectRadio("5-1-3","臨時上機","臨時上機");
+                    $("#p5").html(patient_info["臨時上機-時間"]);
+                    $("#Place5-3-1").val(patient_info['臨時上機-地點']);
+                    
+                    SetText("Q5-3-1-1Text", "Q5-3-1-1", patient_info['機號'], patient_info['個人史'], "藥物過敏");
 
-
-                        temp = patient_info['臨時上機-時間'].split("月");
-                        $("#month5-3-1").val(temp[0]);
-
-                        temp = temp[1].split("日");
-                        $("#day5-3-1").val(temp[0]);
-
-                        temp = temp[1].split("時");
-                        $("#hour5-3-1").val(temp[0]);
-
-                        temp = temp[1].split("分");
-                        $("#min5-3-1").val(temp[0]);
-
-                        $("#Place5-3-1").val(patient_info['臨時上機-地點']);
-
-                        $("#medicine5-3-1").val(patient_info['臨時上機-已用藥物']);
-
-                    }
-
-                    SelectRadio("n5-3-1", patient_info['止痛方式'], "IVPCA", "PCEA", "C/S 8-8)", "PCEA+PIB");
-
-                    $("#Q5-3-2-1").val(patient_info['止痛方式-位置']);
-                    $("#Q5-3-2-2").val(patient_info['止痛方式-fix']);
-                    $("#Q5-3-2-3").val(patient_info['止痛方式-施打者']);
-
-                    //SelectRadio("n5-3-1", patient_info['止痛方式'], "IVPCA", "PCEA", "C/S 8-8)", "PCEA+PIB");
-                    //patient_info["止痛藥物"] = "123456";
-
-                    if (patient_info['止痛藥物'].search("0.1%") != -1) {
-
-                        SelectRadio("n5-4-1", "case 1", "case 1", "case 2", "case 3", "其他");
-                        $("#QC5-4-1-1").show();
-
-                        if (patient_info['止痛藥物'].search("Keto") != -1) {
-                            $("#SEL5-4-1-1").val("Keto");
-                            temp = patient_info['止痛藥物'].split("Keto");
-                            temp = temp[1].split("支");
-                            $("#Keto").val(temp[0]);
-                            $("#QC5-4-1-1SEL1").show();
-                            $("#QC5-4-1-1SEL2").hide();
-                            $("#QC5-4-1-1SEL3").hide();
-
-                        } else if (patient_info['止痛藥物'].search("Vena") != -1) {
-                            $("#SEL5-4-1-1").val("Vena");
-                            temp = patient_info['止痛藥物'].split("Vena");
-                            temp = temp[1].split("支");
-                            $("#Vena").val(temp[0]);
-                            $("#QC5-4-1-1SEL1").hide();
-                            $("#QC5-4-1-1SEL2").show();
-                            $("#QC5-4-1-1SEL3").hide();
-                        } else {
-                            $("#SEL5-4-1-1").val("Other");
-                            temp = patient_info['止痛藥物'].split("+");
-                            $("#QtC5-4-1-1SEL3").val(temp[1].replace(/\s+/g, ""));
-                            $("#QC5-4-1-1SEL1").hide();
-                            $("#QC5-4-1-1SEL2").hide();
-                            $("#QC5-4-1-1SEL3").show();
-                        }
-
-                    } else if (patient_info['止痛藥物'].search("N/S：400ml") != -1) {
-
-                        SelectRadio("n5-4-1", "case 2", "case 1", "case 2", "case 3", "其他");
-                        $("#QC5-4-1-2").show();
-
-                    } else if (patient_info['止痛藥物'].search("mg：400ml") != -1) {
-
-                        SelectRadio("n5-4-1", "case 3", "case 1", "case 2", "case 3", "其他");
-                        $("#QC5-4-1-3").show();
-
-                        var temp1 = patient_info['止痛藥物'].split("+");
-                        temp = temp1[0].split("mg");
-                        temp = temp[0].split(" ");
-                        $("#QCs5-4-1-3").val(temp[1]);
-
-                        temp = temp1[1].split("mcg");
-                        temp = temp[0].split("l ");
-                        $("#QCs5-4-1-3-2").val(temp[1]);
-
-                        temp = temp1[2].split("mg");
-                        temp = temp[0].split("e ");
-                        $("#QCs5-4-1-3-3").val(temp[1]);                      
-
-                    } else {
-
-                        SelectRadio("n5-4-1", "其他", "case 1", "case 2", "case 3", "其他");
-                        $("#QC5-4-1-4").show();
-
-                        $("#QCt5-4-1-4").val(patient_info['止痛藥物']);
-
-                    }
-                    temp = patient_info['zofran已給'].split("mg");
-
-                    $("#Q5-4-2-1").val(temp[0]);
-                    SelectRadio("5-4-4", temp[1].replace(/\s+/g, ""), "麻打", "分2次");
-
-                    SelectRadio("n5-5-1", patient_info['單位設定'], "ml", "mg");
-
-                    $("#Q5-5-2-1-1").val(patient_info['Loading-初始設定']);
-                    $("#Q5-5-2-1-2").val(patient_info['Loading-調整後']);
-
-                    $("#Q5-5-2-2-1").val(patient_info['Bolus-初始設定']);
-                    $("#Q5-5-2-2-2").val(patient_info['Bolus-調整後']);
-
-                    $("#Q5-5-2-3-1").val(patient_info['Contin.-初始設定']);
-                    $("#Q5-5-2-3-2").val(patient_info['Contin.-調整後']);
-
-                    $("#Q5-5-2-4-1").val(patient_info['Interval-初始設定']);
-                    $("#Q5-5-2-4-2").val(patient_info['Interval-調整後']);
-
-                    $("#Q5-5-2-5-1").val(patient_info['4H limit-初始設定']);
-                    $("#Q5-5-2-5-2").val(patient_info['4H limit-調整後']);
+                    $("#Q5-3-1-1").val(patient_info["機號"]);
+                    $("#Q5-3-1-2").val(patient_info["鎖牌號碼"]);                 
+                   
 
                     temp = patient_info['下床時間'].split(":");
                     $("#dbedhour").val(temp[0]);
@@ -367,10 +258,28 @@ $(document).ready(function() {
                     $("#FF7").val(patient_info['頭痛']);
                     $("#FF8").val(patient_info['腳麻']);
                     $("#FF9").val(patient_info['EA導管']);
-                    $("#FF10").val(patient_info['衛教']);
                     $("#FF11").val(patient_info['處置']);
+                    SelectCheckbox("F10", patient_info['衛教'], "勿協助按壓", "增加活動", "預防性按壓", "預告DC");
+                    
+                    
+                    $("#TQ1").val(patient_info["其他交班事項"]);
+                    
+                    if(patient_info["備袋"] != "" && patient_info["備袋"] != undefined) {
+                        SelectRadio("2","備袋","備袋");
+                        $("#p2").html(patient_info["備袋"]);
+                    }
+                    
+                    SelectRadio("3",patient_info["備袋狀況"],"無備袋","已用","已取回");
+                    
+                    if(patient_info["U1126"] != "" && patient_info["U1126"] != undefined) {
+                        SelectRadio("4","U1126","U1126");
+                        $("#p4").html(patient_info["U1126"]);
+                    }
+                    
+                    SelectRadio("5","用藥資料單完成","用藥資料單完成");
 
                 };
+
             };
             // This event is only implemented in recent browsers
             request1.onupgradeneeded = function(event) {
@@ -386,6 +295,8 @@ $(document).ready(function() {
     };
 
     //=================================================================================
+
+
 
     function RadioCkeck(QNum) {
         var valtemp = $('input[name=Q' + QNum + ']:checked').val();
@@ -497,107 +408,202 @@ $(document).ready(function() {
 
     $("#saveinfo").click(function(event) {
 
-        if(hhtemp != 0 && hhtemp != undefined) {
+        /*if(hhtemp != 0 && hhtemp != undefined) {
             patient_info['病歷號'] = hhtemp;
-        }
-
-        //event.preventDefault();
-        patient_info["開始使用時間"] = $("#StartHour").find(":selected").text() + ":" + $("#StartMin").find(":selected").text();
-        patient_info["麻醉結束時間"] = $("#EndHour").find(":selected").text() + ":" + $("#EndMin").find(":selected").text();
-        if (cnt513 == 1) {
-            patient_info["臨時上機"] = "臨時上機";
-            patient_info["臨時上機-時間"] = $("#month5-3-1").find(":selected").text() + "月" + $("#day5-3-1").find(":selected").text() + "日" + $("#hour5-3-1").find(":selected").text() + "時" + $("#min5-3-1").find(":selected").text() + "分";
-            patient_info["臨時上機-地點"] = $("#Place5-3-1").find(":selected").text();
-            patient_info["臨時上機-已用藥物"] = $("#medicine5-3-1").val();
+        }*/
+        if(hhtemp != 0 && hhtemp != undefined) {
+            patient_info["病歷號"] = hhtemp;
         } else {
-            patient_info["臨時上機"] = "";
-            patient_info["臨時上機-時間"] = "";
-            patient_info["臨時上機-地點"] = "";
-            patient_info["臨時上機-已用藥物"] = "";
+            patient_info["病歷號"] = htemp[1];
         }
-
-        patient_info["Cr/洗腎"] = $("#T5-2-1").val();
-
-        var pertemp = "";
-
+        //event.preventDefault();
+        
+        patient_info["Cre."] = $("#ss06").val();
+        
+        if ($("#ss11").prop('checked')) {
+            patient_info["洗腎"] = "洗腎";
+        } else {
+            patient_info["洗腎"] = "";
+        }
+        
+        var pertemp = "", pertemp1 = "", pertemp2 = "", pertemp3 = "";
         if ($("#Q5-2-2-1").prop('checked')) {
             pertemp = "藥物過敏";
-            patient_info["藥物過敏"] = $("#QT5-2-2-1").val();
+            pertemp1 = $("#QT5-2-2-1").val();
         } else {
-            patient_info["藥物過敏"] = "";
+            pertemp1 = "";
         }
-
         if ($("#Q5-2-2-2").prop('checked')) {
             if (pertemp == "")
                 pertemp = "腸胃潰瘍史";
             else
                 pertemp = pertemp + "|腸胃潰瘍史";
         }
-
         if ($("#Q5-2-2-3").prop('checked')) {
             if (pertemp == "")
                 pertemp = "藥癮/毒癮患者";
             else
                 pertemp = pertemp + "|藥癮/毒癮患者";
         }
-
         if ($("#Q5-2-2-4").prop('checked')) {
-            patient_info["長期使用opioids"] = $("#QT5-2-2-4").val();
+            pertemp2 = $("#QT5-2-2-4").val();
             if (pertemp == "")
                 pertemp = "長期使用opioids";
             else
                 pertemp = pertemp + "|長期使用opioids";
         } else {
-            patient_info["長期使用opioids"] = "";
+            pertemp2 = "";
         }
-
         patient_info["個人史"] = pertemp;
-
-        patient_info["止痛方式"] = RadioCkeck("n5-3-1");
-        patient_info["止痛方式-位置"] = $("#Q5-3-2-1").val();
-        patient_info["止痛方式-fix"] = $("#Q5-3-2-2").val();
-        patient_info["止痛方式-施打者"] = $("#Q5-3-2-3").val();
-
-
-        if (RadioCkeck("n5-4-1") == "case 1") {
-            if ($("#SEL5-4-1-1").find(":selected").text() == "Keto") {
-                patient_info["止痛藥物"] = "0.1% Morphine 100 mg /100 ml/Bag + " + $("#SEL5-4-1-1").find(":selected").text() + $("#Keto").find(":selected").text() + "支";
-            } else if ($("#SEL5-4-1-1").find(":selected").text() == "Vena") {
-                patient_info["止痛藥物"] = "0.1% Morphine 100 mg /100 ml/Bag +" + $("#SEL5-4-1-1").find(":selected").text() + $("#Vena").find(":selected").text() + "支";
-            } else {
-                patient_info["止痛藥物"] = $("#QtC5-4-1-1SEL3").val();
-            }
-
-        } else if (RadioCkeck("n5-4-1") == "case 2") {
-            patient_info["止痛藥物"] = "Marcaine 265mg+ fentanyl 500mcg in N/S：400ml";
-        } else if (RadioCkeck("n5-4-1") == "case 3") {
-            patient_info["止痛藥物"] = "Marcaine " + $("#QCs5-4-1-3").find(":selected").text() + "mg+ fentanyl " + $("#QCs5-4-1-3-2").find(":selected").text() + "mcg+ morphine " + $("#QCs5-4-1-3-3").find(":selected").text() + "mg：400ml";
-        } else if (RadioCkeck("n5-4-1") == "其他") {
-            patient_info["止痛藥物"] = $("#QCt5-4-1-4").val();
+        patient_info["藥物過敏"] = pertemp1;
+        patient_info["長期使用opioids"] = pertemp2;
+        
+        
+        pertemp = "", pertemp1 = "", pertemp2 = "", pertemp3 = "";
+        if ($("#Q5-2-3-1").prop('checked')) {
+            pertemp = "術後急性疼痛";
+        }
+        else{
+            pertemp = "";
+        }
+        if ($("#Q5-2-3-2").prop('checked')) {
+            pertemp1 = $("#QT5-2-3-2").val();
+            if(pertemp == "")
+                pertemp = "剖腹產";
+            else
+                pertemp = pertemp + "|剖腹產";
         } else {
-            patient_info["止痛藥物"] = ""; //整合totall 
+            pertemp1 = "";
+        }
+        if ($("#Q5-2-3-3").prop('checked')) {
+            pertemp2 = $("#QT5-2-3-3").val();
+            if(pertemp == "")
+                pertemp = "減痛分娩";
+            else
+                pertemp = pertemp + "|減痛分娩";
+        } else {
+            pertemp2 = "";
+        }
+        if ($("#Q5-2-3-4").prop('checked')) {
+            pertemp3 = $("#QT5-2-3-4").val();
+            if (pertemp == "")
+                pertemp = "其他";
+            else
+                pertemp = pertemp + "|其他";
+        } else {
+            pertemp3 = "";
+        }
+        patient_info["使用原因"] = pertemp;
+        patient_info["剖腹產：胎次"] = pertemp1;
+        patient_info["減痛分娩：胎次"] = pertemp2;
+        patient_info["其他"] = pertemp3;
+        
+        
+        patient_info["麻醉結束時間"] = $("#EndHour").find(":selected").text() + ":" + $("#EndMin").find(":selected").text();
+        patient_info["預計使用期間"] = $("#StartMonth").find(":selected").text() + "月" + $("#StartDay").find(":selected").text() + "日";
+        
+        patient_info["已知用藥-Zfran"] = $("#Q5-1-1").find(":selected").text() + "mg";
+        
+        pertemp="";
+        if($("#Q5-1-2-1-1").prop('checked')){
+            pertemp = "morphine " + $("#QT5-1-2-1-1").val() + " mg";
+        }
+        else{
+            pertemp = "";
+        }
+        if($("#Q5-1-2-1-2").prop('checked')){
+            if(pertemp==""){
+                pertemp ="keto " + $("#QT5-1-2-1-2").val() + " mg";
+            }
+            else{
+                pertemp = pertemp + " + keto " + $("#QT5-1-2-1-2").val() + " mg";
+            }
+        }
+        else{
+            pertemp = pertemp + "";
+        }
+        if($("#Q5-1-2-1-3").prop('checked')){
+            if(pertemp==""){
+                pertemp ="Tencam 1支";
+            }
+            else{
+                pertemp = pertemp + " + Tencam 1支";
+            }            
+        }
+        else{
+            pertemp = pertemp + "";
+        }
+        if($("#Q5-1-2-1-4").prop('checked')){
+            if(pertemp==""){
+                pertemp = $("#QT5-1-2-1-4").val();
+            }
+            else{
+                pertemp = pertemp + " + " + $("#QT5-1-2-1-4").val();
+            }
+        }
+        else{
+            pertemp = pertemp + "";
+        }
+        patient_info["已知用藥-OR"] = pertemp;
+        
+        
+        pertemp="";
+        if($("#Q5-1-4-1-1").prop('checked')){
+            pertemp = "morphine " + $("#QT5-1-4-1-1").val() + " mg";
+        }
+        else{
+            pertemp = "";
+        }
+        if($("#Q5-1-4-1-2").prop('checked')){
+            if(pertemp==""){
+                pertemp ="keto " + $("#QT5-1-4-1-2").val() + " mg";
+            }
+            else{
+                pertemp = pertemp + " + keto " + $("#QT5-1-4-1-2").val() + " mg";
+            }
+        }
+        else{
+            pertemp = pertemp + "";
+        }
+        if($("#Q5-1-4-1-3").prop('checked')){
+            if(pertemp==""){
+                pertemp ="Tencam 1支";
+            }
+            else{
+                pertemp = pertemp + " + Tencam 1支";
+            }            
+        }
+        else{
+            pertemp = pertemp + "";
+        }
+        if($("#Q5-1-4-1-4").prop('checked')){
+            if(pertemp==""){
+                pertemp = $("#QT5-1-4-1-4").val();
+            }
+            else{
+                pertemp = pertemp + " + " + $("#QT5-1-4-1-4").val();
+            }
+        }
+        else{
+            pertemp = pertemp + "";
+        }
+        patient_info["已知用藥-POR"] = pertemp;
+        
+        
+        if (cnt513 == 1) {
+            patient_info["臨時上機"] = "臨時上機";
+            patient_info["臨時上機-時間"] = $("#p5").html();
+            patient_info["臨時上機-地點"] = $("#Place5-3-1").find(":selected").text();
+        } else {
+            patient_info["臨時上機"] = "";
+            patient_info["臨時上機-時間"] = "";
+            patient_info["臨時上機-地點"] = "";
         }
 
-
-
-        patient_info["zofran已給"] = $("#Q5-4-2-1").val() + "mg " + RadioCkeck("n5-2-1"); //(mg+麻打/分兩次)
-
-        patient_info["單位設定"] = RadioCkeck("n5-5-1");
-        patient_info["Loading-初始設定"] = $("#Q5-5-2-1-1").val();
-        patient_info["Loading-調整後"] = $("#Q5-5-2-1-2").val();
-        patient_info["Bolus-初始設定"] = $("#Q5-5-2-2-1").val();
-        patient_info["Bolus-調整後"] = $("#Q5-5-2-2-2").val();
-        patient_info["Contin.-初始設定"] = $("#Q5-5-2-3-1").val();
-        patient_info["Contin.-調整後"] = $("#Q5-5-2-3-2").val();
-        patient_info["Interval-初始設定"] = $("#Q5-5-2-4-1").val();
-        patient_info["Interval-調整後"] = $("#Q5-5-2-4-2").val();
-        patient_info["4H limit-初始設定"] = $("#Q5-5-2-5-1").val();
-        patient_info["4H limit-調整後"] = $("#Q5-5-2-5-2").val();
-
+        patient_info["機號"] = $("#Q5-3-1-1").val();
+        patient_info["鎖牌號碼"] = $("#Q5-3-1-2").val();
         patient_info["下床時間"] = $("#dbedhour").find(":selected").text() + ":" + $("#dbedmin").find(":selected").text();
         patient_info["排氣時間"] = $("#blhour").find(":selected").text() + ":" + $("#blmin").find(":selected").text();
-        patient_info["鎖牌號碼"] = $("#Q5-6-1-1").val();
-        patient_info["機號"] = $("#Q5-6-1-2").val();
         patient_info["胎次"] = $("#Q5-6-1-3").val();
 
         if ($("#Qn5-6-2-1").prop('checked')) {
@@ -619,17 +625,17 @@ $(document).ready(function() {
                 pertemp += "|已完成";
             }
         }
-
         patient_info["PFE(PCA)"] = pertemp;
 
 
         patient_info["病人狀況-日期"] = $("#Qtime1").html();
         patient_info["病人狀況-時間"] = $("#Qtime2").html();
-        patient_info["已輸液量(自控)"] = $("#Qtime3").val();
-        patient_info["已輸液量(請求)"] = $("#Qtime4").val();
-        patient_info["VAS(動)"] = $("#Qtime5").find(":selected").text();
-        patient_info["VAS(靜)"] = $("#Qtime6").find(":selected").text();
-        patient_info["宮縮痛"] = $("#s8").find(":selected").text();
+        patient_info["已輸液量"] = $("#Qtime3").val();
+        patient_info["有效次數"] = $("#Qtime4").val();
+        patient_info["請求次數"] = $("#Qtime5").val();
+        patient_info["VAS(動)"] = $("#Qtime6").find(":selected").text();
+        patient_info["VAS(靜)"] = $("#Qtime7").find(":selected").text();
+        patient_info["VAS(宮縮)"] = $("#Qtime7").find(":selected").text();
 
         patient_info["頭暈"] = $("#FF1").find(":selected").text();
         patient_info["噁心"] = $("#FF2").find(":selected").text();
@@ -638,10 +644,43 @@ $(document).ready(function() {
         patient_info["嗜睡"] = $("#FF5").find(":selected").text();
         patient_info["難尿"] = $("#FF6").find(":selected").text();
         patient_info["頭痛"] = $("#FF7").find(":selected").text();
-        patient_info["腳麻"] = $("#FF8").find(":selected").text();
-        patient_info["EA導管"] = $("#FF9").find(":selected").text();
-        patient_info["衛教"] = $("#FF10").find(":selected").text();
+        patient_info["腳麻"] = $("#FF8").find(":selected").text();        
         patient_info["處置"] = $("#FF11").find(":selected").text();
+        
+        pertemp = "";
+        if($("#FF9-1-1").prop('checked')){
+            pertemp = "有滲濕，" + "小於3x3";
+        }
+        else if($("#FF9-1-2").prop('checked')){
+            pertemp = "有滲濕，" + "大於3x3";
+        }
+        else{
+            pertemp = $("#FF9-2").val();
+        }
+        if($("#FF9-1-3").prop('checked')){
+            pertemp = pertemp + "，需加壓";
+        }
+        else{
+            pretemp = pertemp + "";
+        }
+        if($("#FF9-3").prop('checked')){
+            pertemp = pertemp + "，需換藥重貼";
+        }
+        else{
+            pretemp = pertemp + "";
+        }
+        patient_info["EA導管"] = pertemp;  
+        
+        
+        
+        patient_info["衛教"] = CheckboxCkeck("F10");
+        
+        
+        patient_info["其他交班事項"] = $("#TQ1").val();
+        patient_info["備袋"] = $("#p2").html();
+        patient_info["備袋狀況"] = RadioCkeck("3");
+        patient_info["U1126"] = $("#p4").html();
+        patient_info["用藥資料單完成"] = RadioCkeck("5");
 
         var transaction = db.transaction(["mList"], "readwrite");
         transaction.oncomplete = function(event) {
@@ -669,169 +708,108 @@ $(document).ready(function() {
         };
         console.log(patient_info);
     });
-
-
-    $("#btnQ5-N-2").click(function() {
-        if(cnt5N2==0) {
-            $('#B5-N-2').show();
-            cnt5N2=1;
-        } else if(cnt5N3 == 0) {
-            $('#B5-N-2').hide();
-            cnt5N2=0;
+    
+    $("#Q5-1-2-1").change(function() {
+        $("#Q5-1-2-1Btn").show();
+        $(window).resize();
+        });
+    
+    $("#Q5-1-2-2").change(function() {
+        $("#Q5-1-2-1Btn,#Q5-1-2-1-1Text,#Q5-1-2-1-2Text,#Q5-1-2-1-4Text").hide();
+        $(window).resize();
+        });
+    
+    $("#Q5-1-2-1-1").change(function() {
+        if (cnt51211 == 0) {
+            cnt51211 = 1;
+            $("#Q5-1-2-1-1Text").show();
         } else {
-           cnt5N2=0; 
+            cnt51211 = 0;
+            $("#Q5-1-2-1-1Text").hide();
         }
     });
-    $("#btnQ5-N-3").click(function() {
-        if(cnt5N3==0) {
-            $('#B5-N-2').show();
-            cnt5N3=1;
-        } else if(cnt5N2 == 0){
-            $('#B5-N-2').hide();
-            cnt5N3=0;
+    
+    $("#Q5-1-2-1-2").change(function() {
+        if (cnt51212 == 0) {
+            cnt51212 = 1;
+            $("#Q5-1-2-1-2Text").show();
         } else {
-           cnt5N3=0; 
-        } 
-    });
-    $("#btnQ5-N-5").click(function() {
-        if(cnt5N5==0) {
-            $('#B5-N-5').show();
-            cnt5N5=1;
-        } else if(cnt5N2 == 0){
-            $('#B5-N-5').hide();
-            cnt5N5=0;
+            cnt51212 = 0;
+            $("#Q5-1-2-1-2Text").hide();
         }
     });
-
-    $("#btnQ2-2-1").click(function() {
-        $('#Q2-2-2').prop('checked', "false");
-        $('#btnQ2-2-2').removeClass('active');
-        $('#Q2-2-3').prop('checked', "false");
-        $('#btnQ2-2-3').removeClass('active');
-        $('#Q2-2-4').prop('checked', "false");
-        $('#btnQ2-2-4').removeClass('active');  
-        $('#Q2-2-5').prop('checked', "false");
-        $('#btnQ2-2-5').removeClass('active');  
-        $('#B2-2-2').hide();
-        $('#B2-2-3').hide();
-        $('#B2-2-5').hide(); 
-        cnt222=0;  
-        cnt223=0;
-        cnt225=0;
-    });
-    $("#btnQ2-2-2").click(function() {
-        $('#Q2-2-1').prop('checked', "false");
-        $('#btnQ2-2-1').removeClass('active');
-        if(cnt222==0) {
-            $('#B2-2-2').show();
-            cnt222=1;
+    
+    $("#Q5-1-2-1-4").change(function() {
+        if (cnt51214 == 0) {
+            cnt51214 = 1;
+            $("#Q5-1-2-1-4Text").show();
         } else {
-            $('#B2-2-2').hide();
-            cnt222=0;
+            cnt51214 = 0;
+            $("#Q5-1-2-1-4Text").hide();
         }
     });
-    $("#btnQ2-2-3").click(function() {
-        $('#Q2-2-1').prop('checked', "false");
-        $('#btnQ2-2-1').removeClass('active');
-        if(cnt223==0) {
-            $('#B2-2-3').show();
-            cnt223=1;
+    
+    $("#Q5-1-4-1").change(function() {
+        $("#Q5-1-4-1Btn").show();
+        $(window).resize();
+        });
+    
+    $("#Q5-1-4-2").change(function() {
+        $("#Q5-1-4-1Btn,#Q5-1-4-1-1Text,#Q5-1-4-1-2Text,#Q5-1-4-1-4Text").hide();
+        $(window).resize();
+        });
+    
+    $("#Q5-1-4-1-1").change(function() {
+        if (cnt51411 == 0) {
+            cnt51411 = 1;
+            $("#Q5-1-4-1-1Text").show();
         } else {
-            $('#B2-2-3').hide();
-            cnt223=0;
+            cnt51411 = 0;
+            $("#Q5-1-4-1-1Text").hide();
         }
     });
-    $("#btnQ2-2-4").click(function() {
-        $('#Q2-2-1').prop('checked', "false");
-        $('#btnQ2-2-1').removeClass('active');
-    });
-    $("#btnQ2-2-5").click(function() {
-        $('#Q2-2-1').prop('checked', "false");
-        $('#btnQ2-2-1').removeClass('active');
-        if(cnt225==0) {
-            $('#B2-2-5').show();
-            cnt225=1;
+    
+    $("#Q5-1-4-1-2").change(function() {
+        if (cnt51412 == 0) {
+            cnt51412 = 1;
+            $("#Q5-1-4-1-2Text").show();
         } else {
-            $('#B2-2-5').hide();
-            cnt225=0;
+            cnt51412 = 0;
+            $("#Q5-1-4-1-2Text").hide();
         }
     });
-
-    $("#btnQ2-3-1").click(function() {
-        $('#Q2-3-2').prop('checked', "false");
-        $('#btnQ2-3-2').removeClass('active');
-        $('#Q2-3-3').prop('checked', "false");
-        $('#btnQ2-3-3').removeClass('active');
-        $('#Q2-3-4').prop('checked', "false");
-        $('#btnQ2-3-4').removeClass('active');  
-        $('#Q2-3-5').prop('checked', "false");
-        $('#btnQ2-3-5').removeClass('active');
-        $('#B2-3-2').hide();
-        $('#B2-3-3').hide();
-        $('#B2-3-5').hide();
-        cnt232=0;  
-        cnt233=0;
-        cnt235=0;
-    });
-
-    $("#btnQ2-3-2").click(function() {
-        $('#Q2-3-1').prop('checked', "false");
-        $('#btnQ2-3-1').removeClass('active');
-        if(cnt232==0) {
-            $('#B2-3-2').show();
-            cnt232=1;
+    
+    $("#Q5-1-4-1-4").change(function() {
+        if (cnt51414 == 0) {
+            cnt51414 = 1;
+            $("#Q5-1-4-1-4Text").show();
         } else {
-            $('#B2-3-2').hide();
-            cnt232=0;
+            cnt51414 = 0;
+            $("#Q5-1-4-1-4Text").hide();
         }
     });
-    $("#btnQ2-3-3").click(function() {
-        $('#Q2-3-1').prop('checked', "false");
-        $('#btnQ2-3-1').removeClass('active');
-        if(cnt233==0) {
-            $('#B2-3-3').show();
-            cnt233=1;
-        } else {
-            $('#B2-3-3').hide();
-            cnt233=0;
-        }
-    });
-    $("#btnQ2-3-4").click(function() {
-        $('#Q2-3-1').prop('checked', "false");
-        $('#btnQ2-3-1').removeClass('active');
-    });
-    $("#btnQ2-3-5").click(function() {
-        $('#Q2-3-1').prop('checked', "false");
-        $('#btnQ2-3-1').removeClass('active');
-        if(cnt235==0) {
-            $('#B2-3-5').show();
-            cnt235=1;
-        } else {
-            $('#B2-3-5').hide();
-            cnt235=0;
-        }
-    });
-
+    
     $("#Q5-1-3").click(function() {
         if (cnt513 == 0) {
             cnt513 = 1;
             $("#Q5-1-3").attr("class", "btn btn-danger");
             $("#Q5-1-3Text").show();
+            var Today = new Date();
+            $("#p5").html(Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "  " + Today.getHours() + ":" + Today.getMinutes());
         } else {
             cnt513 = 0;
             $("#Q5-1-3").attr("class", "btn btn-primary");
             $("#Q5-1-3Text").hide();
+            $("#p5").html("");
         }
     });
 
     $("#Q5-2-2-1").change(function() {
         if (cnt5221 == 0) {
             cnt5221 = 1;
-            //$("#Q5-1-3").attr("class", "btn btn-danger");
             $("#Q5-2-2-1Text").show();
         } else {
             cnt5221 = 0;
-            //$("#Q5-1-3").attr("class", "btn btn-primary");
             $("#Q5-2-2-1Text").hide();
         }
     });
@@ -839,22 +817,50 @@ $(document).ready(function() {
     $("#Q5-2-2-4").change(function() {
         if (cnt5224 == 0) {
             cnt5224 = 1;
-            //$("#Q5-1-3").attr("class", "btn btn-danger");
             $("#Q5-2-2-4Text").show();
         } else {
             cnt5224 = 0;
-            //$("#Q5-1-3").attr("class", "btn btn-primary");
             $("#Q5-2-2-4Text").hide();
         }
     });
-//新增2
+    
+    $("#Q5-2-3-2").change(function() {
+        if (cnt5232 == 0) {
+            cnt5232 = 1;
+            $("#Q5-2-3-2Text").show();
+        } else {
+            cnt5232 = 0;
+            $("#Q5-2-3-2Text").hide();
+        }
+    });
+    
+    $("#Q5-2-3-3").change(function() {
+        if (cnt5233 == 0) {
+            cnt5233 = 1;
+            $("#Q5-2-3-3Text").show();
+        } else {
+            cnt5233 = 0;
+            $("#Q5-2-3-3Text").hide();
+        }
+    });
+    
+    $("#Q5-2-3-4").change(function() {
+        if (cnt5234 == 0) {
+            cnt5234 = 1;
+            $("#Q5-2-3-4Text").show();
+        } else {
+            cnt5234 = 0;
+            $("#Q5-2-3-4Text").hide();
+        }
+    });
+    
     $("#Q5-3-2-1").change(function() {
         $("#Q5-3-1").show();
         $("#Q5-3-2").hide();
         $("#Q5-3-3").hide();
         $("#Q5-3-4").hide();
         $("#Q5-3-5").hide();
-        $("#Q5-3-6").hide();
+        $("#Q5-3-6").show();
         $(window).resize();
     });
     
@@ -897,106 +903,137 @@ $(document).ready(function() {
         $(window).resize();
     });
     
-    $("#Q5-3-5-8").change(function() {        
+    $("#Q5-3-5-8").change(function() {
+        $('#btnQ5-3-5-1,#btnQ5-3-5-2,#btnQ5-3-5-3,#btnQ5-3-5-4,#btnQ5-3-5-5,#btnQ5-3-5-6,#btnQ5-3-5-7').attr('class' , 'btn btn-primary');
         $("#QT5-3-2").show();        
         $(window).resize();
     });    
-    $("#Q5-3-5-1,#Q5-3-5-2,#Q5-3-5-3,#Q5-3-5-4,#Q5-3-5-5,#Q5-3-5-6,#Q5-3-5-7").change(function() {        
+    $("#Q5-3-5-1").change(function() {
+        $('#btnQ5-3-5-2,#btnQ5-3-5-3,#btnQ5-3-5-4,#btnQ5-3-5-5,#btnQ5-3-5-6,#btnQ5-3-5-7,#btnQ5-3-5-8').attr('class' , 'btn btn-primary');
         $("#QT5-3-2").hide();        
         $(window).resize();
     });
-    
-    $("#Q5-3-4-4").change(function() {        
-        $("#QT5-3-3").show();        
+    $("#Q5-3-5-2").change(function() {
+        $('#btnQ5-3-5-1,#btnQ5-3-5-3,#btnQ5-3-5-4,#btnQ5-3-5-5,#btnQ5-3-5-6,#btnQ5-3-5-7,#btnQ5-3-5-8').attr('class' , 'btn btn-primary');
+        $("#QT5-3-2").hide();        
         $(window).resize();
-    });    
-    $("#Q5-3-4-1,#Q5-3-4-2,#Q5-3-4-3").change(function() {        
-        $("#QT5-3-3").hide();        
+    });
+    $("#Q5-3-5-3").change(function() {
+        $('#btnQ5-3-5-1,#btnQ5-3-5-2,#btnQ5-3-5-4,#btnQ5-3-5-5,#btnQ5-3-5-6,#btnQ5-3-5-7,#btnQ5-3-5-8').attr('class' , 'btn btn-primary');
+        $("#QT5-3-2").hide();        
+        $(window).resize();
+    });
+    $("#Q5-3-5-4").change(function() {
+        $('#btnQ5-3-5-1,#btnQ5-3-5-2,#btnQ5-3-5-3,#btnQ5-3-5-5,#btnQ5-3-5-6,#btnQ5-3-5-7,#btnQ5-3-5-8').attr('class' , 'btn btn-primary');
+        $("#QT5-3-2").hide();        
+        $(window).resize();
+    });
+    $("#Q5-3-5-5").change(function() {
+        $('#btnQ5-3-5-1,#btnQ5-3-5-2,#btnQ5-3-5-3,#btnQ5-3-5-4,#btnQ5-3-5-6,#btnQ5-3-5-7,#btnQ5-3-5-8').attr('class' , 'btn btn-primary');
+        $("#QT5-3-2").hide();        
+        $(window).resize();
+    });
+    $("#Q5-3-5-6").change(function() {
+        $('#btnQ5-3-5-1,#btnQ5-3-5-2,#btnQ5-3-5-3,#btnQ5-3-5-4,#btnQ5-3-5-5,#btnQ5-3-5-7,#btnQ5-3-5-8').attr('class' , 'btn btn-primary');
+        $("#QT5-3-2").hide();        
+        $(window).resize();
+    });
+    $("#Q5-3-5-7").change(function() {
+        $('#btnQ5-3-5-1,#btnQ5-3-5-2,#btnQ5-3-5-3,#btnQ5-3-5-4,#btnQ5-3-5-5,#btnQ5-3-5-6,#btnQ5-3-5-8').attr('class' , 'btn btn-primary');
+        $("#QT5-3-2").hide();        
+        $(window).resize();
+    });
+     
+    $("#Q5-3-4-1").change(function() {
+        $('#btnQ5-3-4-2,#btnQ5-3-4-3,#btnQ5-3-4-4').attr('class' , 'btn btn-primary');
+        $("#QT5-3-3-1,#QT5-3-3-2,#QT5-3-3-3,#QT5-3-3-4,#QT5-3-3-5").hide();        
         $(window).resize();
     });
     
-     $("#Q5-3-6-3").change(function() {        
-        $("#QT5-3-4").show();        
-        $(window).resize();
-    });    
-    $("#Q5-3-6-1,#Q5-3-6-2").change(function() {        
-        $("#QT5-3-4").hide();        
+    $("#Q5-3-4-2").change(function() {
+        $('#btnQ5-3-4-1,#btnQ5-3-4-3,#btnQ5-3-4-4').attr('class' , 'btn btn-primary');
+        $("#QT5-3-3-1,#QT5-3-3-2,#QT5-3-3-3,#QT5-3-3-4,#QT5-3-3-5").hide();        
         $(window).resize();
     });
     
-     $("#Q5-3-7-3").change(function() {        
-        $("#QT5-3-5").show();        
+    $("#Q5-3-4-3").change(function() {
+        $('#btnQ5-3-4-1,#btnQ5-3-4-2,#btnQ5-3-4-4').attr('class' , 'btn btn-primary');
+        $("#QT5-3-3-1,#QT5-3-3-2,#QT5-3-3-3,#QT5-3-3-4,#QT5-3-3-5").hide();        
+        $(window).resize();
+    });
+    
+    $("#Q5-3-4-4").change(function() {
+        $('#btnQ5-3-4-1,#btnQ5-3-4-2,#btnQ5-3-4-3').attr('class' , 'btn btn-primary');
+        $("#QT5-3-3-1,#QT5-3-3-2,#QT5-3-3-3,#QT5-3-3-4,#QT5-3-3-5").show();   
+        $(window).resize();
+    });
+    
+     $("#Q5-3-6-3").change(function() {
+        $('#btnQ5-3-6-1,#btnQ5-3-6-2').attr('class' , 'btn btn-primary');
+        $("#QT5-3-4-1,#QT5-3-4-2,#QT5-3-4-3,#QT5-3-4-4,#QT5-3-4-5").show();        
         $(window).resize();
     });    
-    $("#Q5-3-7-1,#Q5-3-7-2").change(function() {        
-        $("#QT5-3-5").hide();        
+    $("#Q5-3-6-1").change(function() {
+        $('#btnQ5-3-6-2,#btnQ5-3-6-3').attr('class' , 'btn btn-primary');
+        $("#QT5-3-4-1,#QT5-3-4-2,#QT5-3-4-3,#QT5-3-4-4,#QT5-3-4-5").hide();        
         $(window).resize();
     });
-//新增 END
-/*
-    $("#Qn5-4-1-1").change(function() {
-
-        $("#QC5-4-1-1").show();
-        $("#QC5-4-1-2").hide();
-        $("#QC5-4-1-3").hide();
-        $("#QC5-4-1-4").hide();
-        //$(window).resize();
+    $("#Q5-3-6-2").change(function() {
+        $('#btnQ5-3-6-1,#btnQ5-3-6-3').attr('class' , 'btn btn-primary');
+        $("#QT5-3-4-1,#QT5-3-4-2,#QT5-3-4-3,#QT5-3-4-4,#QT5-3-4-5").hide();        
+        $(window).resize();
     });
+    
+     $("#Q5-3-7-3").change(function() {
+        $('#btnQ5-3-7-1,#btnQ5-3-7-2').attr('class' , 'btn btn-primary');
+        $("#QT5-3-5-1,#QT5-3-5-2,#QT5-3-5-3,#QT5-3-5-4,#QT5-3-5-5").show();        
+        $(window).resize();
+    });    
+    $("#Q5-3-7-1").change(function() {
+        $('#btnQ5-3-7-2,#btnQ5-3-7-3').attr('class' , 'btn btn-primary');
+        $("#QT5-3-5-1,#QT5-3-5-2,#QT5-3-5-3,#QT5-3-5-4,#QT5-3-5-5").hide();        
+        $(window).resize();
+    });
+    $("#Q5-3-7-2").change(function() {
+        $('#btnQ5-3-7-1,#btnQ5-3-7-3').attr('class' , 'btn btn-primary');
+        $("#QT5-3-5-1,#QT5-3-5-2,#QT5-3-5-3,#QT5-3-5-4,#QT5-3-5-5").hide();        
+        $(window).resize();
+    });    
+    
+    $("#Q2-1").change(function() {
+        if (Q21 == 0) {
 
+            var Today = new Date();
+            $("#p2").html(Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "  " + Today.getHours() + ":" + Today.getMinutes());
 
-    $('select').change(function() {
-        id = $("#SEL5-4-1-1").find(':selected').data('id');
-        //或是以下方式也可以
-        //id= $(this).find(':selected').attr('data-id');              
-        //alert(id2);
-        if (id == 1) {
-            $("#QC5-4-1-1SEL1").show();
-            $("#QC5-4-1-1SEL2").hide();
-            $("#QC5-4-1-1SEL3").hide();
-        } else if (id == 2) {
-            $("#QC5-4-1-1SEL1").hide();
-            $("#QC5-4-1-1SEL2").show();
-            $("#QC5-4-1-1SEL3").hide();
-        } else if (id == 3) {
-            $("#QC5-4-1-1SEL1").hide();
-            $("#QC5-4-1-1SEL2").hide();
-            $("#QC5-4-1-1SEL3").show();
+            Q21 = 1;
+        } else if (Q21 == 1) {
+            $("#p2").html("");
+            Q21 = 0;
         }
+    });
+    $("#Q4-1").change(function() {
+        if (Q33 == 0) {
 
+            var Today = new Date();
+            $("#p4").html(Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "  " + Today.getHours() + ":" + Today.getMinutes());
+            Q33 = 1;
+        } else if (Q33 == 1) {
+            $("#p4").html("");
+            Q33 = 0;
+        }
     });
-
-
-    $("#Qn5-4-1-2").change(function() {
-        $("#QC5-4-1-2").show();
-        $("#QC5-4-1-1").hide();
-        $("#QC5-4-1-3").hide();
-        $("#QC5-4-1-4").hide();
+    
+    $("#FF9-1").change(function() {
+        $("#FF9-1Btn").show();
         $(window).resize();
-    });
-    $("#Qn5-4-1-3").change(function() {
-        $("#QC5-4-1-3").show();
-        $("#QC5-4-1-1").hide();
-        $("#QC5-4-1-2").hide();
-        $("#QC5-4-1-4").hide();
+        });
+    
+    $("#FF9-2").change(function() {
+        $("#FF9-1Btn").hide();
         $(window).resize();
-    });
-    $("#Qn5-4-1-4").change(function() {
-        $("#QC5-4-1-4").show();
-        $("#QC5-4-1-1").hide();
-        $("#QC5-4-1-2").hide();
-        $("#QC5-4-1-3").hide();
-        $(window).resize();
-    });
-*/
-    //-------------------------Q5-6-------------------------
-    /*$("#Q5-6-4-1").change(function() {
-        $("#Q5-6-4-1Text").show();
-        $("#Q5-6-4-2Text").hide();
-    });
-    $("#Q5-6-4-2").change(function() {
-        $("#Q5-6-4-1Text").hide();
-        $("#Q5-6-4-2Text").show();
-    });*/
+        });
+    
     var font = 14;
     $("#fontbig").click(function() {
             font = font + 1;
