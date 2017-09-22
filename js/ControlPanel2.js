@@ -240,7 +240,7 @@
             //"<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + ">+</a>"
             //console.log(RowCnt);
             if (RowCnt == -1) {
-                $("#htmlout").html("<table><tr id='T0'><td></td><td>姓名</td><td>年齡</td><td>病歷號</td><td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td></tr></table>");
+                $("#htmlout").html("<table><tr id='T0'><td></td><td>姓名</td><td>年齡</td><td>病歷號</td><td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td></tr></table>");
                 RowCnt++;
             }
             RowCnt++;
@@ -253,7 +253,6 @@
                 "<td>" + "" + "</td>" +
                 "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
                 "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
-                "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
                 "</tr>");
             //console.log(RowCnt);
 
@@ -340,7 +339,7 @@
                     var temp2 = temp[0].split("<td>");
 
                     if (RowCnt == -1) {
-                        htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
+                        htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td>";
                         RowCnt++;
                     } else {
                         var temp5 = $("#htmlout").html().split("</table>");
@@ -359,7 +358,6 @@
                         htmlstr += temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
                         htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
                         htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
-                        htmlstr += "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + temp4[1] + "'>未填</a></td>";
                     }
                     htmlstr += temp[temp.length - 1];
                     //console.log(temp[temp.length - 1]);
@@ -662,7 +660,7 @@
                     var temp2 = temp[0].split("<td>");
 
                     if (RowCnt == -1) {
-                        htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td><td>交班事項</td>";
+                        htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td>";
                         RowCnt++;
                     } else {
                         var temp5 = $("#htmlout").html().split("</table>");
@@ -681,7 +679,6 @@
                         htmlstr += temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
                         htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
                         htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
-                        htmlstr += "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + temp4[1] + "'>未填</a></td>";
                         
                     }
                     htmlstr += temp[temp.length - 1];
@@ -736,7 +733,7 @@
 
             var Form1db = new Array(people_id.length);
             var Form2db = new Array(people_id.length);
-            var Form3db = new Array(people_id.length);
+            //var Form3db = new Array(people_id.length);
             var Fcnt = 0;
 
             ArrForm1[0] = new Array();
@@ -923,7 +920,6 @@
                         "<td>" + temp4[1] + "</td>" +
                         "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp3[1] + "'>未填</a></td>" +
                         "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp3[1] + "'>未填</a></td>" +
-                        "<td><a class='btn btn-danger3 navbar-btn' id='Fbtn" + RowCnt + "a3' href='index2.html?ssn=" + temp3[1] + "'>未填</a></td>" +
                         "</tr>");
                     
                     var wstemp = [{
