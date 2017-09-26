@@ -60,13 +60,6 @@
                         <p class="col-md-4">身&nbsp;&nbsp;&nbsp;高：<input id="ss08" type="text" value="" size="25"></p>
                         <p class="col-md-4">體&nbsp;&nbsp;&nbsp;重：<input id="ss09" type="text" value="" size="25"></p>
                         <p class="col-md-4">C&nbsp;r&nbsp;e.&nbsp;：<input id="ss06" type="text" value="" size="25"></p>
-                        <div class="col-xs-12 col-sm-4">
-                            <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
-                                <label class="btn btn-primary Large-Width" id="ss10">
-                                    <input type="checkbox" name="" id="ss11" value="1">洗腎
-                                </label>
-                            </div>
-                        </div>
                     </div>
                     <br>
                     <div class="row">
@@ -84,6 +77,9 @@
                                 </label>
                                 <label class="btn btn-primary Large-Width" id="btnQ5-2-2-4">
                                     <input type="checkbox" name="Q5-2-2" id="Q5-2-2-4" value="4">長期使用opioids
+                                </label>
+                                <label class="btn btn-primary Large-Width" id="btnQ5-2-2-5">
+                                    <input type="checkbox" name="Q5-2-2" id="Q5-2-2-5" value="5">洗腎
                                 </label>
                             </div>
                             <br>
@@ -113,6 +109,9 @@
                                 <label class="btn btn-primary Large-Width" id="btnQ5-2-3-3">
                                     <input type="checkbox" name="Q5-2-3" id="Q5-2-3-3" value="3">減痛分娩
                                 </label>
+                                <label class="btn btn-primary Large-Width" id="btnQ5-2-3-5">
+                                    <input type="checkbox" name="Q5-2-3" id="Q5-2-3-5" value="5">癌症疼痛
+                                </label>
                                 <label class="btn btn-primary Large-Width" id="btnQ5-2-3-4">
                                     <input type="checkbox" name="Q5-2-3" id="Q5-2-3-4" value="4">其他
                                 </label>
@@ -139,8 +138,8 @@
             </div>
             <!-- Question5-1 -->
             <div class="panel panel-default">
-                <div class="panel-heading">開始使用</div>
-                <div class="panel-body">
+                <div class="panel-heading">開始使用<span style="float: right"><input type="button" id="hide2" value="..."></span></div>
+                <div class="panel-body" id="QQ5-2">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <p>麻醉結束時間：
@@ -250,20 +249,13 @@
                         mg
                     </p>
                     
+                    
                     <div  class="row">
-                        <span class="col-xs-3 col-sm-2">　　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR：</span>
-                        <div class="btn-group-toolbar col-xs-3 col-sm-2" data-toggle="buttons">
-                            <label class="btn btn-primary" id="btnQ5-1-2-1">
-                                <input type="radio" name="Q5-1-2" id="Q5-1-2-1" value="1">有
-                            </label>
-                            <label class="btn btn-primary" id="btnQ5-1-2-2">
-                                <input type="radio" name="Q5-1-2" id="Q5-1-2-2" value="2">無
-                            </label>
-                        </div>
-                    </div>
-                    <div  class="row" id="Q5-1-2-1Btn">
-                        <span class="col-xs-3 col-sm-2"></span>
+                        <span class="col-xs-3 col-sm-2">　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR：</span>
                         <div class="btn-group-toolbar col-xs-9" data-toggle="buttons">
+                            <label class="btn btn-primary" id="btnQ5-1-2-1-5">
+                                <input type="checkbox" name="Q5-1-2-1" id="Q5-1-2-1-5" value="5">無
+                            </label>
                             <label class="btn btn-primary" id="btnQ5-1-2-1-1">
                                 <input type="checkbox" name="Q5-1-2-1" id="Q5-1-2-1-1" value="1">morphine
                             </label>
@@ -292,30 +284,22 @@
                     </div>
                     <br>
                     <div  class="row">
-                        <span class="col-xs-3 col-sm-2">　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POR：</span>
-                        <div class="btn-group-toolbar col-xs-3" data-toggle="buttons">
-                            <label class="btn btn-primary" id="btnQ5-1-4-1">
-                                <input type="radio" name="OR1" id="Q5-1-4-1" value="有">有
-                            </label>
-                            <label class="btn btn-primary" id="btnQ5-1-4-2">
-                                <input type="radio" name="OR1" id="Q5-1-4-2" value="無">無
-                            </label>
-                        </div>
-                    </div>
-                    <div  class="row" id="Q5-1-4-1Btn">
-                        <span class="col-xs-3 col-sm-2"></span>
+                        <span class="col-xs-3 col-sm-2">　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR：</span>
                         <div class="btn-group-toolbar col-xs-9" data-toggle="buttons">
+                            <label class="btn btn-primary" id="btnQ5-1-4-1-5">
+                                <input type="checkbox" name="Q5-1-4-1" id="Q5-1-4-1-5" value="5">無
+                            </label>
                             <label class="btn btn-primary" id="btnQ5-1-4-1-1">
-                                <input type="checkbox" name="OR2" id="Q5-1-4-1-1" value="1">morphine
+                                <input type="checkbox" name="Q5-1-4-1" id="Q5-1-4-1-1" value="1">morphine
                             </label>
                             <label class="btn btn-primary" id="btnQ5-1-4-1-2">
-                                <input type="checkbox" name="OR2" id="Q5-1-4-1-2" value="2">keto
+                                <input type="checkbox" name="Q5-1-4-1" id="Q5-1-4-1-2" value="2">keto
                             </label>
                             <label class="btn btn-primary" id="btnQ5-1-4-1-3">
-                                <input type="checkbox" name="OR2" id="Q5-1-4-1-3" value="2">Tencam 1支
+                                <input type="checkbox" name="Q5-1-4-1" id="Q5-1-4-1-3" value="3">Tencam 1支
                             </label>
                             <label class="btn btn-primary" id="btnQ5-1-4-1-4">
-                                <input type="checkbox" name="OR2" id="Q5-1-4-1-4" value="2">其他
+                                <input type="checkbox" name="Q5-1-4-1" id="Q5-1-4-1-4" value="4">其他
                             </label>
                         </div>
                     </div>
@@ -350,8 +334,8 @@
             
                      
             <div class="panel panel-default">
-                <div class="panel-heading">止痛方式、藥物、機器設定</div>
-                <div class="panel-body">
+                <div class="panel-heading">止痛方式、藥物、機器設定<span style="float: right"><input type="button" id="hide3" value="..."></span></div>
+                <div class="panel-body" id="QQ5-3">
                     <div class="row">
                         <div class="col-xs-12 col-sm-4">
                             <p>機　　號：<input type="text" name="" id="Q5-3-1-1" style="height:1.5em"></p> 
@@ -362,16 +346,16 @@
                         <div class="col-xs-12 col-sm-12">
                             <div class="btn-group-toolbar" data-toggle="buttons">
                                 <label class="btn btn-primary" id="btnQ5-3-2-1">
-                                    <input type="radio" name="Q5-3-2" id="Q5-3-2-1" value="1">IVPCA
+                                    <input type="radio" name="Q5-3-2" id="Q5-3-2-1" value="IVPCA">IVPCA
                                 </label>
                                 <label class="btn btn-primary" id="btnQ5-3-2-2">
-                                    <input type="radio" name="Q5-3-2" id="Q5-3-2-2" value="2" style="">PCEA
+                                    <input type="radio" name="Q5-3-2" id="Q5-3-2-2" value="PCEA">PCEA
                                 </label>
                                 <label class="btn btn-primary" id="btnQ5-3-2-3">
-                                    <input type="radio" name="Q5-3-2" id="Q5-3-2-3" value="3" style="">PCEA+PIB
+                                    <input type="radio" name="Q5-3-2" id="Q5-3-2-3" value="PCEA+PIB">PCEA+PIB
                                 </label>
                                 <label class="btn btn-primary" id="btnQ5-3-2-4">
-                                    <input type="radio" name="Q5-3-2" id="Q5-3-2-4" value="4" style="">C/S(8-8)
+                                    <input type="radio" name="Q5-3-2" id="Q5-3-2-4" value="C/S(8-8)">C/S(8-8)
                                 </label>
                             </div>                            
                         </div>
@@ -381,10 +365,10 @@
                                 <div class="btn-group-toolbar" data-toggle="buttons">
                                     <span>藥物：</span>
                                     <label class="btn btn-primary" id="btnQ5-3-3-1">
-                                        <input type="radio" name="Q5-3-3" id="Q5-3-3-1" value="1">Morphine 1mg/ml
+                                        <input type="radio" name="Q5-3-3" id="Q5-3-3-1" value="Morphine 1mg/ml">Morphine 1mg/ml
                                     </label>
                                     <label class="btn btn-primary" id="btnQ5-3-3-2">
-                                        <input type="radio" name="Q5-3-3" id="Q5-3-3-2" value="2">Fentanyl 10mcg/ml
+                                        <input type="radio" name="Q5-3-3" id="Q5-3-3-2" value="Fentanyl 10mcg/ml">Fentanyl 10mcg/ml
                                     </label>
                                     <label class="btn btn-primary" id="btnQ5-3-3-3">
                                         <input type="radio" name="Q5-3-3" id="Q5-3-3-3" value="3">其他
@@ -454,19 +438,19 @@
                                             </div>
                                         </td>
                                         <td id="QT5-3-3-1">
-                                            <input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> mg
+                                            <input type="text" name="" id="Q5-3-4-4-1" style="height:1.5em" size="5"> mg
                                         </td>
                                         <td id="QT5-3-3-2">
-                                            <input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> mg
+                                            <input type="text" name="" id="Q5-3-4-4-2" style="height:1.5em" size="5"> mg
                                         </td>
                                         <td id="QT5-3-3-3">
-                                            <input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5">
+                                            <input type="text" name="" id="Q5-3-4-4-3" style="height:1.5em" size="5"> mg
                                         </td>
                                         <td id="QT5-3-3-4">
-                                            <input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> min
+                                            <input type="text" name="" id="Q5-3-4-4-4" style="height:1.5em" size="5"> min
                                         </td>
                                         <td id="QT5-3-3-5">
-                                            <input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> mg
+                                            <input type="text" name="" id="Q5-3-4-4-5" style="height:1.5em" size="5"> mg
                                         </td>
                                     </tr>                                    
                                 </table> 
@@ -610,11 +594,11 @@
                                                 </label>
                                             </div> 
                                         </td>
-                                        <td id="QT5-3-4-1"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> ml</td>
-                                        <td id="QT5-3-4-2"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> ml</td>
-                                        <td id="QT5-3-4-3"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"></td>
-                                        <td id="QT5-3-4-4"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> min</td>
-                                        <td id="QT5-3-4-5"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> ml</td>
+                                        <td id="QT5-3-4-1"><input type="text" name="" id="Q5-3-6-3-1" style="height:1.5em" size="5"> ml</td>
+                                        <td id="QT5-3-4-2"><input type="text" name="" id="Q5-3-6-3-2" style="height:1.5em" size="5"> ml</td>
+                                        <td id="QT5-3-4-3"><input type="text" name="" id="Q5-3-6-3-3" style="height:1.5em" size="5"> ml</td>
+                                        <td id="QT5-3-4-4"><input type="text" name="" id="Q5-3-6-3-4" style="height:1.5em" size="5"> min</td>
+                                        <td id="QT5-3-4-5"><input type="text" name="" id="Q5-3-6-3-5" style="height:1.5em" size="5"> ml</td>
                                     </tr>
                                 </table>
                                 
@@ -667,11 +651,11 @@
                                                 </label> 
                                             </div>
                                         </td>
-                                        <td id="QT5-3-5-1"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> ml</td>
-                                        <td id="QT5-3-5-2"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> ml</td>
-                                        <td id="QT5-3-5-3"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"></td>
-                                        <td id="QT5-3-5-4"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> min</td>
-                                        <td id="QT5-3-5-5"><input type="text" name="" id="Q5-3-1-1" style="height:1.5em" size="5"> ml</td>
+                                        <td id="QT5-3-5-1"><input type="text" name="" id="Q5-3-7-3-1" style="height:1.5em" size="5"> ml</td>
+                                        <td id="QT5-3-5-2"><input type="text" name="" id="Q5-3-7-3-2" style="height:1.5em" size="5"> ml</td>
+                                        <td id="QT5-3-5-3"><input type="text" name="" id="Q5-3-7-3-3" style="height:1.5em" size="5"> ml</td>
+                                        <td id="QT5-3-5-4"><input type="text" name="" id="Q5-3-7-3-4" style="height:1.5em" size="5"> min</td>
+                                        <td id="QT5-3-5-5"><input type="text" name="" id="Q5-3-7-3-5" style="height:1.5em" size="5"> ml</td>
                                     </tr>
                                 </table>                                 
                                 
@@ -711,8 +695,8 @@
         
             <!-- Question5-6 -->
             <div class="panel panel-default">
-                <div class="panel-heading" id="s5">相關資訊</div>
-                <div class="panel-body">
+                <div class="panel-heading" id="s5">相關資訊<span style="float: right"><input type="button" id="hide4" value="..."></span></div>
+                <div class="panel-body" id="QQ5-4">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <p>下床時間：
@@ -832,8 +816,8 @@
             <!-- Question5-6 end -->
             <!-- Question5-7 -->
             <div class="panel panel-default">
-                <div class="panel-heading">使用狀況</div>
-                <div class="panel-body">
+                <div class="panel-heading">使用狀況<span style="float: right"><input type="button" id="hide5" value="..."></span></div>
+                <div class="panel-body" id="QQ5-5">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <p id="Qtime1">日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期：</p>
@@ -916,194 +900,262 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">副作用評估</div>
-                <div class="panel-body">
+                <div class="panel-heading">副作用評估<span style="float: right"><input type="button" id="hide6" value="..."></span></div>
+                <div class="panel-body" id="QQ5-6">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <br>
-                            <label>頭　暈:</label>
-                            <select id="FF1">
-                                <option value="無">無</option>
-                                <option value="不按也會">不按也會</option>
-                                <option value="按多才會">按多才會</option>
-                                <option value="幾乎每次按都會">幾乎每次按都會</option>
-                            </select>
-                            <br>
-                            <label>噁　心:</label>
-                            <select id="FF2">
-                                <option value="無">無</option>
-                                <option value="不按也會">不按也會</option>
-                                <option value="按多才會">按多才會</option>
-                                <option value="幾乎每次按都會">幾乎每次按都會</option>
-                            </select>
-                            <br>
-                            <label>嘔　吐:</label>
-                            <select id="FF3">
-                                <option value="無">無</option>
-                                <option value="不按也會">不按也會</option>
-                                <option value="按多才會">按多才會</option>
-                                <option value="幾乎每次按都會">幾乎每次按都會</option>
-                            </select>
-                            <br>
-                            <label>癢　疹:</label>
-                            <select id="FF4">
-                                <option value="無">無</option>
-                                <option value="需抓癢但可以接受">需抓癢但可以接受</option>
-                                <option value="冷毛巾可改善">冷毛巾可改善</option>
-                                <option value="需用藥">需用藥</option>
-                            </select>
-                            <br>
-                            <label style="height:1.5em;">嗜　睡:</label>
-                            <select id="FF5">
-                                <option value="無">無</option>
-                                <option value="聲音可喚醒">聲音可喚醒</option>
-                                <option value="物理刺激可喚醒">物理刺激可喚醒</option>
-                                <option value="無法喚醒">無法喚醒</option>
-                            </select>
-                            <br>
-                            <label>難　尿:</label>
-                            <select id="FF6">
-                                <option value="無">無</option>
-                                <option value="待自解">待自解</option>
-                                <option value="輕微可自解">輕微可自解</option>
-                                <option value="需導管">需導管</option>
-                                <option value="onfoley">on foley</option>
-                            </select>
-                            <br>
-                            <label>頭　痛:</label>
-                            <select id="FF7">
-                                <option value="無">無</option>
-                                <option value="與姿勢改變無關">與姿勢改變無關</option>
-                                <option value="與姿勢改變有關">與姿勢改變有關</option>
-                            </select>
-                            <br>
-                            <label>腳　麻:</label>
-                            <select id="FF8">
-                                <option value="無">無</option>
-                                <option value="感覺減弱">感覺減弱</option>
-                                <option value="影響musclepower">影響muscle power</option>
-                            </select>                           
-                            <br>
-                            <label>處&nbsp;&nbsp;&nbsp;置:</label>
-                            <select id="FF11">
-                                <option value="調整設定">調整設定</option>
-                                <option value="Keto">Keto</option>
-                                <option value="Vena">Vena</option>
-                                <option value="Naloxone">Naloxone</option>
-                                <option value="Novamin">Novamin</option>
-                                <option value="Zofran">Zofran</option>
-                                <option value="Primperan">Primperan</option>
-                                <option value="停用">停用</option>
-                                <option value="PCEA>IVPCA">EA>IVPCA</option>
-                                <option value="Bloob patch+施打者">Bloob patch+施打者</option>
-                            </select>
-                            <br>
-                            <label>EA 導管:</label>
-                            <div  class="row">
-                                <span class="col-xs-1"></span>
-                                <div class="btn-group-toolbar col-xs-5" data-toggle="buttons">
-                                    <label class="btn btn-primary" id="btnFF9-1">
-                                        <input type="radio" name="EA1" id="FF9-1" value="有滲濕">有滲濕
-                                    </label>
-                                    <label class="btn btn-primary" id="btnFF9-2">
-                                        <input type="radio" name="EA1" id="FF9-2" value="無滲濕">無滲濕
-                                    </label>                                    
-                                </div>
-                                <div class="btn-group-toolbar col-xs-5" data-toggle="buttons">
-                                    <label class="btn btn-primary" id="btnFF9-3">
-                                        <input type="checkbox" name="EA2" id="FF9-3" value="換藥重貼">換藥重貼
-                                    </label>
-                                </div>
-                            </div>
-                            <div  class="row" id="FF9-1Btn">
-                                <span class="col-xs-1"></span>
-                                <div class="btn-group-toolbar col-xs-5" data-toggle="buttons">
-                                    <label class="btn btn-primary" id="btnFF9-1-1">
-                                        <input type="radio" name="EA3" id="FF9-1-1" value="小於3x3">小於3x3
-                                    </label>
-                                    <label class="btn btn-primary" id="btnFF9-1-2">
-                                        <input type="radio" name="EA3" id="FF9-1-2" value="大於3x3">大於3x3
-                                    </label>
-                                </div>
-                                <div class="btn-group-toolbar col-xs-5" data-toggle="buttons">
-                                    <label class="btn btn-primary" id="btnFF9-1-3">
-                                        <input type="checkbox" name="EA4" id="FF9-1-3" value="加壓">加壓
-                                    </label>
-                                </div>
-                            </div>  
-                            <br>
-                            <label>衛　教:</label>
-                            <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
-                                <label class="btn btn-primary Large-Width" id="btnQF10-1">
-                                    <input type="checkbox" name="QF10" id="QF10-1" value="1">勿協助按壓
-                                </label>
-                                <label class="btn btn-primary Large-Width" id="btnQF10-2">
-                                    <input type="checkbox" name="QF10" id="QF10-2" value="2">增加活動
-                                </label>
-                                <label class="btn btn-primary Large-Width" id="btnQF10-3">
-                                    <input type="checkbox" name="QF10" id="QF10-3" value="3">預防性按壓
-                                </label>
-                                <label class="btn btn-primary Large-Width" id="btnQF10-4">
-                                    <input type="checkbox" name="QF10" id="QF10-4" value="4">預告DC
-                                </label>
-                            </div>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons" >
+                            頭暈:&nbsp;&nbsp;
+                            <label class="btn btn-primary Large-Width" id="btnQF1-1">
+                                <input type="radio" name="QF1" id="QF1-1" autocomplete="off" value="1">無
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF1-2">
+                                <input type="radio" name="QF1" id="QF1-2" autocomplete="off" value="2">不按也會
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF1-3">
+                                <input type="radio" name="QF1" id="QF1-3" autocomplete="off" value="3">按多才會
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF1-4">
+                                <input type="radio" name="QF1" id="QF1-4" autocomplete="off" value="4">幾乎每次按都會
+                            </label>
+                        </div><br><br>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
+                            噁心:&nbsp;&nbsp;
+                            <label class="btn btn-primary Large-Width" id="btnQF2-1">
+                                <input type="radio" name="QF2" id="QF2-1" autocomplete="off" value="1">無
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF2-2">
+                                <input type="radio" name="QF2" id="QF2-2" autocomplete="off" value="2">不按也會
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF2-3">
+                                <input type="radio" name="QF2" id="QF2-3" autocomplete="off" value="3">按多才會
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF2-4">
+                                <input type="radio" name="QF2" id="QF2-4" autocomplete="off" value="4">幾乎每次按都會
+                            </label>
+                        </div><br><br>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
+                            嘔吐:&nbsp;&nbsp;
+                            <label class="btn btn-primary Large-Width" id="btnQF3-1">
+                                <input type="radio" name="QF3" id="QF3-1" autocomplete="off" value="1">無
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF3-2">
+                                <input type="radio" name="QF3" id="QF3-2" autocomplete="off" value="2">不按也會
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF3-3">
+                                <input type="radio" name="QF3" id="QF3-3" autocomplete="off" value="3">按多才會
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF3-4">
+                                <input type="radio" name="QF3" id="QF3-4" autocomplete="off" value="4">幾乎每次按都會
+                            </label>
+                        </div><br><br>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
+                            癢疹:&nbsp;&nbsp;
+                            <label class="btn btn-primary Large-Width" id="btnQF4-1">
+                                <input type="radio" name="QF4" id="QF4-1" autocomplete="off" value="1">無
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF4-2">
+                                <input type="radio" name="QF4" id="QF4-2" autocomplete="off" value="2">需抓癢但可以接受
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF4-3">
+                                <input type="radio" name="QF4" id="QF4-3" autocomplete="off" value="3">冷毛巾可改善
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF4-4">
+                                <input type="radio" name="QF4" id="QF4-4" autocomplete="off" value="4">需用藥
+                            </label>
+                        </div><br><br>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
+                            嗜睡:&nbsp;&nbsp;
+                            <label class="btn btn-primary Large-Width"  id="btnQF5-1">
+                                <input type="radio" name="QF5" id="QF5-1" autocomplete="off" value="1">無
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF5-2">
+                                <input type="radio" name="QF5" id="QF5-2" autocomplete="off" value="2">聲音可喚醒
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF5-3">
+                                <input type="radio" name="QF5" id="QF5-3" autocomplete="off" value="3">物理刺激可喚醒
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF5-4">
+                                <input type="radio" name="QF5" id="QF5-4" autocomplete="off" value="4">無法喚醒
+                            </label>
+                        </div><br><br>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
+                            難尿:&nbsp;&nbsp;
+                            <label class="btn btn-primary Large-Width"  id="btnQF6-1">
+                                <input type="radio" name="QF6" id="QF6-1" autocomplete="off" value="1">無
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF6-2">
+                                <input type="radio" name="QF6" id="QF6-2" autocomplete="off" value="2">待自解
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF6-3">
+                                <input type="radio" name="QF6" id="QF6-3" autocomplete="off" value="3">輕微可自解
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF6-4">
+                                <input type="radio" name="QF6" id="QF6-4" autocomplete="off" value="4">需導管
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF6-5">
+                                <input type="radio" name="QF6" id="QF6-5" autocomplete="off" value="5">on foley
+                            </label>
+                        </div><br><br>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
+                             頭痛:&nbsp;&nbsp;
+                            <label class="btn btn-primary Large-Width" id="btnQF7-1">
+                                <input type="radio" name="QF7" id="QF7-1" autocomplete="off" value="1">無
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF7-2">
+                                <input type="radio" name="QF7" id="QF7-2" autocomplete="off" value="2">與姿勢改變無關
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF7-3">
+                                <input type="radio" name="QF7" id="QF7-3" autocomplete="off" value="3">與姿勢改變有關
+                            </label>
+                        </div><br><br>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
+                            腳麻:&nbsp;&nbsp;
+                            <label class="btn btn-primary Large-Width" id="btnQF8-1">
+                                <input type="radio" name="QF8" id="QF8-1" autocomplete="off" value="1">無
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF8-2">
+                                <input type="radio" name="QF8" id="QF8-2" autocomplete="off" value="2">感覺減弱
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF8-3">
+                                <input type="radio" name="QF8" id="QF8-3" autocomplete="off" value="3">影響muscle power
+                            </label>
+                        </div><br><br>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
+                            處置:&nbsp;&nbsp;
+                            <label class="btn btn-primary Large-Width" id="btnQF11-1">
+                                <input type="radio" name="QF11" id="QF11-1" autocomplete="off" value="1">調整設定
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF11-2">
+                                <input type="radio" name="QF11" id="QF11-2" autocomplete="off" value="2">Keto
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF11-3">
+                                <input type="radio" name="QF11" id="QF11-3" autocomplete="off" value="3">Vena
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF11-4">
+                                <input type="radio" name="QF11" id="QF11-4" autocomplete="off" value="4">Naloxone
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF11-5">
+                                <input type="radio" name="QF11" id="QF11-5" autocomplete="off" value="5">Novamin
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF11-6">
+                                <input type="radio" name="QF11" id="QF11-6" autocomplete="off" value="6">Zofran
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF11-7">
+                                <input type="radio" name="QF11" id="QF11-7" autocomplete="off" value="7">Primperan
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF11-8">
+                                <input type="radio" name="QF11" id="QF11-8" autocomplete="off" value="8">停用
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF11-9">
+                                <input type="radio" name="QF11" id="QF11-9" autocomplete="off" value="9">EA>IVPCA
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF11-10">
+                                <input type="radio" name="QF11" id="QF11-10" autocomplete="off" value="10">Bloob patch+施打者
+                            </label>
+                        </div><br><br>
+                        <div class="btn-group-toolbar col-xs-6 col-md-3" data-toggle="buttons">
+                            EA 導管:
+                            <label class="btn btn-primary" id="btnFF9-1">
+                                <input type="radio" name="EA1" id="FF9-1" value="有滲濕">有滲濕
+                            </label>
+                            <label class="btn btn-primary" id="btnFF9-2">
+                                <input type="radio" name="EA1" id="FF9-2" value="無滲濕">無滲濕
+                            </label>                                    
                         </div>
-                        <div class="col-xs-12 col-sm-6" style="text-align:justify;" 　>
-                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <br>
-                                        <p>日　期: <span id="olddata1-1"></span></p>
-                                        <p>時　間: <span id="olddata1-2"></span></p>
-                                        <p>頭　暈: <span id="olddata1-3"></span></p>
-                                        <p>噁　心: <span id="olddata1-4"></span></p>
-                                        <p>嘔　吐: <span id="olddata1-5"></span></p>
-                                        <p>癢　疹: <span id="olddata1-6"></span></p>
-                                        <p>嗜　睡: <span id="olddata1-7"></span></p>
-                                        <p>難　尿: <span id="olddata1-8"></span></p>
-                                        <p>頭　痛: <span id="olddata1-9"></span></p>
-                                        <p>腳　麻: <span id="olddata1-10"></span></p>
-                                        <p>EA 導管: <span id="olddata1-11"></span></p>
-                                        <p>衛　教: <span id="olddata1-12"></span></p>
-                                        <p>處　置: <span id="olddata1-13"></span></p>
-                                        <br>
-                                        <div class="carousel-caption">
-                                        </div>
+                        <div class="btn-group-toolbar col-xs-6 col-md-4" data-toggle="buttons">
+                            <label class="btn btn-primary" id="btnFF9-3">
+                                <input type="checkbox" name="EA2" id="FF9-3" value="換藥重貼">換藥重貼
+                            </label>
+                        </div>
+                        <div id="FF9-1Btn">
+                            <span class="col-xs-1"></span>
+                            <div class="btn-group-toolbar col-xs-5 col-md-12" data-toggle="buttons">
+                                <label class="btn btn-primary" id="btnFF9-1-1">
+                                    <input type="radio" name="EA3" id="FF9-1-1" value="小於3x3">小於3x3
+                                </label>
+                                <label class="btn btn-primary" id="btnFF9-1-2">
+                                    <input type="radio" name="EA3" id="FF9-1-2" value="大於3x3">大於3x3
+                                </label>
+                            </div>
+                            <div class="btn-group-toolbar col-xs-5 col-md-12" data-toggle="buttons">
+                                <label class="btn btn-primary" id="btnFF9-1-3">
+                                    <input type="checkbox" name="EA4" id="FF9-1-3" value="加壓">加壓
+                                </label>
+                            </div>
+                            <br><br>
+                        </div>  
+                        <br><br><br><br>
+                        <div class="btn-group-toolbar col-md-12" data-toggle="buttons">
+                            衛&nbsp;&nbsp;教:
+                            <label class="btn btn-primary Large-Width" id="btnQF10-1">
+                                <input type="checkbox" name="QF10" id="QF10-1" value="1">勿協助按壓
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF10-2">
+                                <input type="checkbox" name="QF10" id="QF10-2" value="2">增加活動
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF10-3">
+                                <input type="checkbox" name="QF10" id="QF10-3" value="3">預防性按壓
+                            </label>
+                            <label class="btn btn-primary Large-Width" id="btnQF10-4">
+                                <input type="checkbox" name="QF10" id="QF10-4" value="4">預告DC
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6" style="text-align:justify;" 　>
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                                <div class="item active">
+                                    <br>
+                                    <p>日　期: <span id="olddata1-1"></span></p>
+                                    <p>時　間: <span id="olddata1-2"></span></p>
+                                    <p>頭　暈: <span id="olddata1-3"></span></p>
+                                    <p>噁　心: <span id="olddata1-4"></span></p>
+                                    <p>嘔　吐: <span id="olddata1-5"></span></p>
+                                    <p>癢　疹: <span id="olddata1-6"></span></p>
+                                    <p>嗜　睡: <span id="olddata1-7"></span></p>
+                                    <p>難　尿: <span id="olddata1-8"></span></p>
+                                    <p>頭　痛: <span id="olddata1-9"></span></p>
+                                    <p>腳　麻: <span id="olddata1-10"></span></p>
+                                    <p>EA 導管: <span id="olddata1-11"></span></p>
+                                    <p>衛　教: <span id="olddata1-12"></span></p>
+                                    <p>處　置: <span id="olddata1-13"></span></p>
+                                    <br>
+                                    <div class="carousel-caption">
                                     </div>
                                 </div>
-                                <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                                <script>
-                                var x = 1;
-                                $("#olddata1-1").append(x);
-                                for (x = 2; x < 3; x++) {
-                                    $('.carousel-inner').append('<div class="item"><br><p>日　期: <span id="olddata' + x + '-1"></span></p><p>時　間: <span olddata' + x + '-2></span></p><p>頭　暈: <span olddata' + x + '-3></span></p><p>噁　心: <span olddata' + x + '-4></span></p><p>嘔　吐: <span olddata' + x + '-5></span></p><p>癢　疹: <span olddata' + x + '-6></span></p><p>嗜　睡: <span olddata' + x + '-7></span></p><p>難　尿: <span olddata' + x + '-8></span></p><p>頭　痛: <span olddata' + x + '-9></span></p><p>腳　麻: <span olddata' + x + '-10></span></p><p>EA 導管: <span olddata' + x + '-11></span></p><p>衛　教: <span olddata' + x + '-12></span></p><p>處　置: <span olddata' + x + '-13></span></p><br><div class="carousel-caption"></div></div>');
-                                    $("#olddata" + x + "-1").append(x);
-                                }
-                                </script>
-                                <script>
+                            </div>
+                            <!-- Controls -->
+                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            <script>
+                            var x = 1;
+                            $("#olddata1-1").append(x);
+                            for (x = 2; x < 3; x++) {
+                                $('.carousel-inner').append('<div class="item"><br><p>日　期: <span id="olddata' + x + '-1"></span></p><p>時　間: <span olddata' + x + '-2></span></p><p>頭　暈: <span olddata' + x + '-3></span></p><p>噁　心: <span olddata' + x + '-4></span></p><p>嘔　吐: <span olddata' + x + '-5></span></p><p>癢　疹: <span olddata' + x + '-6></span></p><p>嗜　睡: <span olddata' + x + '-7></span></p><p>難　尿: <span olddata' + x + '-8></span></p><p>頭　痛: <span olddata' + x + '-9></span></p><p>腳　麻: <span olddata' + x + '-10></span></p><p>EA 導管: <span olddata' + x + '-11></span></p><p>衛　教: <span olddata' + x + '-12></span></p><p>處　置: <span olddata' + x + '-13></span></p><br><div class="carousel-caption"></div></div>');
+                                $("#olddata" + x + "-1").append(x);
+                            }
+                            </script>
+                            <script>
                                 $('.carousel').carousel({
                                     interval: false
                                 })
                                 if ($('.carousel-inner div.item').length < 2) {
                                     $('.carousel-indicators, .carousel-control').hide();
                                 }
-                                </script>
-                            </div>
+                            </script>
                         </div>
                     </div>
                 </div>
-                
             </div>
+                
         
         <div class="panel panel-default" id="s8">
             <div class="panel-heading">其他交班事項</div>
