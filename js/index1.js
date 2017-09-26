@@ -1,113 +1,39 @@
 $(document).ready(function() {
-    var cnt51211 = 0,
-        cnt51212 = 0,
-        cnt51214 = 0,
-        cnt51411 = 0,
-        cnt51412 = 0,
-        cnt51414 = 0,
+    var cnt51211 = 0, cnt51212 = 0, cnt51214 = 0,
+        cnt51411 = 0, cnt51412 = 0, cnt51414 = 0,
         cnt513 = 0,
-        cnt5221 = 0,
-        cnt5224 = 0,
-        cnt5232 = 0,
-        cnt5233 = 0,
-        cnt5234 = 0,
+        cnt5221 = 0, cnt5224 = 0,
+        cnt5232 = 0, cnt5233 = 0, cnt5234 = 0,
         cntasa = 0,
         id = 1,
         Q21 = 0,
-        Q33 = 0;
+        Q33 = 0,
+        hd2 = 0, hd3 = 0, hd4 = 0, hd5 = 0, hd6 = 1;
     
-    $("#Q5-1-3Text").hide();
-    $("#Q5-1-2-1Btn").hide();
-    $("#Q5-1-2-1-1Text").hide();
-    $("#Q5-1-2-1-2Text").hide();
-    $("#Q5-1-2-1-4Text").hide();
-    $("#Q5-1-4-1Btn").hide();
-    $("#Q5-1-4-1-1Text").hide();
-    $("#Q5-1-4-1-2Text").hide();
-    $("#Q5-1-4-1-4Text").hide();
-    $("#Q5-2-2-1Text").hide();
-    $("#Q5-2-2-4Text").hide();
-    $("#Q5-2-3-2Text").hide();
-    $("#Q5-2-3-3Text").hide();
-    $("#Q5-2-3-4Text").hide();
-    $("#Q5-3-1").hide();
-    $("#Q5-3-2").hide();
-    $("#Q5-3-3").hide();
-    $("#Q5-3-4").hide();
-    $("#Q5-3-5").hide();
-    $("#Q5-3-6").hide();
-    $("#QT5-3-1").hide();
-    $("#QT5-3-2").hide();
+    $("#Q5-1-3Text").hide();    
+    $("#Q5-1-2-1-1Text,#Q5-1-2-1-2Text,#Q5-1-2-1-4Text").hide();
+    $("#Q5-1-4-1-1Text,#Q5-1-4-1-2Text,#Q5-1-4-1-4Text").hide();
+    $("#Q5-2-2-1Text,#Q5-2-2-4Text").hide();
+    $("#Q5-2-3-2Text,#Q5-2-3-3Text,#Q5-2-3-4Text").hide();
+    $("#Q5-3-1,#Q5-3-2,#Q5-3-3,#Q5-3-4,#Q5-3-5,#Q5-3-6").hide();
+    $("#QT5-3-1,#QT5-3-2").hide();
     $("#QT5-3-3-1,#QT5-3-3-2,#QT5-3-3-3,#QT5-3-3-4,#QT5-3-3-5").hide();
     $("#QT5-3-4-1,#QT5-3-4-2,#QT5-3-4-3,#QT5-3-4-4,#QT5-3-4-5").hide();
     $("#QT5-3-5-1,#QT5-3-5-2,#QT5-3-5-3,#QT5-3-5-4,#QT5-3-5-5").hide();    
-    $("#Q5-6-4-2Text").hide();
-    $("#Q5-6-4-1Text").hide();
-    $("#QC5-4-1-1SEL1").show();
-    $("#QC5-4-1-1SEL2").hide();
-    $("#QC5-4-1-1SEL3").hide();
+    $("#Q5-6-4-2Text,#Q5-6-4-1Text").hide();
+    $("#QC5-4-1-1SEL1,#QC5-4-1-1SEL2,#QC5-4-1-1SEL3").show();
     $("#FF9-1Btn").hide();
-    /*
-    patient_info["開始使用時間"] = "";
-    patient_info["麻醉結束時間"] = "";
-    patient_info["臨時上機"] = "";
-    patient_info["臨時上機-時間"] = "";
-    patient_info["臨時上機-地點"] = "";
-    patient_info["臨時上機-已用藥物"] = "";
-    patient_info["Cr/洗腎"] = "";
-    patient_info["個人史"] = "";
-    patient_info["藥物過敏"] = "";
-    patient_info["長期使用opioids"] = "";
-    patient_info["止痛方式"] = "";
-    patient_info["止痛方式-位置"] = "";
-    patient_info["止痛方式-fix"] = "";
-    patient_info["止痛方式-施打者"] = "";
-
-    patient_info["止痛藥物"] = ""; //整合totall
-    patient_info["zofran已給"] = ""; //(mg+麻打/分兩次)
-
-    patient_info["單位設定"] = "";
-    patient_info["Loading-初始設定"] = "";
-    patient_info["Loading-調整後"] = "";
-    patient_info["Bolus-初始設定"] = "";
-    patient_info["Bolus-調整後"] = "";
-    patient_info["Contin.-初始設定"] = "";
-    patient_info["Contin.-調整後"] = "";
-    patient_info["Interval-初始設定"] = "";
-    patient_info["Interval-調整後"] = "";
-    patient_info["4H limit-初始設定"] = "";
-    patient_info["4H limit-調整後"] = "";
-
-    patient_info["下床時間"] = "";
-    patient_info["排氣時間"] = "";
-    patient_info["鎖牌號碼"] = "";
-    patient_info["機號"] = "";
-    patient_info["胎次"] = "";
-    patient_info["PCA同意書確認"] = "";
-    patient_info["PFE(PCA)"] = "";
-    patient_info["OR/POR 用藥"] = "";
-
-    patient_info["病人狀況-日期"] = "";
-    patient_info["病人狀況-時間"] = "";
-    patient_info["已輸液量(自控)"] = "";
-    patient_info["已輸液量(請求)"] = "";
-    patient_info["VAS(動)"] = "";
-    patient_info["VAS(靜)"] = "";
-    patient_info["宮縮痛"] = "";
-
-    patient_info["頭暈"] = "";
-    patient_info["噁心"] = "";
-    patient_info["嘔吐"] = "";
-    patient_info["癢疹"] = "";
-    patient_info["嗜睡"] = "";
-    patient_info["難尿"] = "";
-    patient_info["頭痛"] = "";
-    patient_info["腳麻"] = "";
-    patient_info["EA導管"] = "";
-    patient_info["衛教"] = "";
-    patient_info["處置"] = "";
-
-    */
+    $("#QQ5-6").hide("fast");
+    
+    $("#btnQF1-1").addClass("active");	$("#QF1-1").prop("checked", true);
+	$("#btnQF2-1").addClass("active");	$("#QF2-1").prop("checked", true);
+	$("#btnQF3-1").addClass("active");	$("#QF3-1").prop("checked", true);
+	$("#btnQF4-1").addClass("active");	$("#QF4-1").prop("checked", true);
+	$("#btnQF5-1").addClass("active");	$("#QF5-1").prop("checked", true);
+	$("#btnQF6-1").addClass("active");	$("#QF6-1").prop("checked", true);
+	$("#btnQF7-1").addClass("active");	$("#QF7-1").prop("checked", true);
+	$("#btnQF8-1").addClass("active");	$("#QF8-1").prop("checked", true);
+	$("#btnQF11-1").addClass("active");	$("#QF11-1").prop("checked", true);
 
 
     //-----------------------------------------------------------------------------------------
@@ -160,10 +86,7 @@ $(document).ready(function() {
             $("#ss03").attr("value", request.result.性別);
             $("#ss04").attr("value", request.result.年齡);            
             $("#ss07").attr("value", request.result.術式);
-
-            //patient_info['機號'] = request.result.機號;
-            //patient_info['刀序1'] = request.result.刀序1;
-            //patient_info['刀序2'] = request.result.刀序2;
+            
             patient_info['姓名'] = request.result.姓名;
             patient_info['病房'] = request.result.病房;
             patient_info['病歷號'] = request.result.病歷號;
@@ -177,7 +100,6 @@ $(document).ready(function() {
             //patient_info['麻VS'] = request.result.麻VS;
             //patient_info['備註'] = request.result.備註;
             //patient_info['入帳'] = request.result.入帳;
-            //patient_info['入帳']= $('input[name=Q1-1]:checked').val();
 
             //=================================================================================
             var request1 = indexedDB.open("Form2Database");
@@ -239,7 +161,7 @@ $(document).ready(function() {
                     if(patient_info['PCA同意書確認'] = "已確認") {
                         RadioSet("n5-6-2");
                     }
-                    //patient_info['PFE(PCA)'] = "術訪|完成";
+                    
                     SelectCheckbox("n5-6-3", patient_info['PFE(PCA)'], "術訪", "完成");
 
                     $("#Qtime3").val(patient_info['已輸液量(自控)']);
@@ -249,16 +171,15 @@ $(document).ready(function() {
                     $("#Qtime6").val(patient_info['VAS(靜)']);
                     $("#s8").val(patient_info['宮縮痛']);
 
-                    $("#FF1").val(patient_info['頭暈']);
-                    $("#FF2").val(patient_info['噁心']);
-                    $("#FF3").val(patient_info['嘔吐']);
-                    $("#FF4").val(patient_info['癢疹']);
-                    $("#FF5").val(patient_info['嗜睡']);
-                    $("#FF6").val(patient_info['難尿']);
-                    $("#FF7").val(patient_info['頭痛']);
-                    $("#FF8").val(patient_info['腳麻']);
-                    $("#FF9").val(patient_info['EA導管']);
-                    $("#FF11").val(patient_info['處置']);
+                    SelectRadio("F1",patient_info["頭暈"],"無", "不按也會", "按多才會", "幾乎每次按都會");
+                    SelectRadio("F2",patient_info["噁心"],"無", "不按也會", "按多才會", "幾乎每次按都會");
+                    SelectRadio("F3",patient_info["嘔吐"],"無", "不按也會", "按多才會", "幾乎每次按都會");
+                    SelectRadio("F4",patient_info["癢疹"],"無", "需抓癢但可以接受", "冷毛巾可改善", "需用藥");
+                    SelectRadio("F5",patient_info["嗜睡"],"無", "聲音可喚醒", "物理刺激可喚醒", "無法喚醒");
+                    SelectRadio("F6",patient_info["難尿"],"無", "待自解", "輕微可自解", "需導管", "on foley");
+                    SelectRadio("F7",patient_info["頭痛"],"無", "與姿勢改變無關", "與姿勢改變有關");
+                    SelectRadio("F8",patient_info["腳麻"],"無", "感覺減弱", "影響muscle power");
+                    SelectRadio("F11",patient_info["處置"],"調整設定", "Keto", "Vena", "Naloxone", "Novamin", "Zofran", "Primperan", "停用", "EA>IVPCA", "Bloob patch+施打者");
                     SelectCheckbox("F10", patient_info['衛教'], "勿協助按壓", "增加活動", "預防性按壓", "預告DC");
                     
                     
@@ -347,7 +268,7 @@ $(document).ready(function() {
         }
     }
 
-    function SelectRadio(QNum, Qtext, c1, c2, c3, c4, c5, c6, c7) {
+    function SelectRadio(QNum, Qtext, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10) {
 
         var TNum = 0;
         console.log(Qtext);
@@ -373,6 +294,15 @@ $(document).ready(function() {
                     break;
                 case c7:
                     TNum = 7;
+                    break;
+                case c8:
+                    TNum = 8;
+                    break;
+                case c9:
+                    TNum = 9;
+                    break;
+                case c10:
+                    TNum = 10;
                     break;
                 default:
                     TNum = 99;
@@ -407,10 +337,7 @@ $(document).ready(function() {
 
 
     $("#saveinfo").click(function(event) {
-
-        /*if(hhtemp != 0 && hhtemp != undefined) {
-            patient_info['病歷號'] = hhtemp;
-        }*/
+        
         if(hhtemp != 0 && hhtemp != undefined) {
             patient_info["病歷號"] = hhtemp;
         } else {
@@ -418,19 +345,15 @@ $(document).ready(function() {
         }
         //event.preventDefault();
         
-        patient_info["Cre."] = $("#ss06").val();
+        patient_info["Cre."] = $("#ss06").val();        
         
-        if ($("#ss11").prop('checked')) {
-            patient_info["洗腎"] = "洗腎";
-        } else {
-            patient_info["洗腎"] = "";
-        }
         
         var pertemp = "", pertemp1 = "", pertemp2 = "", pertemp3 = "";
         if ($("#Q5-2-2-1").prop('checked')) {
             pertemp = "藥物過敏";
             pertemp1 = $("#QT5-2-2-1").val();
         } else {
+            pertemp = "";
             pertemp1 = "";
         }
         if ($("#Q5-2-2-2").prop('checked')) {
@@ -438,12 +361,16 @@ $(document).ready(function() {
                 pertemp = "腸胃潰瘍史";
             else
                 pertemp = pertemp + "|腸胃潰瘍史";
+        } else{
+            pertemp = pertemp + "";
         }
         if ($("#Q5-2-2-3").prop('checked')) {
             if (pertemp == "")
                 pertemp = "藥癮/毒癮患者";
             else
                 pertemp = pertemp + "|藥癮/毒癮患者";
+        } else{
+            pertemp = pertemp + "";
         }
         if ($("#Q5-2-2-4").prop('checked')) {
             pertemp2 = $("#QT5-2-2-4").val();
@@ -452,7 +379,16 @@ $(document).ready(function() {
             else
                 pertemp = pertemp + "|長期使用opioids";
         } else {
+            pertemp = pertemp + "";
             pertemp2 = "";
+        }
+        if ($("#Q5-2-2-5").prop('checked')) {
+            if (pertemp == "")
+                pertemp = "洗腎";
+            else
+                pertemp = pertemp + "|洗腎";
+        } else{
+            pertemp = pertemp + "";
         }
         patient_info["個人史"] = pertemp;
         patient_info["藥物過敏"] = pertemp1;
@@ -464,7 +400,7 @@ $(document).ready(function() {
             pertemp = "術後急性疼痛";
         }
         else{
-            pertemp = "";
+            pertemp = pertemp + "";
         }
         if ($("#Q5-2-3-2").prop('checked')) {
             pertemp1 = $("#QT5-2-3-2").val();
@@ -473,6 +409,7 @@ $(document).ready(function() {
             else
                 pertemp = pertemp + "|剖腹產";
         } else {
+            pertemp = pertemp + "";
             pertemp1 = "";
         }
         if ($("#Q5-2-3-3").prop('checked')) {
@@ -482,7 +419,17 @@ $(document).ready(function() {
             else
                 pertemp = pertemp + "|減痛分娩";
         } else {
+            pertemp = pertemp + "";
             pertemp2 = "";
+        }
+        if ($("#Q5-2-3-5").prop('checked')) {
+            if(pertemp == "")
+                pertemp = "癌症疼痛";
+            else
+                pertemp = pertemp + "|癌症疼痛";
+        }
+        else{
+            pertemp = pertemp + "";
         }
         if ($("#Q5-2-3-4").prop('checked')) {
             pertemp3 = $("#QT5-2-3-4").val();
@@ -491,6 +438,7 @@ $(document).ready(function() {
             else
                 pertemp = pertemp + "|其他";
         } else {
+            pertemp = pertemp + "";
             pertemp3 = "";
         }
         patient_info["使用原因"] = pertemp;
@@ -535,14 +483,21 @@ $(document).ready(function() {
         }
         if($("#Q5-1-2-1-4").prop('checked')){
             if(pertemp==""){
-                pertemp = $("#QT5-1-2-1-4").val();
+                pertemp = $("#QT5-1-2-1-3").val();
             }
             else{
-                pertemp = pertemp + " + " + $("#QT5-1-2-1-4").val();
+                pertemp = pertemp + " + " + $("#QT5-1-2-1-3").val();
             }
         }
         else{
             pertemp = pertemp + "";
+        }
+        if(pertemp == ""){
+            pertemp = "無";
+        }
+        else 
+        {
+            pertemp = pertemp;
         }
         patient_info["已知用藥-OR"] = pertemp;
         
@@ -578,14 +533,21 @@ $(document).ready(function() {
         }
         if($("#Q5-1-4-1-4").prop('checked')){
             if(pertemp==""){
-                pertemp = $("#QT5-1-4-1-4").val();
+                pertemp = $("#QT5-1-4-1-3").val();
             }
             else{
-                pertemp = pertemp + " + " + $("#QT5-1-4-1-4").val();
+                pertemp = pertemp + " + " + $("#QT5-1-4-1-3").val();
             }
         }
         else{
             pertemp = pertemp + "";
+        }
+        if(pertemp == ""){
+            pertemp = "無";
+        }
+        else 
+        {
+            pertemp = pertemp;
         }
         patient_info["已知用藥-POR"] = pertemp;
         
@@ -602,6 +564,212 @@ $(document).ready(function() {
 
         patient_info["機號"] = $("#Q5-3-1-1").val();
         patient_info["鎖牌號碼"] = $("#Q5-3-1-2").val();
+        
+        pertemp="", pertemp1="", pertemp2="";
+        if($("#Q5-3-2-1").prop('checked')){
+            patient_info["止痛方式"] = $("#Q5-3-2-1").val();
+            if($("#Q5-3-3-1").prop('checked')){
+                patient_info["止痛藥物"] = $("#Q5-3-3-1").val();
+            }
+            else if($("#Q5-3-3-2").prop('checked')){
+                patient_info["止痛藥物"] = $("#Q5-3-3-2").val();        
+            }
+            else if($("#Q5-3-3-3").prop('checked')){
+                patient_info["止痛藥物"] = $("#Q5-3-3-3-1").val();        
+            }
+            else{
+                patient_info["止痛藥物"] = "";
+            }
+            
+            if($("#Q5-3-4-1").prop('checked')){
+                patient_info["機器設定-Loading dose"] = "3 mg" ;
+                patient_info["機器設定-PCA dose"] = "1 mg" ;
+                patient_info["機器設定-Infusion dose"] = "0 mg" ;
+                patient_info["機器設定-Lock-out interval"] = "5 min" ;
+                patient_info["機器設定-4-hr limit"] = "20 mg" ;
+            }
+            else if($("#Q5-3-4-2").prop('checked')){
+                patient_info["機器設定-Loading dose"] = "3 mg" ;
+                patient_info["機器設定-PCA dose"] = "2 mg" ;
+                patient_info["機器設定-Infusion dose"] = "0 mg" ;
+                patient_info["機器設定-Lock-out interval"] = "10 min" ;
+                patient_info["機器設定-4-hr limit"] = "30 mg" ;
+            }
+            else if($("#Q5-3-4-3").prop('checked')){
+                patient_info["機器設定-Loading dose"] = "2 mg" ;
+                patient_info["機器設定-PCA dose"] = "1 mg" ;
+                patient_info["機器設定-Infusion dose"] = "0 mg" ;
+                patient_info["機器設定-Lock-out interval"] = "5 min" ;
+                patient_info["機器設定-4-hr limit"] = "15 mg" ;
+            }
+            else if($("#Q5-3-4-4").prop('checked')){
+                patient_info["機器設定-Loading dose"] = $("#Q5-3-4-4-1").val() + " mg" ;
+                patient_info["機器設定-PCA dose"] = $("#Q5-3-4-4-2").val() + " mg" ;
+                patient_info["機器設定-Infusion dose"] = $("#Q5-3-4-4-3").val() + " mg" ;
+                patient_info["機器設定-Lock-out interval"] = $("#Q5-3-4-4-4").val() + " min" ;
+                patient_info["機器設定-4-hr limit"] = $("#Q5-3-4-4-5").val() + " mg" ;
+            }
+            else{
+                patient_info["機器設定-Loading dose"] = "" ;
+                patient_info["機器設定-PCA dose"] = "" ;
+                patient_info["機器設定-Infusion dose"] = "" ;
+                patient_info["機器設定-Lock-out interval"] = "" ;
+                patient_info["機器設定-4-hr limit"] = "" ;
+            }
+            patient_info["位置"] = "" ;
+            patient_info["fix"] = "" ;
+            patient_info["施打者"] = "" ;
+        }
+        else if($("#Q5-3-2-2").prop('checked')){
+            patient_info["止痛方式"] = $("#Q5-3-2-2").val();
+            if($("#Q5-3-5-1").prop('checked')){
+                patient_info["止痛藥物"] = "Marcaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL: 400mL";
+            }
+            else if($("#Q5-3-5-2").prop('checked')){
+                patient_info["止痛藥物"] = "Marcaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL + Morphine 0.01 mg/mL: 400mL";        
+            }
+            else if($("#Q5-3-5-3").prop('checked')){
+                patient_info["止痛藥物"] = "Marcaine 0.66 mg/mL + Morphine 0.01 mg/mL: 400mL";        
+            }
+            else if($("#Q5-3-5-4").prop('checked')){
+                patient_info["止痛藥物"] = "Marcaine 1 mg/mL: 400mL";        
+            }
+            else if($("#Q5-3-5-5").prop('checked')){
+                patient_info["止痛藥物"] = "Chirocaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL: 400mL";        
+            }
+            else if($("#Q5-3-5-6").prop('checked')){
+                patient_info["止痛藥物"] = "Chirocaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL + Morphine 0.01 mg/mL: 400mL";    
+            }
+            else if($("#Q5-3-5-7").prop('checked')){
+                patient_info["止痛藥物"] = "Chirocaine 1 mg/mL: 400mL";    
+            }
+            else if($("#Q5-3-5-8").prop('checked')){
+                patient_info["止痛藥物"] = $("#QT5-3-5-8-1").val();    
+            }
+            else{
+                patient_info["止痛藥物"] = "";
+            }
+            
+            if($("#Q5-3-6-1").prop('checked')){
+                patient_info["機器設定-Loading dose"] = "0 ml" ;
+                patient_info["機器設定-PCA dose"] = "3 ml" ;
+                patient_info["機器設定-Infusion dose"] = "4 ml" ;
+                patient_info["機器設定-Lock-out interval"] = "20 min" ;
+                patient_info["機器設定-4-hr limit"] = "35 ml" ;
+            }
+            else if($("#Q5-3-6-2").prop('checked')){
+                patient_info["機器設定-Loading dose"] = "0 ml" ;
+                patient_info["機器設定-PCA dose"] = "6 ml" ;
+                patient_info["機器設定-Infusion dose"] = "6 ml" ;
+                patient_info["機器設定-Lock-out interval"] = "15 min" ;
+                patient_info["機器設定-4-hr limit"] = "80 ml" ;
+            }
+            else if($("#Q5-3-6-3").prop('checked')){
+                patient_info["機器設定-Loading dose"] = $("#Q5-3-6-3-1").val() + " ml" ;
+                patient_info["機器設定-PCA dose"] = $("#Q5-3-6-3-2").val() + " ml" ;
+                patient_info["機器設定-Infusion dose"] = $("#Q5-3-6-3-3").val() + " ml" ;
+                patient_info["機器設定-Lock-out interval"] = $("#Q5-3-6-3-4").val() + " min" ;
+                patient_info["機器設定-4-hr limit"] = $("#Q5-3-6-3-5").val() + " ml" ;
+            }
+            else{
+                patient_info["機器設定-Loading dose"] = "" ;
+                patient_info["機器設定-PCA dose"] = "" ;
+                patient_info["機器設定-Infusion dose"] = "" ;
+                patient_info["機器設定-Lock-out interval"] = "" ;
+                patient_info["機器設定-4-hr limit"] = "" ;
+            }
+            patient_info["位置"] = $("#Q5-3-8-1").val() ;
+            patient_info["fix"] = $("#Q5-3-8-2").val() ;
+            patient_info["施打者"] = $("#Q5-3-8-3").val() ;
+        }
+        else if($("#Q5-3-2-3").prop('checked')){
+            patient_info["止痛方式"] = $("#Q5-3-2-3").val();
+            if($("#Q5-3-5-1").prop('checked')){
+                patient_info["止痛藥物"] = "Marcaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL: 400mL";
+            }
+            else if($("#Q5-3-5-2").prop('checked')){
+                patient_info["止痛藥物"] = "Marcaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL + Morphine 0.01 mg/mL: 400mL";        
+            }
+            else if($("#Q5-3-5-3").prop('checked')){
+                patient_info["止痛藥物"] = "Marcaine 0.66 mg/mL + Morphine 0.01 mg/mL: 400mL";        
+            }
+            else if($("#Q5-3-5-4").prop('checked')){
+                patient_info["止痛藥物"] = "Marcaine 1 mg/mL: 400mL";        
+            }
+            else if($("#Q5-3-5-5").prop('checked')){
+                patient_info["止痛藥物"] = "Chirocaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL: 400mL";        
+            }
+            else if($("#Q5-3-5-6").prop('checked')){
+                patient_info["止痛藥物"] = "Chirocaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL + Morphine 0.01 mg/mL: 400mL";    
+            }
+            else if($("#Q5-3-5-7").prop('checked')){
+                patient_info["止痛藥物"] = "Chirocaine 1 mg/mL: 400mL";    
+            }
+            else if($("#Q5-3-5-8").prop('checked')){
+                patient_info["止痛藥物"] = $("#QT5-3-5-8-1").val();    
+            }
+            else{
+                patient_info["止痛藥物"] = "";
+            }
+            
+            if($("#Q5-3-7-1").prop('checked')){
+                patient_info["機器設定-Loading dose"] = "0 ml" ;
+                patient_info["機器設定-PCA dose"] = "3 ml" ;
+                patient_info["機器設定-Infusion dose"] = "4 ml" ;
+                patient_info["機器設定-Lock-out interval"] = "20 min" ;
+                patient_info["機器設定-4-hr limit"] = "40 ml" ;
+            }
+            else if($("#Q5-3-7-2").prop('checked')){
+                patient_info["機器設定-Loading dose"] = "0 ml" ;
+                patient_info["機器設定-PCA dose"] = "6 ml" ;
+                patient_info["機器設定-Infusion dose"] = "8 ml" ;
+                patient_info["機器設定-Lock-out interval"] = "15 min" ;
+                patient_info["機器設定-4-hr limit"] = "80 ml" ;
+            }
+            else if($("#Q5-3-7-3").prop('checked')){
+                patient_info["機器設定-Loading dose"] = $("#Q5-3-7-3-1").val() + " ml" ;
+                patient_info["機器設定-PCA dose"] = $("#Q5-3-7-3-2").val() + " ml" ;
+                patient_info["機器設定-Infusion dose"] = $("#Q5-3-7-3-3").val() + " ml" ;
+                patient_info["機器設定-Lock-out interval"] = $("#Q5-3-7-3-4").val() + " min" ;
+                patient_info["機器設定-4-hr limit"] = $("#Q5-3-7-3-5").val() + " ml" ;
+            }
+            else{
+                patient_info["機器設定-Loading dose"] = "" ;
+                patient_info["機器設定-PCA dose"] = "" ;
+                patient_info["機器設定-Infusion dose"] = "" ;
+                patient_info["機器設定-Lock-out interval"] = "" ;
+                patient_info["機器設定-4-hr limit"] = "" ;
+            }
+            patient_info["位置"] = $("#Q5-3-8-1").val() ;
+            patient_info["fix"] = $("#Q5-3-8-2").val() ;
+            patient_info["施打者"] = $("#Q5-3-8-3").val() ;
+        }
+        else if($("#Q5-3-2-4").prop('checked')){
+            patient_info["止痛方式"] = $("#Q5-3-2-4").val();
+            patient_info["止痛藥物"] = "Morphine 2 mg";            
+            patient_info["機器設定-Loading dose"] = "" ;
+            patient_info["機器設定-PCA dose"] = "" ;
+            patient_info["機器設定-Infusion dose"] = "" ;
+            patient_info["機器設定-Lock-out interval"] = "" ;
+            patient_info["機器設定-4-hr limit"] = "" ;
+            patient_info["位置"] = $("#Q5-3-8-1").val() ;
+            patient_info["fix"] = $("#Q5-3-8-2").val() ;
+            patient_info["施打者"] = $("#Q5-3-8-3").val() ;
+        }
+        else{
+            patient_info["止痛方式"] = "";
+            patient_info["止痛藥物"] = "";            
+            patient_info["機器設定-Loading dose"] = "";
+            patient_info["機器設定-PCA dose"] = "";
+            patient_info["機器設定-Infusion dose"] = "";
+            patient_info["機器設定-Lock-out interval"] = "";
+            patient_info["機器設定-4-hr limit"] = "" ;
+            patient_info["位置"] = "" ;
+            patient_info["fix"] = "" ;
+            patient_info["施打者"] = "" ;
+        }        
+        
+        
         patient_info["下床時間"] = $("#dbedhour").find(":selected").text() + ":" + $("#dbedmin").find(":selected").text();
         patient_info["排氣時間"] = $("#blhour").find(":selected").text() + ":" + $("#blmin").find(":selected").text();
         patient_info["胎次"] = $("#Q5-6-1-3").val();
@@ -637,15 +805,15 @@ $(document).ready(function() {
         patient_info["VAS(靜)"] = $("#Qtime7").find(":selected").text();
         patient_info["VAS(宮縮)"] = $("#Qtime7").find(":selected").text();
 
-        patient_info["頭暈"] = $("#FF1").find(":selected").text();
-        patient_info["噁心"] = $("#FF2").find(":selected").text();
-        patient_info["嘔吐"] = $("#FF3").find(":selected").text();
-        patient_info["癢疹"] = $("#FF4").find(":selected").text();
-        patient_info["嗜睡"] = $("#FF5").find(":selected").text();
-        patient_info["難尿"] = $("#FF6").find(":selected").text();
-        patient_info["頭痛"] = $("#FF7").find(":selected").text();
-        patient_info["腳麻"] = $("#FF8").find(":selected").text();        
-        patient_info["處置"] = $("#FF11").find(":selected").text();
+        patient_info["頭暈"] = RadioCkeck("F1");
+        patient_info["噁心"] = RadioCkeck("F2");
+        patient_info["嘔吐"] = RadioCkeck("F3");
+        patient_info["癢疹"] = RadioCkeck("F4");
+        patient_info["嗜睡"] = RadioCkeck("F5");
+        patient_info["難尿"] = RadioCkeck("F6");
+        patient_info["頭痛"] = RadioCkeck("F7");
+        patient_info["腳麻"] = RadioCkeck("F8");        
+        patient_info["處置"] = RadioCkeck("F11");
         
         pertemp = "";
         if($("#FF9-1-1").prop('checked')){
@@ -707,22 +875,16 @@ $(document).ready(function() {
             // event.target.result == customerData[i].ssn;
         };
         console.log(patient_info);
-    });
+    });    
     
-    $("#Q5-1-2-1").change(function() {
-        $("#Q5-1-2-1Btn").show();
-        $(window).resize();
-        });
     
-    $("#Q5-1-2-2").change(function() {
-        $("#Q5-1-2-1Btn,#Q5-1-2-1-1Text,#Q5-1-2-1-2Text,#Q5-1-2-1-4Text").hide();
-        $(window).resize();
-        });
     
     $("#Q5-1-2-1-1").change(function() {
         if (cnt51211 == 0) {
             cnt51211 = 1;
             $("#Q5-1-2-1-1Text").show();
+            $("#Q5-1-2-1-5").prop("checked",false);            
+            $('#btnQ5-1-2-1-5').removeClass('active');
         } else {
             cnt51211 = 0;
             $("#Q5-1-2-1-1Text").hide();
@@ -733,36 +895,46 @@ $(document).ready(function() {
         if (cnt51212 == 0) {
             cnt51212 = 1;
             $("#Q5-1-2-1-2Text").show();
+            $("#Q5-1-2-1-5").prop("checked",false);            
+            $('#btnQ5-1-2-1-5').removeClass('active');
         } else {
             cnt51212 = 0;
             $("#Q5-1-2-1-2Text").hide();
         }
     });
     
+    $("#Q5-1-2-1-3").change(function() {
+        $("#Q5-1-2-1-5").prop("checked",false);            
+        $('#btnQ5-1-2-1-5').removeClass('active');
+    });
+    
     $("#Q5-1-2-1-4").change(function() {
         if (cnt51214 == 0) {
             cnt51214 = 1;
             $("#Q5-1-2-1-4Text").show();
+            $("#Q5-1-2-1-5").prop("checked",false);            
+            $('#btnQ5-1-2-1-5').removeClass('active');
         } else {
             cnt51214 = 0;
             $("#Q5-1-2-1-4Text").hide();
         }
     });
     
-    $("#Q5-1-4-1").change(function() {
-        $("#Q5-1-4-1Btn").show();
-        $(window).resize();
-        });
-    
-    $("#Q5-1-4-2").change(function() {
-        $("#Q5-1-4-1Btn,#Q5-1-4-1-1Text,#Q5-1-4-1-2Text,#Q5-1-4-1-4Text").hide();
-        $(window).resize();
-        });
+    $("#Q5-1-2-1-5").change(function() {
+        cnt51211 = 0,cnt51212 = 0,cnt51214 = 0;
+        $("#Q5-1-2-1-5").prop("checked",true); 
+        $('#Q5-1-2-1-1,#Q5-1-2-1-2,#Q5-1-2-1-3,#Q5-1-2-1-4').prop('checked', false);
+        $("#Q5-1-2-1-1Text,#Q5-1-2-1-2Text,#Q5-1-2-1-4Text").hide();
+        $('#btnQ5-1-2-1-1,#btnQ5-1-2-1-2,#btnQ5-1-2-1-3,#btnQ5-1-2-1-4').removeClass('active');
+        $('#btnQ5-1-2-1-5').attr('class','btn btn-primary active');
+    });
     
     $("#Q5-1-4-1-1").change(function() {
         if (cnt51411 == 0) {
             cnt51411 = 1;
             $("#Q5-1-4-1-1Text").show();
+            $("#Q5-1-4-1-5").prop("checked",false);            
+            $('#btnQ5-1-4-1-5').removeClass('active');
         } else {
             cnt51411 = 0;
             $("#Q5-1-4-1-1Text").hide();
@@ -773,20 +945,38 @@ $(document).ready(function() {
         if (cnt51412 == 0) {
             cnt51412 = 1;
             $("#Q5-1-4-1-2Text").show();
+            $("#Q5-1-4-1-5").prop("checked",false);            
+            $('#btnQ5-1-4-1-5').removeClass('active');
         } else {
             cnt51412 = 0;
             $("#Q5-1-4-1-2Text").hide();
         }
     });
     
+    $("#Q5-1-4-1-3").change(function() {
+        $("#Q5-1-4-1-5").prop("checked",false);            
+        $('#btnQ5-1-4-1-5').removeClass('active');
+    });
+    
     $("#Q5-1-4-1-4").change(function() {
         if (cnt51414 == 0) {
             cnt51414 = 1;
             $("#Q5-1-4-1-4Text").show();
+            $("#Q5-1-4-1-5").prop("checked",false);            
+            $('#btnQ5-1-4-1-5').removeClass('active');
         } else {
             cnt51414 = 0;
             $("#Q5-1-4-1-4Text").hide();
         }
+    });
+    
+    $("#Q5-1-4-1-5").change(function() {
+        cnt51411 = 0,cnt51412 = 0,cnt51414 = 0;
+        $("#Q5-1-4-1-5").prop("checked",true); 
+        $('#Q5-1-4-1-1,#Q5-1-4-1-2,#Q5-1-4-1-3,#Q5-1-4-1-4').prop('checked', false);
+        $("#Q5-1-4-1-1Text,#Q5-1-4-1-2Text,#Q5-1-4-1-4Text").hide();
+        $('#btnQ5-1-4-1-1,#btnQ5-1-4-1-2,#btnQ5-1-4-1-3,#btnQ5-1-4-1-4').removeClass('active');
+        $('#btnQ5-1-4-1-5').attr('class','btn btn-primary active');
     });
     
     $("#Q5-1-3").click(function() {
@@ -860,7 +1050,7 @@ $(document).ready(function() {
         $("#Q5-3-3").hide();
         $("#Q5-3-4").hide();
         $("#Q5-3-5").hide();
-        $("#Q5-3-6").show();
+        $("#Q5-3-6").hide();
         $(window).resize();
     });
     
@@ -968,7 +1158,7 @@ $(document).ready(function() {
         $(window).resize();
     });
     
-     $("#Q5-3-6-3").change(function() {
+    $("#Q5-3-6-3").change(function() {
         $('#btnQ5-3-6-1,#btnQ5-3-6-2').attr('class' , 'btn btn-primary');
         $("#QT5-3-4-1,#QT5-3-4-2,#QT5-3-4-3,#QT5-3-4-4,#QT5-3-4-5").show();        
         $(window).resize();
@@ -984,7 +1174,7 @@ $(document).ready(function() {
         $(window).resize();
     });
     
-     $("#Q5-3-7-3").change(function() {
+    $("#Q5-3-7-3").change(function() {
         $('#btnQ5-3-7-1,#btnQ5-3-7-2').attr('class' , 'btn btn-primary');
         $("#QT5-3-5-1,#QT5-3-5-2,#QT5-3-5-3,#QT5-3-5-4,#QT5-3-5-5").show();        
         $(window).resize();
@@ -1046,6 +1236,52 @@ $(document).ready(function() {
             font = font - 1;
             $("#body").attr("style", "font-size:" + font + "px;");
         }
+    });
+    
+    $("#hide2").click(function() {
+        if (hd2 == 0) {
+            $("#QQ5-2").hide("fast");
+			hd2=1;
+        }else{
+			$("#QQ5-2").show("fast");
+			hd2=0;
+		}
+    });
+	$("#hide3").click(function() {
+        if (hd3 == 0) {
+            $("#QQ5-3").hide("fast");
+			hd3=1;
+        }else{
+			$("#QQ5-3").show("fast");
+			hd3=0;
+		}
+    });
+	$("#hide4").click(function() {
+        if (hd4 == 0) {
+            $("#QQ5-4").hide("fast");
+			hd4=1;
+        }else{
+			$("#QQ5-4").show("fast");
+			hd4=0;
+		}
+    });
+	$("#hide5").click(function() {
+        if (hd5 == 0) {
+            $("#QQ5-5").hide("fast");
+			hd5=1;
+        }else{
+			$("#QQ5-5").show("fast");
+			hd5=0;
+		}
+    });
+	$("#hide6").click(function() {
+        if (hd6 == 0) {
+            $("#QQ5-6").hide("fast");
+			hd6=1;
+        }else{
+			$("#QQ5-6").show("fast");
+			hd6=0;
+		}
     });
 });
 
