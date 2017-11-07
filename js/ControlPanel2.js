@@ -63,9 +63,9 @@
     $(document).ready(function() {
         var font = 14;
         $("#fontbig").click(function() {
-                font = font + 1;
-                $("#body").attr("style", "font-size:" + font + "px;");
-            
+            font = font + 1;
+            $("#body").attr("style", "font-size:" + font + "px;");
+
         });
 
         $("#fontsmall").click(function() {
@@ -87,7 +87,8 @@
 
 
         db = opendb("TestDatabase", "病歷號");
-        console.log("Test");
+        console.log(db);
+
         //================================================
         function opendb(dbname, KeyPathStr) {
             var request = indexedDB.open(dbname);
@@ -240,23 +241,21 @@
             //"<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + ">+</a>"
             //console.log(RowCnt);
             if (RowCnt == -1) {
-                $("#htmlout").html("<table><tr id='T0'><td></td><td>姓名</td><td>年齡</td><td>病歷號</td><td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td></tr></table>");
+                $("#htmlout").html("<table><tr id='T0'><td></td><td>姓名</td><td>年齡</td><td>病歷號</td><td>病房</td><td>止痛訪視</td></tr></table>");
                 RowCnt++;
             }
             RowCnt++;
             $("table").html($("table").html() +
                 "<tr id='T" + RowCnt + "'>" +
-                "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" +"</td>" + 
+                "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" + "</td>" +
                 "<td>" + $("#info01").val() + "</td>" +
                 "<td>" + $("#info03").val() + "</td>" +
                 "<td>" + $("#info04").val() + "</td>" +
                 "<td>" + "" + "</td>" +
-                "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
+                //"<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
                 "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
                 "</tr>");
             //console.log(RowCnt);
-
-
 
             var wstemp = [{
                 "機號": "",
@@ -276,23 +275,7 @@
             }];
 
             write_to_db(db, wstemp);
-            /*
-                        wstemp[RowCnt][0] = ""; //機號
-                        wstemp[RowCnt][1] = ""; //刀序1
-                        wstemp[RowCnt][2] = ""; //刀序2
-                        wstemp[RowCnt][3] = $("#info01").val(); //姓名
-                        wstemp[RowCnt][4] = ""; //病房
-                        wstemp[RowCnt][5] = $("#info04").val(); //病歷號
-                        wstemp[RowCnt][6] = Mfunction(); //性別
-                        wstemp[RowCnt][7] = $("#info03").val(); //年齡
-                        wstemp[RowCnt][8] = $("#info08").val(); //診斷
-                        wstemp[RowCnt][9] = $("#info09").val(); //術式
-                        wstemp[RowCnt][10] = ""; //天數
-                        wstemp[RowCnt][11] = $("#info18").val(); //麻VS
-                        wstemp[RowCnt][12] = ""; //備註
-                        wstemp[RowCnt][13] = ""; //入帳
 
-            */
         });
 
         function Mfunction() {
@@ -317,134 +300,63 @@
 
                 //document.getElementById('htmlout').innerHTML = "";
                 var result = [];
-                workbook.SheetNames.forEach(function(sheetName) {
-                    //=========================================================================
-                    //html顯示表格
-                    var htmlstr = XLSX.write(workbook, {
-                        sheet: sheetName,
-                        type: 'binary',
-                        bookType: 'html'
-                    });
-                    RowCnt = -1;
-                    while ($("#T" + (RowCnt + 1)).length == 1) {
-                        RowCnt++;
-                    }
 
-                    //document.getElementById('htmlout').innerHTML = htmlstr;
+                //=========================================================================
+                //html顯示表格
+                var htmlstr = XLSX.write(workbook, {
+                    sheet: "personal_information",
+                    type: 'binary',
+                    bookType: 'html'
+                });
 
-                    //console.log(RowCnt);
+                RowCnt = -1;
+                while ($("#T" + (RowCnt + 1)).length == 1) {
+                    RowCnt++;
+                }
 
-                    var temp = htmlstr.split("</td>");
-                    //console.log(temp);
-                    var temp2 = temp[0].split("<td>");
+                //document.getElementById('htmlout').innerHTML = htmlstr;
+                //console.log(RowCnt);
 
-                    if (RowCnt == -1) {
-                        htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td>";
-                        RowCnt++;
-                    } else {
-                        var temp5 = $("#htmlout").html().split("</table>");
-                        htmlstr = temp5[0];
-                    }
-                    //console.log(temp);
-                    var i = 0;
+                var temp = htmlstr.split("</td>");
+                //console.log(temp);
+                var temp2 = temp[0].split("<td>");
 
-                    for (i = 15; i < temp.length - 1; i = i + 15) {
-                        //console.log(i);
-                        var temp3 = temp[i].split("<td>");
-                        var temp4 = temp[i + 6].split("<td>");
-                        RowCnt++;
-                        htmlstr += temp3[0];
-                        htmlstr += "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" +"</td>";
-                        htmlstr += temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
-                        htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
-                        htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
-                    }
-                    htmlstr += temp[temp.length - 1];
-                    //console.log(temp[temp.length - 1]);
-                    document.getElementById('htmlout').innerHTML = htmlstr;
-                    $("#s0").height("auto");
-                    console.log(htmlstr);
+                if (RowCnt == -1) {
+                    htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>止痛訪視</td>";
+                    RowCnt++;
+                } else {
+                    var temp5 = $("#htmlout").html().split("</table>");
+                    htmlstr = temp5[0];
+                }
+                //console.log(temp);
+                var i = 0;
 
+                for (i = 15; i < temp.length - 1; i = i + 15) {
+                    //console.log(i);
+                    var temp3 = temp[i].split("<td>");
+                    var temp4 = temp[i + 6].split("<td>");
+                    RowCnt++;
+                    htmlstr += temp3[0];
+                    htmlstr += "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" + "</td>";
+                    htmlstr += temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
+                    //htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
+                    htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
+                }
+                htmlstr += temp[temp.length - 1];
+                //console.log(temp[temp.length - 1]);
+                document.getElementById('htmlout').innerHTML = htmlstr;
+                $("#s0").height("auto");
+                console.log(htmlstr);
 
+                //=========================================================================
+                //儲存病人資訊至DB
+                var patient_info = to_json(workbook);
 
-
-
-                    //=========================================================================
-                    //儲存病人資訊至DB
-                    var patient_info = to_json(workbook);
-                    //jsonstr = jsonstr.replaceAll("姓名","s2");
-                    //console.log(jsonstr.SheetJS);
-                    /*
-                                       for(var a in patient_info.SheetJS) {
-                                        patient_info.SheetJS[a]["訪視地點"] = "";
-                                        patient_info.SheetJS[a]["回答者"] = "";
-                                        patient_info.SheetJS[a]["回答者-其他回答者"] = "";
-                                        patient_info.SheetJS[a]["訪視時間點(麻醉後)"] = "";
-                                        patient_info.SheetJS[a]["麻醉前訪視滿意度"] = "";
-                                        patient_info.SheetJS[a]["麻醉前訪視滿意度-其他"] = "";
-                                        patient_info.SheetJS[a]["麻醉滿意度"] = "";
-                                        patient_info.SheetJS[a]["麻醉滿意度-其他"] = "";
-
-                                        patient_info.SheetJS[a]["麻醉後相關問題"] = "";
-                                        patient_info.SheetJS[a]["麻醉前後的不舒服"] = "";
-                                        patient_info.SheetJS[a]["麻醉前後的不舒服-其他"] = "";
-                                        patient_info.SheetJS[a]["麻醉前後的不舒服-最不舒服為"] = "";
-                                        patient_info.SheetJS[a]["全身麻醉中甦醒"] = "";
-                                        patient_info.SheetJS[a]["喉嚨痛"] = "";
-                                        patient_info.SheetJS[a]["喉嚨痛-疼痛程度"] = "";
-                                        patient_info.SheetJS[a]["喉嚨痛-處置狀況"] = "";
-                                        patient_info.SheetJS[a]["聲音沙啞"] = "";
-                                        patient_info.SheetJS[a]["聲音沙啞-處置狀況"] = "";
-                                        patient_info.SheetJS[a]["頭痛"] = "";
-                                        patient_info.SheetJS[a]["頭痛-疼痛程度"] = "";
-                                        patient_info.SheetJS[a]["頭痛-處置狀況"] = "";
-                                        patient_info.SheetJS[a]["眩暈"] = "";
-                                        patient_info.SheetJS[a]["眩暈-處置狀況"] = "";
-                                        patient_info.SheetJS[a]["噁心"] = "";
-                                        patient_info.SheetJS[a]["噁心-處置狀況"] = "";
-                                        patient_info.SheetJS[a]["嘔吐"] = "";
-                                        patient_info.SheetJS[a]["嘔吐-嘔吐次數"] = "";
-                                        patient_info.SheetJS[a]["嘔吐-處置狀況"] = "";
-                                        patient_info.SheetJS[a]["排尿困難"] = "";
-                                        patient_info.SheetJS[a]["排尿困難-處置方式"] = "";
-                                        patient_info.SheetJS[a]["神經損傷"] = "";
-                                        patient_info.SheetJS[a]["譫妄 Delirium"] = "";
-                                        patient_info.SheetJS[a]["譫妄 Delirium-症狀"] = "";
-                                        patient_info.SheetJS[a]["Apfel score"] = "";
-                                        patient_info.SheetJS[a]["眼部受傷"] = "";
-                                        patient_info.SheetJS[a]["眼部受傷-部位"] = "";
-                                        patient_info.SheetJS[a]["PDPH"] = "";
-                                        patient_info.SheetJS[a]["PDPH-分"] = "";
-                                        patient_info.SheetJS[a]["PDPH"] = "";
-                                        patient_info.SheetJS[a]["麻醉後相關問題-其他"] = "";
-
-                                        patient_info.SheetJS[a]["術後疼痛評估"] = "";
-                                        patient_info.SheetJS[a]["傷口疼痛"] = "";
-                                        patient_info.SheetJS[a]["傷口疼痛-分"] = "";
-                                        patient_info.SheetJS[a]["止痛方式"] = "";
-                                        patient_info.SheetJS[a]["呼吸抑制"] = "";
-                                        patient_info.SheetJS[a]["嗜睡"] = "";
-                                        patient_info.SheetJS[a]["搔癢"] = "";
-                                        patient_info.SheetJS[a]["感覺阻斷"] = "";
-                                        patient_info.SheetJS[a]["運動阻斷"] = "";
-
-                                        patient_info.SheetJS[a]["訪視結果"] = "";
-                                        patient_info.SheetJS[a]["訪視後處置"] = "";
-                                        patient_info.SheetJS[a]["通知主治醫師"] = "";
-                                        patient_info.SheetJS[a]["未完成訪視"] = "";
-                                        patient_info.SheetJS[a]["通知主治醫師-處置方式"] = "";
-                                        patient_info.SheetJS[a]["未完成訪視-其他"] = "";
-                                        console.log(patient_info.SheetJS[a]);
-                                       }
-
-                    */
-                    write_to_db(db, patient_info.SheetJS);
-                    //TableDB = opendb("TableDB", "HtmlTemp");
-                    //=========================================================================
+                write_to_db(db, patient_info.personal_information);
+                //TableDB = opendb("TableDB", "HtmlTemp");
+                //=========================================================================
 
 
-
-                }); //workbook.SheetNames.forEach
             }; //fileReader.onload
 
             fileReader.readAsBinaryString(files[0]);
@@ -498,95 +410,26 @@
                         }
                         console.log(Form2db);
                         console.log(ArrForm2);
-
-                        ReadF3db(people_id);
-
-                    }
-                };
-
-                resource.onerror = function(event) { //出现错误给出提示
-                    alert("can't create database,error:" + resource.error);
-                };
-            };
-
-            // This event is only implemented in recent browsers
-            requestF1.onupgradeneeded = function(event) {
-                db = event.target.result;
-                // Create an objectStore for this database
-                var objectStore = db.createObjectStore("mList", {
-                    keyPath: "病歷號"
-                });
-            };
-            //===========================================
-        }
-
-        function ReadF3db(people_id) {
-            //----------------------opendb----------------------------
-            //
-            var Form3db = new Array(people_id.length);
-            var requestF1 = indexedDB.open("From3Database");
-            var Fcnt = 0;
-            requestF1.onerror = function(event) {
-                alert("Why didn't you allow my web app to use IndexedDB?!");
-            };
-            requestF1.onsuccess = function(event) {
-                db = event.target.result;
-                console.log(db);
-                var transaction = db.transaction(["mList"], "readonly");
-                var resource = transaction.objectStore("mList").openCursor();
-
-                resource.onsuccess = function(event) {
-
-                    var cursor = event.target.result;
-                    //console.log(event);
-                    if (cursor) {
-                        if (cursor.value.病歷號 != "HTML") {
-                            Form3db[Fcnt] = (cursor.value);
-                            Fcnt++;
-                        }
-                        cursor.continue();
-                    } else {
-                        var f3cnt = 0;
-                        for (var f3db1 in Form3db[0]) {
-                            ArrForm3[0][f3cnt] = f3db1;
-                            f3cnt++;
-                        }
-                        var f3cnt1 = 1;
-                        var f3cnt2 = 0;
-
-                        for (var f3db in Form3db) {
-                            ArrForm3[f3cnt1] = new Array();
-                            for (var f3db1 in Form3db[f3db]) {
-                                //console.log(Form1db[f1db][f1db1]);
-
-                                ArrForm3[f3cnt1][f3cnt2] = Form3db[f3db][f3db1];
-                                f3cnt2++;
-                            }
-                            f3cnt1++;
-                            f3cnt2 = 0;
-                        }
-                        //console.log(Form3db);
-                        //console.log(ArrForm3);
                         db = opendb("TestDatabase", "病歷號");
 
-                        var ws_name1 = "form1";
+                        //var ws_name1 = "form1";
                         var ws_name2 = "form2";
-                        var ws_name3 = "form3";
+                        //var ws_name3 = "form3";
 
                         var wb = new Workbook(),
-                            ws1 = sheet_from_array_of_arrays(ArrForm1),
-                            ws2 = sheet_from_array_of_arrays(ArrForm2),
-                            ws3 = sheet_from_array_of_arrays(ArrForm3);
+                            //ws1 = sheet_from_array_of_arrays(ArrForm1),
+                            ws2 = sheet_from_array_of_arrays(ArrForm2);
+                        //ws3 = sheet_from_array_of_arrays(ArrForm3);
 
                         //add worksheet to workbook
-                        wb.SheetNames.push(ws_name1);
-                        wb.Sheets[ws_name1] = ws1;
-
+                        //wb.SheetNames.push(ws_name1);
+                        //wb.Sheets[ws_name1] = ws1;
+                        console.log(ArrForm2);
                         wb.SheetNames.push(ws_name2);
                         wb.Sheets[ws_name2] = ws2;
 
-                        wb.SheetNames.push(ws_name3);
-                        wb.Sheets[ws_name3] = ws3;
+                        //wb.SheetNames.push(ws_name3);
+                        //wb.Sheets[ws_name3] = ws3;
 
                         var wbout = XLSX.write(wb, {
                             bookType: 'xlsx',
@@ -599,10 +442,12 @@
                         }), "finall.xlsx")
 
                         window.indexedDB.deleteDatabase("TestDatabase");
-                        window.indexedDB.deleteDatabase("Form1Database");
+                        //window.indexedDB.deleteDatabase("Form1Database");
                         window.indexedDB.deleteDatabase("Form2Database");
-                        window.indexedDB.deleteDatabase("From3Database");
+                        window.indexedDB.deleteDatabase("olddb");
+                        //window.indexedDB.deleteDatabase("From3Database");
                         location.assign(window.location.href);
+                        //ReadF3db(people_id);
 
                     }
                 };
@@ -638,71 +483,150 @@
 
                 //document.getElementById('htmlout').innerHTML = "";
                 var result = [];
-                workbook.SheetNames.forEach(function(sheetName) {
-                    //=========================================================================
-                    //html顯示表格
-                    var htmlstr = XLSX.write(workbook, {
-                        sheet: sheetName,
-                        type: 'binary',
-                        bookType: 'html'
-                    });
-                    RowCnt = -1;
-                    while ($("#T" + (RowCnt + 1)).length == 1) {
-                        RowCnt++;
+                //workbook.SheetNames.forEach(function(sheetName) {
+                //=========================================================================
+                //html顯示表格
+                var htmlstr = XLSX.write(workbook, {
+                    sheet: "personal_information",
+                    type: 'binary',
+                    bookType: 'html'
+                });
+                RowCnt = -1;
+                while ($("#T" + (RowCnt + 1)).length == 1) {
+                    RowCnt++;
+                }
+
+                //document.getElementById('htmlout').innerHTML = htmlstr;
+
+                //console.log(RowCnt);
+
+                var temp = htmlstr.split("</td>");
+                //console.log(temp);
+                var temp2 = temp[0].split("<td>");
+
+                if (RowCnt == -1) {
+                    htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>止痛訪視</td>";
+                    RowCnt++;
+                } else {
+                    var temp5 = $("#htmlout").html().split("</table>");
+                    htmlstr = temp5[0];
+                }
+                //console.log(temp);
+                var i = 0;
+
+                for (i = 15; i < temp.length - 1; i = i + 15) {
+                    //console.log(i);
+                    var temp3 = temp[i].split("<td>");
+                    var temp4 = temp[i + 6].split("<td>");
+                    RowCnt++;
+                    htmlstr += temp3[0];
+                    htmlstr += "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" + "</td>";
+                    htmlstr += temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
+                    //htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
+                    htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
+
+                }
+                htmlstr += temp[temp.length - 1];
+                //console.log(temp[temp.length - 1]);
+                document.getElementById('htmlout').innerHTML = htmlstr;
+                $("#s0").height("auto");
+                //console.log(htmlstr);
+
+                //=========================================================================
+                //儲存病人資訊至DB
+                var patient_info = to_json(workbook);
+
+                var datacnt = { "123456": 1, "223456": 1 };
+
+                for (var i = 0; i < (patient_info.form.length - 1); i++) {
+                    for (var j = i + 1; j < patient_info.form.length; j++) {
+                        if (patient_info.form[i].病歷號 == patient_info.form[j].病歷號) {
+                            if (datacnt[patient_info.form[j].病歷號] == undefined)
+                                datacnt[patient_info.form[j].病歷號] = 1;
+                            patient_info.form[j].病歷號 = patient_info.form[j].病歷號 + "-" + datacnt[patient_info.form[j].病歷號];
+                            datacnt[patient_info.form[j].病歷號]++;
+                        }
                     }
+                }
 
-                    //document.getElementById('htmlout').innerHTML = htmlstr;
+                console.log(patient_info.form);
 
-                    //console.log(RowCnt);
-
-                    var temp = htmlstr.split("</td>");
-                    //console.log(temp);
-                    var temp2 = temp[0].split("<td>");
-
-                    if (RowCnt == -1) {
-                        htmlstr = temp2[0] + "<td></td><td>姓名</td>" + "<td>年齡</td>" + "<td>病歷號</td>" + "<td>病房</td><td>麻醉後訪視</td><td>止痛訪視</td>";
-                        RowCnt++;
-                    } else {
-                        var temp5 = $("#htmlout").html().split("</table>");
-                        htmlstr = temp5[0];
-                    }
-                    //console.log(temp);
-                    var i = 0;
-
-                    for (i = 15; i < temp.length - 1; i = i + 15) {
-                        //console.log(i);
-                        var temp3 = temp[i].split("<td>");
-                        var temp4 = temp[i + 6].split("<td>");
-                        RowCnt++;
-                        htmlstr += temp3[0];
-                        htmlstr += "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" +"</td>";
-                        htmlstr += temp[i + 4] + "</td>" + temp[i + 8] + "</td>" + temp[i + 6] + "</td>" + temp[i + 5] + "</td>";
-                        htmlstr += "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp4[1] + "'>未填</a></td>"; //tssn[Math.floor(i / 14)]
-                        htmlstr += "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp4[1] + "'>未填</a></td>";
-                        
-                    }
-                    htmlstr += temp[temp.length - 1];
-                    //console.log(temp[temp.length - 1]);
-                    document.getElementById('htmlout').innerHTML = htmlstr;
-                    $("#s0").height("auto");
-                    //console.log(htmlstr);
-
+                //write_to_db(db, patient_info.SheetJS);
+                //console.log(vardb);
+                var transaction = db.transaction(["mList"], "readwrite");
+                //console.log(data);
+                // Do something when all the data is added to the database.
+                transaction.oncomplete = function(event) {
+                    console.log("done");
                     //=========================================================================
-                    //儲存病人資訊至DB
-                    var patient_info = to_json(workbook);
+                    var requestF1 = indexedDB.open("olddb");
 
-                    write_to_db(db, patient_info.SheetJS);
+                    requestF1.onerror = function(event) {
+                        alert("Why didn't you allow my web app to use IndexedDB?!");
+                    };
+                    requestF1.onsuccess = function(event) {
+                        db = event.target.result;
+                        console.log(db);
 
-                    //=========================================================================
+
+                        //===============
 
 
+                        var transaction = db.transaction(["mList"], "readwrite");
+                        //console.log(data);
+                        // Do something when all the data is added to the database.
+                        transaction.oncomplete = function(event) {
+                            console.log("done");
+                            //alert("All done!");
+                            db = opendb("TestDatabase", "病歷號");
+                        };
 
-                }); //workbook.SheetNames.forEach
+                        transaction.onerror = function(event) {
+                            // Don't forget to handle errors!
+                            console.log("add error");
+
+                        };
+
+                        var objectStore = transaction.objectStore("mList");
+                        for (var i in patient_info.form) {
+                            var request = objectStore.add(patient_info.form[i]);
+                            request.onsuccess = function(event) {
+                                // event.target.result == customerData[i].ssn;
+                            };
+                        }
+
+                    };
+                    // This event is only implemented in recent browsers
+                    requestF1.onupgradeneeded = function(event) {
+                        db = event.target.result;
+                        // Create an objectStore for this database
+                        var objectStore = db.createObjectStore("mList", {
+                            keyPath: "病歷號"
+                        });
+                    };
+                    //===========================================
+                };
+                transaction.onerror = function(event) {
+                    // Don't forget to handle errors!
+                    console.log("add error");
+
+                };
+                var objectStore = transaction.objectStore("mList");
+                for (var i in patient_info.personal_information) {
+                    var request = objectStore.add(patient_info.personal_information[i]);
+                    request.onsuccess = function(event) {
+                        // event.target.result == customerData[i].ssn;
+                    };
+                }
+                //===========================================================================
+
+
+                //}); //workbook.SheetNames.forEach
             }; //fileReader.onload
 
             var oReq = new XMLHttpRequest();
 
-            oReq.open("GET", "https://pandelaz.github.io/NTUTForm/ControlPanel2_TestFile2.xlsx", true);
+            oReq.open("GET", "https://pandelaz.github.io/NTUTForm/test789.xlsx", true);
             oReq.responseType = "blob";
             oReq.onload = function(e) {
                 var bbuffer = oReq.response; // not responseText
@@ -731,113 +655,17 @@
             }
             //console.log(people_id);
 
-            var Form1db = new Array(people_id.length);
+            //var Form1db = new Array(people_id.length);
             var Form2db = new Array(people_id.length);
             //var Form3db = new Array(people_id.length);
             var Fcnt = 0;
 
-            ArrForm1[0] = new Array();
+            //ArrForm1[0] = new Array();
             ArrForm2[0] = new Array();
-            ArrForm3[0] = new Array();
+            //ArrForm3[0] = new Array();
 
-            //----------------------opendb----------------------------
-            //
-            var requestF1 = indexedDB.open("Form1Database");
-            requestF1.onerror = function(event) {
-                alert("Why didn't you allow my web app to use IndexedDB?!");
-            };
-            requestF1.onsuccess = function(event) {
-                db = event.target.result;
-                console.log(db);
-                var transaction = db.transaction(["mList"], "readonly");
-                var resource = transaction.objectStore("mList").openCursor();
+            ReadF2db(people_id);
 
-                resource.onsuccess = function(event) {
-
-                    var cursor = event.target.result;
-                    //console.log(event);
-                    if (cursor) {
-                        if (cursor.value.病歷號 != "HTML") {
-                            Form1db[Fcnt] = (cursor.value);
-                            Fcnt++;
-                        }
-                        cursor.continue();
-                    } else {
-                        //console.log(Form1db);
-
-                        var f1cnt = 0;
-                        for (var f1db1 in Form1db[0]) {
-                            ArrForm1[0][f1cnt] = f1db1;
-                            f1cnt++;
-                        }
-                        var f1cnt1 = 1;
-                        var f1cnt2 = 0;
-
-                        for (var f1db in Form1db) {
-                            ArrForm1[f1cnt1] = new Array();
-                            for (var f1db1 in Form1db[f1db]) {
-                                //console.log(Form1db[f1db][f1db1]);
-
-                                ArrForm1[f1cnt1][f1cnt2] = Form1db[f1db][f1db1];
-                                f1cnt2++;
-                            }
-                            f1cnt1++;
-                            f1cnt2 = 0;
-                        }
-                        console.log(ArrForm1);
-
-                        ReadF2db(people_id);
-                    }
-                };
-
-                resource.onerror = function(event) { //出现错误给出提示
-                    alert("can't create database,error:" + resource.error);
-                };
-            };
-
-            // This event is only implemented in recent browsers
-            requestF1.onupgradeneeded = function(event) {
-                db = event.target.result;
-                // Create an objectStore for this database
-                var objectStore = db.createObjectStore("mList", {
-                    keyPath: "病歷號"
-                });
-            };
-            //===========================================
-
-
-
-
-
-
-
-            /*
-                        var testout = new Array();
-                        testout[0] = new Array();
-                        
-
-                        var ws_name = "SheetJS";
-
-                        var wb = new Workbook(),
-                            ws = sheet_from_array_of_arrays(testout);
-
-                        //add worksheet to workbook
-                        wb.SheetNames.push(ws_name);
-                        wb.Sheets[ws_name] = ws;
-                        var wbout = XLSX.write(wb, {
-                            bookType: 'xlsx',
-                            bookSST: true,
-                            type: 'binary'
-                        });
-
-                        saveAs(new Blob([s2ab(wbout)], {
-                            type: "application/octet-stream"
-                        }), "test.xlsx")
-            */
-            //window.indexedDB.deleteDatabase("TestDatabase");
-            //window.indexedDB.deleteDatabase("Form1Database");
-            //window.indexedDB.deleteDatabase("Form2Database");
-            //window.indexedDB.deleteDatabase("Form3Database");
         });
 
         $('body').on("click", function(e) {
@@ -877,11 +705,11 @@
 
 
                 //=============================================================
-            } else if(e.target.id.search("Plusbtn") >= 0) {
+            } else if (e.target.id.search("Plusbtn") >= 0) {
                 var temp = e.target.id.split("Plusbtn");
-                console.log($("#T"+temp[1]).html().split("</td>"));
+                console.log($("#T" + temp[1]).html().split("</td>"));
 
-                var temp0 = $("#T"+temp[1]).html().split("</td>")
+                var temp0 = $("#T" + temp[1]).html().split("</td>")
 
                 var temp1 = temp0[1].split("<td>");
                 var temp2 = temp0[2].split("<td>");
@@ -897,23 +725,23 @@
                 };
                 request1.onsuccess = function(event) {
                     //request1.result
-                    if(temp3[1].search("-") == -1) {
+                    if (temp3[1].search("-") == -1) {
                         temp3[1] = temp3[1] + "-2";
                     } else {
                         var temp31 = temp3[1].split("-");
-                        temp3[1] = temp31[0] + "-" + (parseInt(temp31[1])+1);
+                        temp3[1] = temp31[0] + "-" + (parseInt(temp31[1]) + 1);
                     }
 
                     var temp4 = temp0[4].split("<td>");
                     RowCnt = -1;
                     while ($("#T" + (RowCnt + 1)).length == 1) {
                         RowCnt++;
-                    }                
+                    }
 
                     RowCnt++;
                     $("table").html($("table").html() +
                         "<tr id='T" + RowCnt + "'>" +
-                        "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" +"</td>" + 
+                        "<td>" + "<a class='btn btn-default navbar-btn' id='Plusbtn" + RowCnt + "'>+</a>" + "</td>" +
                         "<td>" + temp1[1] + "</td>" +
                         "<td>" + temp2[1] + "</td>" +
                         "<td>" + temp3[1] + "</td>" +
@@ -921,7 +749,7 @@
                         "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp3[1] + "'>未填</a></td>" +
                         "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp3[1] + "'>未填</a></td>" +
                         "</tr>");
-                    
+
                     var wstemp = [{
                         "機號": request1.result.機號,
                         "刀序1": request1.result.刀序1,
@@ -940,7 +768,7 @@
                     }];
 
                     write_to_db(db, wstemp);
-                    
+
                 };
                 //=======================================
 
@@ -953,25 +781,25 @@
             }
         });
 
-       $("#info11").change(function() {
-           id = $("#info11").find(':selected').data('id');
-           //或是以下方式也可以
-           //id= $(this).find(':selected').attr('data-id');              
+        $("#info11").change(function() {
+            id = $("#info11").find(':selected').data('id');
+            //或是以下方式也可以
+            //id= $(this).find(':selected').attr('data-id');              
 
-           if (id == 1) {
-               //$("#division1Text").remove();
-               //$("#division3Text").remove();
-               $("#info13").hide();
-               $("#info12").show();
-           }
-           if (id == 2) {
-               $("#info12").hide();
-               $("#info13").show();
+            if (id == 1) {
+                //$("#division1Text").remove();
+                //$("#division3Text").remove();
+                $("#info13").hide();
+                $("#info12").show();
+            }
+            if (id == 2) {
+                $("#info12").hide();
+                $("#info13").show();
 
-               //$("#division2Text").remove();
-               //$("#Textdivision3").append('<span id="division3Text"><select name="bigout"><option value="1">骨科</option><option value="2">泌尿科</option><option value="3">耳鼻喉科</option><option value="4">牙科</option><option value="5">皮膚科</option><option value="6">疼痛科</option></select></span>');
-           }
-       });
+                //$("#division2Text").remove();
+                //$("#Textdivision3").append('<span id="division3Text"><select name="bigout"><option value="1">骨科</option><option value="2">泌尿科</option><option value="3">耳鼻喉科</option><option value="4">牙科</option><option value="5">皮膚科</option><option value="6">疼痛科</option></select></span>');
+            }
+        });
 
 
     });
