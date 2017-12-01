@@ -74,12 +74,12 @@
                 $("#body").attr("style", "font-size:" + font + "px;");
             }
         });
-        
+
         var Today = new Date();
         var info07 = Today.getFullYear() + "-" + (Today.getMonth() + 1) + "-" + Today.getDate();
         $("#info07").attr("value", info07);
-        
-        
+
+
         var RowCnt = 0;
 
         var db;
@@ -312,7 +312,7 @@
                     type: 'binary',
                     bookType: 'html'
                 });
-                
+
                 RowCnt = -1;
                 while ($("#T" + (RowCnt + 1)).length == 1) {
                     RowCnt++;
@@ -711,7 +711,7 @@
 
             var oReq = new XMLHttpRequest();
 
-            oReq.open("GET", "https://pandelaz.github.io/NTUTForm/test789.xlsx", true);
+            oReq.open("GET", "https://pandelaz.github.io/NTUTForm/ControlPanel2.xlsx", true);
             oReq.responseType = "blob";
             oReq.onload = function(e) {
                 var bbuffer = oReq.response; // not responseText
