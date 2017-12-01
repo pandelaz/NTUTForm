@@ -23,7 +23,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">止痛訪視頁面</a>
-                <a class="btn btn-default navbar-btn" id="saveinfo" href="ControlPanel2.html">儲存</a>
+                <span class="btn btn-default navbar-btn" id="saveinfo">儲存</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:white;">字體大小</span>
                 <input type="button" class="btn btn-default navbar-btn" id="fontbig" value="大">
                 <input type="button" class="btn btn-default navbar-btn" id="fontsmall" value="小">
@@ -654,7 +654,7 @@
                 <div class="panel-body" id="QQ5-4">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
-                            <p>下床時間：<input type="date" id="OutbedTime" style="height:1.5em" size=5>
+                            <span>下床時間：<input type="date" id="OutbedTime" style="height:1.5em" size=5>
                                 <select id="dbedhour">
                                     <option value="00">00</option>
                                     <option value="01">01</option>
@@ -695,12 +695,16 @@
                                     <option value="45">45</option>
                                     <option value="50">50</option>
                                     <option value="55">55</option>
-                                </select>
-								&nbsp;&nbsp;<button class="btn btn-primary" id="none1">尚未發生</button>
-                            </p>
+                                </select>								
+                            </span>
+                            <span class="btn-group-toolbar" data-toggle="buttons">
+                                <label class="btn btn-primary" id="btnnone1">
+                                    <input type="checkbox" name="" id="none1">尚未發生
+                                </label>
+                            </span>
                         </div>
                         <div class="col-xs-12 col-sm-6">
-                            <p>排氣時間：<input type="date" id="GasTime" style="height:1.5em" size=5>
+                            <span>排氣時間：<input type="date" id="GasTime" style="height:1.5em" size=5 >
                                 <select id="blhour">
                                     <option value="00">00</option>
                                     <option value="01">01</option>
@@ -741,14 +745,18 @@
                                     <option value="45">45</option>
                                     <option value="50">50</option>
                                     <option value="55">55</option>
-                                </select>
-								&nbsp;&nbsp;<button class="btn btn-primary" id="none2">尚未發生</button>
-                            </p>
+                                </select>                                
+                            </span>
+                            <span class="btn-group-toolbar" data-toggle="buttons">
+                                <label class="btn btn-primary" id="btnnone2">
+                                    <input type="checkbox" name="" id="none2">尚未發生
+                                </label>
+                            </span>
                         </div>
                     </div>                    
                     <div class="btn-group-toolbar" data-toggle="buttons">
-                        <label class="btn btn-primary" id="btnQn5-6-2">
-                            <input type="checkbox" name="Qn5-6-2" id="Qn5-6-2-1" value="1">PCA同意書確認
+                        <label class="btn btn-primary" id="btnQn5-6-2">                            
+                            <input type="checkbox" name="Qn5-6-2" id="Qn5-6-2-1">PCA同意書確認
                         </label>
                     </div>
                     <br>
@@ -1062,7 +1070,7 @@
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                             <!-- Wrapper for slides -->
-                            <div class="carousel-inner" role="listbox">
+                            <div class="carousel-inner" role="listbox" id="carousel-innerQ5-6">
                                 <div class="item active">
                                     <br>
                                     <p>日　期: <span id="olddata1-1"></span></p>
@@ -1075,9 +1083,9 @@
                                     <p>難　尿: <span id="olddata1-8"></span></p>
                                     <p>頭　痛: <span id="olddata1-9"></span></p>
                                     <p>腳　麻: <span id="olddata1-10"></span></p>
-                                    <p>EA 導管: <span id="olddata1-11"></span></p>
-                                    <p>衛　教: <span id="olddata1-12"></span></p>
-                                    <p>處　置: <span id="olddata1-13"></span></p>
+                                    <p>處　置: <span id="olddata1-11"></span></p>
+                                    <p>EA 導管: <span id="olddata1-12"></span></p>
+                                    <p>衛　教: <span id="olddata1-13"></span></p>                                    
                                     <br>
                                     <div class="carousel-caption">
                                     </div>
@@ -1092,22 +1100,6 @@
                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
-                            <script>
-                            var x = 1;
-                            $("#olddata1-1").append(x);
-                            for (x = 2; x < 3; x++) {
-                                $('.carousel-inner').append('<div class="item"><br><p>日　期: <span id="olddata' + x + '-1"></span></p><p>時　間: <span olddata' + x + '-2></span></p><p>頭　暈: <span olddata' + x + '-3></span></p><p>噁　心: <span olddata' + x + '-4></span></p><p>嘔　吐: <span olddata' + x + '-5></span></p><p>癢　疹: <span olddata' + x + '-6></span></p><p>嗜　睡: <span olddata' + x + '-7></span></p><p>難　尿: <span olddata' + x + '-8></span></p><p>頭　痛: <span olddata' + x + '-9></span></p><p>腳　麻: <span olddata' + x + '-10></span></p><p>EA 導管: <span olddata' + x + '-11></span></p><p>衛　教: <span olddata' + x + '-12></span></p><p>處　置: <span olddata' + x + '-13></span></p><br><div class="carousel-caption"></div></div>');
-                                $("#olddata" + x + "-1").append(x);
-                            }
-                            </script>
-                            <script>
-                                $('.carousel').carousel({
-                                    interval: false
-                                })
-                                if ($('.carousel-inner div.item').length < 2) {
-                                    $('.carousel-indicators, .carousel-control').hide();
-                                }
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -1127,7 +1119,7 @@
                         <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" id="carousel-innerQ3-2" role="listbox">
                                 <div class="item active">
-                                    <textarea cols=30 rows=8></textarea>
+                                    <textarea cols=30 rows=8 id="olddata1-14"></textarea>
                                     <div class="carousel-caption">
                                     </div>
                                 </div>
@@ -1139,22 +1131,7 @@
                             <a class="right carousel-control Q32" href="#carousel-example-generic1" role="button" data-slide="next">
                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
-                            </a>
-                            <script>
-                            var x = 1;
-                            $("#olddata1").append(x);
-                            for (x = 2; x < 3; x++) {
-                                $('.carousel-inner').append('<div class="item"><TEXTAREA cols=35 rows=8></TEXTAREA><div class="carousel-caption"></div></div>');
-                            }
-                            </script>
-                            <script>
-                            $('.carousel').carousel({
-                                interval: false
-                            })
-                            if ($('#carousel-innerQ3-2 div.item').length < 2) {
-                                $('.carousel-control.Q32').hide();
-                            }
-                            </script>
+                            </a>                           
                         </div>
                     </div>
                 </div>
@@ -1212,7 +1189,7 @@
                             <div class="carousel-inner" id="carousel-innerQ3-3" role="listbox">
                                 <div class="item active">
                                     <br>
-                                    <p>U1126：1</p>
+                                    <p id="olddata1-15">U1126：</p>
                                 </div>
                             </div>
                             <a class="left carousel-control Q33" role="button" href="#carousel-example-generic2" data-slide="prev">
@@ -1223,26 +1200,13 @@
                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
-                            <script>
-                            var x = 1;
-                            for (x = 2; x < 3; x++) {
-                                $('#carousel-innerQ3-3').append('<div class="item"><br><p>U1126：</p></div>');
-                            }
-                            </script>
-                            <script>
-                            $('.carousel').carousel({
-                                interval: false
-                            })
-                            if ($('#carousel-innerQ3-3 div.item').length < 2) {
-                                $('.carousel-control.Q33').hide();
-                            }
-                            </script>
                         </div>
                     </div>
                     <!-- U1126 歷史資料結束 -->
                 </div>
 
                 <br>
+                
                 <div class="btn-group-toolbar" data-toggle="buttons">
                     <label class="btn btn-primary" id="btnQ5-1">
                         <input type="checkbox" name="Q5" id="Q5-1" value="1">用藥資料單完成
@@ -1252,5 +1216,10 @@
             </div>
         </div>
     </form>
+    <script>        
+        $(".carousel").carousel({
+            interval: false
+        })
+    </script>
     </body>
 </html>

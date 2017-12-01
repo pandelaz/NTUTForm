@@ -85,7 +85,7 @@
                     <div class="row">
                         <p class="col-md-1-5">
                         <p class="col-md-3">日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期：
-                            <input type="text" id="info07" style="height:1.5em" size=15>
+                            <input type="date" id="info07" style="height:1.5em" size=5>
                         </p>
                         <p class="col-md-3">診&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;斷：
                             <input type="text" id="info08" style="height:1.5em" size=15>
@@ -103,31 +103,31 @@
                             <select name="doc" id="info18">
                                 <option value="1">謝承原</option>
                                 <option value="2">劉映汝</option>
-                                <option value="3">林怡萱</option>
+                                <option value="3">劉治民</option>
                                 <option value="4">王曼玲</option>
-                                <option value="5">吳峻宇</option>
-                                <option value="6">莊岳勳</option>
+                                <option value="5">王明鉅</option>
+                                <option value="6">王憶嘉</option>
                                 <option value="7">許彥鈞</option>
-                                <option value="8">王憶嘉 </option>
+                                <option value="8">莊岳勳</option>
                                 <option value="9">周韋翰</option>
                                 <option value="10">蔡奉芳</option>
                                 <option value="11">洪明輝</option>
-                                <option value="12">黃信豪</option>
-                                <option value="13">劉治民</option>
+                                <option value="12">林佩玲</option>
+                                <option value="13">林怡萱</option>
                                 <option value="14">林峯盛</option>
                                 <option value="15">林至芃</option>
                                 <option value="16">葉育彰</option>
-                                <option value="17">詹光政</option>
+                                <option value="17">葉惠敏</option>
                                 <option value="18">蕭柏妮</option>
-                                <option value="19">葉惠敏</option>
+                                <option value="19">詹光政</option>
                                 <option value="20">趙安怡</option>
-                                <option value="21">林佩玲</option>
+                                <option value="21">黃信豪</option>
                                 <option value="22">黃啟祥</option>
                                 <option value="23">李宗勳</option>
                                 <option value="24">范守仁</option>
                                 <option value="25">鄭雅蓉</option>
                                 <option value="26">孫維仁</option>
-                                <option value="27">王明鉅</option>
+                                <option value="27">吳峻宇</option>
                             </select>
                         </p>
                         <p class="col-md-4">科&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;別：
@@ -165,9 +165,16 @@
                     <div class="row">
                         <p class="col-md-1-5">
                         <p class="col-md-3">麻&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式：
-                            <input type="text" id="info16" style="height:1.6em" size=15>
+                            <select id="info16">
+                                <option value="1">GA</option>
+                                <option value="2">IVG</option>
+                                <option value="3">Mask</option>
+                                <option value="4">SA</option>
+                                <option value="5">EA</option>
+                                <option value="6">NB</option>
+                            </select>
                         </p>
-                        <p class="col-md-3">A&nbsp;&nbsp;S&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;：
+                        <p class="col-md-3">&nbsp;A&nbsp;&nbsp;&nbsp;S&nbsp;&nbsp;&nbsp;A：
                             <span id="asa">
                                 <select id="info17">
                                     <option value="1">I</option>
@@ -187,7 +194,47 @@
                         </p>
 
                         <p class="col-md-4">麻醉結束時間：
-                            <input type="text" id="info15" style="height:1.5em" size=15>
+                            <select id="info15">
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                            </select>
+                            <span>：</span>
+                            <select id="info15-1">
+                                <option value="00">00</option>
+                                <option value="05">05</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55">55</option>
+                            </select>
                         </p>
                     </div>
                 </div>
@@ -201,6 +248,7 @@
             <br>
             <div id="htmlout"></div>
         </div>
+    </div>
 </body>
 
 </html>
