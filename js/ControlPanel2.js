@@ -711,7 +711,7 @@
 
             var oReq = new XMLHttpRequest();
 
-            oReq.open("GET", "https://pandelaz.github.io/NTUTForm/ControlPanel2.xlsx", true);
+            oReq.open("GET", "https://pandelaz.github.io/NTUTForm/ControlPanel2_TestFile2.xlsx", true);
             oReq.responseType = "blob";
             oReq.onload = function(e) {
                 var bbuffer = oReq.response; // not responseText
