@@ -58,7 +58,8 @@ $(document).ready(function() {
     $("#btnQF11-1").addClass("active");
     $("#QF11-1").prop("checked", true);
 
-
+       
+    
     //-----------------------------------------------------------------------------------------
     //開啟資料庫
     var db;
@@ -67,7 +68,8 @@ $(document).ready(function() {
     var patient_info = {
         "病歷號": "",
         "姓名": ""
-    };
+    };   
+    var time = 0;
     var request = indexedDB.open("TestDatabase");
     request.onerror = function(event) {
         alert("Why didn't you allow my web app to use IndexedDB?!");
@@ -96,19 +98,19 @@ $(document).ready(function() {
             // Handle errors!
             alert("not found!");
         };
-        request.onsuccess = function(event) {
-            // Do something with the request.result!
-            //alert("Name for SSN 沈xx is " + request.result.ssn);
+        request.onsuccess = function(event) {  
+            
             var Today = new Date();
-            //document.write("今天日期是 " + Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
-            //$("#ss07").append(Today.getFullYear() + "/" + (Today.getMonth() + 1) + "/" + Today.getDate() + "  " + Today.getHours() + ":" + Today.getMinutes());
             $("#Qtime1").html((Today.getMonth() + 1) + " 月 " + Today.getDate() + " 日");
             $("#Qtime2").html(Today.getHours() + " 點 " + Today.getMinutes() + " 分");
-            //$("#ss012").append(request.result.病歷號);
             $("#ss01").attr("value", request.result.姓名);
+            $("#ss02").attr("value", request.result.病房);
             $("#ss03").attr("value", request.result.性別);
             $("#ss04").attr("value", request.result.年齡);
+            $("#ss06").attr("value", request.result.Cre);
             $("#ss07").attr("value", request.result.術式);
+            $("#ss08").attr("value", request.result.身高);
+            $("#ss09").attr("value", request.result.體重);
 
             patient_info['姓名'] = request.result.姓名;
             patient_info['病房'] = request.result.病房;
@@ -117,12 +119,7 @@ $(document).ready(function() {
             patient_info['年齡'] = request.result.年齡;
             patient_info['診斷'] = request.result.診斷;
             patient_info['術式'] = request.result.術式;
-
-
-            //patient_info['天數'] = request.result.天數;
-            //patient_info['麻VS'] = request.result.麻VS;
-            //patient_info['備註'] = request.result.備註;
-            //patient_info['入帳'] = request.result.入帳;
+            
 
             //=================================================================================
             var request1 = indexedDB.open("Form2Database");
@@ -133,9 +130,9 @@ $(document).ready(function() {
                 db = event.target.result;
                 console.log(db);
 
-                var transaction2 = db.transaction(["mList"]);
-                var objectStore2 = transaction2.objectStore("mList");
-                var request2 = objectStore2.get(patient_info['病歷號']);
+                var transaction1 = db.transaction(["mList"]);
+                var objectStore1 = transaction1.objectStore("mList");
+                var request2 = objectStore1.get(patient_info['病歷號']);
                 request2.onerror = function(event) {
                     alert("not found!");
                 };
@@ -143,91 +140,19 @@ $(document).ready(function() {
                     if (request2.result != undefined)
                         patient_info = request2.result;
                     console.log(patient_info);
-
-                    SelectCheckbox("Q5-2-2", patient_info['個人史'], "藥物過敏", "腸胃潰瘍史", "藥癮/毒癮患者", "長期使用opioids");
-                    SetText("Q5-2-2-1Text", "QT5-2-2-1", patient_info['藥物過敏'], patient_info['個人史'], "藥物過敏");
-                    SetText("Q5-2-2-4Text", "QT5-2-2-4", patient_info['長期使用opioids'], patient_info['個人史'], "長期使用opioids");
-
-                    if (patient_info['麻醉結束時間'] != undefined) {
-                        var temp = patient_info['麻醉結束時間'].split(":");
-                        $("#EndHour").val(temp[0]);
-                        $("#EndMin").val(temp[1]);
-                    }
-
-                    if (patient_info['預計使用期間'] != undefined) {
-                        var temp = patient_info['預計使用期間'].split(":");
-                        $("#StartMonth").val(temp[0]);
-                        $("#StartDay").val(temp[1]);
-                    }
-
-                    $("#Q5-1-1").val(patient_info["已知用藥-Zfran"]);
-
-                    SelectRadio("5-1-3", "臨時上機", "臨時上機");
-                    $("#p5").html(patient_info["臨時上機-時間"]);
-                    $("#Place5-3-1").val(patient_info['臨時上機-地點']);
-
-                    SetText("Q5-3-1-1Text", "Q5-3-1-1", patient_info['機號'], patient_info['個人史'], "藥物過敏");
-
-                    $("#Q5-3-1-1").val(patient_info["機號"]);
-                    $("#Q5-3-1-2").val(patient_info["鎖牌號碼"]);
-
-                    if (patient_info['下床時間'] != undefined) {
-                        temp = patient_info['下床時間'].split(":");
-                        $("#dbedhour").val(temp[0]);
-                        $("#dbedmin").val(temp[1]);
-                    }
-
-                    if (patient_info['排氣時間'] != undefined) {
-                        temp = patient_info['排氣時間'].split(":");
-                        $("#blhour").val(temp[0]);
-                        $("#blmin").val(temp[1]);
-                    }
-
-                    $("#Q5-6-1-1").val(patient_info['鎖牌號碼']);
-                    $("#Q5-6-1-2").val(patient_info['機號']);
-                    $("#Q5-6-1-3").val(patient_info['胎次']);
-
-                    if (patient_info['PCA同意書確認'] = "已確認") {
-                        RadioSet("n5-6-2");
-                    }
-
-                    SelectCheckbox("n5-6-3", patient_info['PFE(PCA)'], "術訪", "完成");
-
-                    $("#Qtime3").val(patient_info['已輸液量(自控)']);
-                    $("#Qtime4").val(patient_info['已輸液量(請求)']);
-
-                    $("#Qtime5").val(patient_info['VAS(動)']);
-                    $("#Qtime6").val(patient_info['VAS(靜)']);
-                    $("#s8").val(patient_info['宮縮痛']);
-
-                    SelectRadio("F1", patient_info["頭暈"], "無", "不按也會", "按多才會", "幾乎每次按都會");
-                    SelectRadio("F2", patient_info["噁心"], "無", "不按也會", "按多才會", "幾乎每次按都會");
-                    SelectRadio("F3", patient_info["嘔吐"], "無", "不按也會", "按多才會", "幾乎每次按都會");
-                    SelectRadio("F4", patient_info["癢疹"], "無", "需抓癢但可以接受", "冷毛巾可改善", "需用藥");
-                    SelectRadio("F5", patient_info["嗜睡"], "無", "聲音可喚醒", "物理刺激可喚醒", "無法喚醒");
-                    SelectRadio("F6", patient_info["難尿"], "無", "待自解", "輕微可自解", "需導管", "on foley");
-                    SelectRadio("F7", patient_info["頭痛"], "無", "與姿勢改變無關", "與姿勢改變有關");
-                    SelectRadio("F8", patient_info["腳麻"], "無", "感覺減弱", "影響muscle power");
-                    SelectRadio("F11", patient_info["處置"], "調整設定", "Keto", "Vena", "Naloxone", "Novamin", "Zofran", "Primperan", "停用", "EA>IVPCA", "Bloob patch+施打者");
-                    SelectCheckbox("F10", patient_info['衛教'], "勿協助按壓", "增加活動", "預防性按壓", "預告DC");
-
-
-                    $("#TQ1").val(patient_info["其他交班事項"]);
-
-                    if (patient_info["備袋"] != "" && patient_info["備袋"] != undefined) {
-                        SelectRadio("2", "備袋", "備袋");
-                        $("#p2").html(patient_info["備袋"]);
-                    }
-
-                    SelectRadio("3", patient_info["備袋狀況"], "無備袋", "已用", "已取回");
-
-                    if (patient_info["U1126"] != "" && patient_info["U1126"] != undefined) {
-                        SelectRadio("4", "U1126", "U1126");
-                        $("#p4").html(patient_info["U1126"]);
-                    }
-
-                    SelectRadio("5", "用藥資料單完成", "用藥資料單完成");
+                    
+                    
                     olddbload();
+                    
+                    var request1 = indexedDB.open("Form2Database");
+                    request1.onerror = function(event) {
+                        alert("Why didn't you allow my web app to use IndexedDB?!");
+                    };
+                    request1.onsuccess = function(event) {
+                        db = event.target.result;
+                        //console.log(db);
+                    };
+                                        
                 };
 
             };
@@ -248,140 +173,133 @@ $(document).ready(function() {
 
     function olddbload() {
         //=================================================================================
-        var request1 = indexedDB.open("olddb");
-        request1.onerror = function(event) {
+        var request2 = indexedDB.open("olddb");
+        request2.onerror = function(event) {
             alert("Why didn't you allow my web app to use IndexedDB?!");
         };
-        request1.onsuccess = function(event) {
+        request2.onsuccess = function(event) {
             db = event.target.result;
             console.log(db);
 
             var transaction2 = db.transaction(["mList"]);
             var objectStore2 = transaction2.objectStore("mList");
-
+            
+            var olddata = objectStore2.get(htemp[1]);
             objectStore2.getAll().onsuccess = function(event) {
                 console.log(event.target.result);
                 var resdata = event.target.result;
-
                 //===============
 
                 var lastdata;
+                var datanumber = [];
 
                 for (var i = 0; i < resdata.length; i++) {
                     //console.log(resdata[i].病歷號.indexOf(patient_info["病歷號"]));
+                    //lastdata = 0;
                     if (resdata[i].病歷號.indexOf(patient_info["病歷號"]) >= 0) {
                         //console.log(resdata[i].病歷號);
+                        datanumber[time] = i;
                         lastdata = resdata[i];
+                        time ++ ;
+                    }
+                }
+
+                console.log(lastdata);                
+                
+                var Today = new Date();
+                var StartData = Today.getFullYear() + "-" + (Today.getMonth() + 1) + "-" + Today.getDate();
+                $("#StartDate").attr("value", StartData);
+                
+                for (var x = 2; x <= time; x++) {
+                    $("#carousel-innerQ5-6").append('<div class="item"><br><p>日　期: <span id="olddata'+ x +'-1"></span></p><p>時　間: <span id="olddata'+ x +'-2"></span></p><p>頭　暈: <span id="olddata'+ x +'-3"></span></p><p>噁　心: <span id="olddata'+ x +'-4"></span></p><p>嘔　吐: <span id="olddata'+ x +'-5"></span></p><p>癢　疹: <span id="olddata'+ x +'-6"></span></p><p>嗜　睡: <span id="olddata'+ x +'-7"></span></p><p>難　尿: <span id="olddata'+ x +'-8"></span></p><p>頭　痛: <span id="olddata'+ x +'-9"></span></p><p>腳　麻: <span id="olddata'+ x +'-10"></span></p><p>處　置: <span id="olddata'+ x +'-11"></span></p><p>EA 導管: <span id="olddata'+ x +'-12"></span></p><p>衛　教: <span id="olddata'+ x +'-13"></span></p><br><div class="carousel-caption"></div></div>');
+                }
+                for (x = 2; x <= time; x++) {
+                    $("#carousel-innerQ3-2").append('<div class="item"><TEXTAREA cols=35 rows=8 id="olddata' + x + '-14"></TEXTAREA><div class="carousel-caption"></div></div>');
+                }
+                for (x = 2; x <= time; x++) {
+                    $('#carousel-innerQ3-3').append('<div class="item"><br><p id="olddata' + x + '-15">U1126：</p></div>');
+                }
+                if (time < 2) {
+                    $('.carousel-indicators, .carousel-control').hide();
+                }
+                if(time != 0){
+                    var EndHour = lastdata.麻醉結束時間.substring(0,2);
+                    var EndMin = lastdata.麻醉結束時間.substring(3,5);
+                    $("#EndHour option[value=" + EndHour +"]").attr("selected","selected");
+                    $("#EndMin option[value=" + EndMin + "]").attr("selected","selected");
+                        
+                    
+                    var StartData = lastdata.預計使用期間.substring(0,10);
+                    var ToEndDate = lastdata.預計使用期間.substring(13,23);
+                    $("#StartDate").attr("value", StartData);
+                    $("#ToEndDate").attr("value", ToEndDate);
+
+
+                    var c = "2017-11-02 11:15";
+                    var OutbedTimeyear = lastdata.下床時間.substring(0,4);
+                    var OutbedTimemonth = lastdata.下床時間.substring(5,7);
+                    var OutbedTimeday = lastdata.下床時間.substring(8,10);
+                    var dbedhour = lastdata.下床時間.substring(11,13);
+                    var dbedmin = lastdata.下床時間.substring(14,16);
+                    $("#OutbedTime").attr("value", OutbedTimeyear + "-" + OutbedTimemonth + "-" + OutbedTimeday);
+                    $("#dbedhour option[value=" + dbedhour +"]").attr("selected","selected");
+                    $("#dbedmin option[value=" + dbedmin + "]").attr("selected","selected");
+
+                    var GasTimeyear = lastdata.排氣時間.substring(0,4);
+                    var GasTimemonth = lastdata.排氣時間.substring(5,7);
+                    var GasTimeday = lastdata.排氣時間.substring(8,10);
+                    var blhour = lastdata.排氣時間.substring(11,13);
+                    var blmin = lastdata.排氣時間.substring(14,16);
+                    $("#GasTime").attr("value", GasTimeyear + "-" + GasTimemonth + "-" + GasTimeday);                
+                    $("#blhour option[value=" + blhour + "]").attr("selected","selected");
+                    $("#blmin option[value=" + blmin + "]").attr("selected","selected");
+
+                    if(lastdata.PCA同意書確認 == "已確認"){
+                        $("#btnQn5-6-2").addClass("active");
+                        $("#Qn5-6-2-1").attr("checked", "check");
+                    }
+                    else{
+                        $("#btnQn5-6-2").attr("class", "btn btn-primary");
+                        $("#Qn5-6-2-1").attr("checked", false);
                     }
 
-                }
+                    for(var i=time ; i>0 ; i--){
+                        var j = time - i;
+                        $("#olddata" + i + "-1").append(resdata[datanumber[j]]["病人狀況-日期"]);
+                        $("#olddata" + i + "-2").append(resdata[datanumber[j]]["病人狀況-時間"]);
+                        $("#olddata" + i + "-3").append(resdata[datanumber[j]].頭暈);
+                        $("#olddata" + i + "-4").append(resdata[datanumber[j]].噁心);
+                        $("#olddata" + i + "-5").append(resdata[datanumber[j]].嘔吐);
+                        $("#olddata" + i + "-6").append(resdata[datanumber[j]].癢疹);
+                        $("#olddata" + i + "-7").append(resdata[datanumber[j]].嗜睡);                 
+                        $("#olddata" + i + "-8").append(resdata[datanumber[j]].難尿);
+                        $("#olddata" + i + "-9").append(resdata[datanumber[j]].頭痛);
+                        $("#olddata" + i + "-10").append(resdata[datanumber[j]].腳麻);
+                        $("#olddata" + i + "-11").append(resdata[datanumber[j]].處置);
+                        $("#olddata" + i + "-12").append(resdata[datanumber[j]].EA導管);
+                        $("#olddata" + i + "-13").append(resdata[datanumber[j]].衛教);                
+                        $("#olddata" + i + "-14").append(resdata[datanumber[j]].其他交班事項);                
+                        $("#olddata" + i + "-15").append(resdata[datanumber[j]].U1126);                           
+                    }
 
-                console.log(lastdata);
-
-
-                SelectCheckbox("Q5-2-2", lastdata['個人史'], "藥物過敏", "腸胃潰瘍史", "藥癮/毒癮患者", "長期使用opioids");
-                SetText("Q5-2-2-1Text", "QT5-2-2-1", lastdata['藥物過敏'], lastdata['個人史'], "藥物過敏");
-                SetText("Q5-2-2-4Text", "QT5-2-2-4", lastdata['長期使用opioids'], lastdata['個人史'], "長期使用opioids");
-
-                if (lastdata['麻醉結束時間'] != undefined) {
-                    var temp = lastdata['麻醉結束時間'].split(":");
-                    $("#EndHour").val(temp[0]);
-                    $("#EndMin").val(temp[1]);
-                }
-
-                if (lastdata['預計使用期間'] != undefined) {
-                    var temp = lastdata['預計使用期間'].split(":");
-                    $("#StartMonth").val(temp[0]);
-                    $("#StartDay").val(temp[1]);
-                }
-
-                $("#Q5-1-1").val(lastdata["已知用藥-Zfran"]);
-
-                SelectRadio("5-1-3", "臨時上機", "臨時上機");
-                $("#p5").html(lastdata["臨時上機-時間"]);
-                $("#Place5-3-1").val(lastdata['臨時上機-地點']);
-
-                SetText("Q5-3-1-1Text", "Q5-3-1-1", lastdata['機號'], lastdata['個人史'], "藥物過敏");
-
-                $("#Q5-3-1-1").val(lastdata["機號"]);
-                $("#Q5-3-1-2").val(lastdata["鎖牌號碼"]);
-
-                if (lastdata['下床時間'] != undefined) {
-                    temp = lastdata['下床時間'].split(":");
-                    $("#dbedhour").val(temp[0]);
-                    $("#dbedmin").val(temp[1]);
-                }
-
-                if (lastdata['排氣時間'] != undefined) {
-                    temp = lastdata['排氣時間'].split(":");
-                    $("#blhour").val(temp[0]);
-                    $("#blmin").val(temp[1]);
-                }
-
-                $("#Q5-6-1-1").val(lastdata['鎖牌號碼']);
-                $("#Q5-6-1-2").val(lastdata['機號']);
-                $("#Q5-6-1-3").val(lastdata['胎次']);
-
-                if (lastdata['PCA同意書確認'] = "已確認") {
-                    RadioSet("n5-6-2");
-                }
-
-                SelectCheckbox("n5-6-3", lastdata['PFE(PCA)'], "術訪", "完成");
-
-                $("#Qtime3").val(lastdata['已輸液量(自控)']);
-                $("#Qtime4").val(lastdata['已輸液量(請求)']);
-
-                $("#Qtime5").val(lastdata['VAS(動)']);
-                $("#Qtime6").val(lastdata['VAS(靜)']);
-                $("#s8").val(lastdata['宮縮痛']);
-
-                SelectRadio("F1", lastdata["頭暈"], "無", "不按也會", "按多才會", "幾乎每次按都會");
-                SelectRadio("F2", lastdata["噁心"], "無", "不按也會", "按多才會", "幾乎每次按都會");
-                SelectRadio("F3", lastdata["嘔吐"], "無", "不按也會", "按多才會", "幾乎每次按都會");
-                SelectRadio("F4", lastdata["癢疹"], "無", "需抓癢但可以接受", "冷毛巾可改善", "需用藥");
-                SelectRadio("F5", lastdata["嗜睡"], "無", "聲音可喚醒", "物理刺激可喚醒", "無法喚醒");
-                SelectRadio("F6", lastdata["難尿"], "無", "待自解", "輕微可自解", "需導管", "on foley");
-                SelectRadio("F7", lastdata["頭痛"], "無", "與姿勢改變無關", "與姿勢改變有關");
-                SelectRadio("F8", lastdata["腳麻"], "無", "感覺減弱", "影響muscle power");
-                SelectRadio("F11", lastdata["處置"], "調整設定", "Keto", "Vena", "Naloxone", "Novamin", "Zofran", "Primperan", "停用", "EA>IVPCA", "Bloob patch+施打者");
-                SelectCheckbox("F10", lastdata['衛教'], "勿協助按壓", "增加活動", "預防性按壓", "預告DC");
-
-
-                $("#TQ1").val(lastdata["其他交班事項"]);
-
-                if (lastdata["備袋"] != "" && lastdata["備袋"] != undefined) {
-                    SelectRadio("2", "備袋", "備袋");
-                    $("#p2").html(lastdata["備袋"]);
-                }
-
-                SelectRadio("3", lastdata["備袋狀況"], "無備袋", "已用", "已取回");
-
-                if (lastdata["U1126"] != "" && lastdata["U1126"] != undefined) {
-                    SelectRadio("4", "U1126", "U1126");
-                    $("#p4").html(lastdata["U1126"]);
-                }
-
-                SelectRadio("5", "用藥資料單完成", "用藥資料單完成");
-
-
-
-
-
-
-
-
-
-
-
+                    if(lastdata.用藥資料單完成 == "用藥資料單完成"){
+                        $("#btnQ5-1").addClass("active");
+                        $("#Q5-1").attr("checked", "check");
+                    }
+                    else{
+                        $("#btnQ5-1").attr("class", "btn btn-primary");
+                        $("#Q5-1").attr("checked", false);
+                    }
+                }                
                 //===============
             };
 
         };
         // This event is only implemented in recent browsers
-        request1.onupgradeneeded = function(event) {
+        request2.onupgradeneeded = function(event) {
             db = event.target.result;
             // Create an objectStore for this database
-            var objectStore1 = db.createObjectStore("mList", {
+            var objectStore2 = db.createObjectStore("mList", {
                 keyPath: "病歷號"
             });
         };
@@ -506,7 +424,7 @@ $(document).ready(function() {
                 RadioSet((QNum + "-7"));
         }
     }
-
+       
 
     $("#saveinfo").click(function(event) {
 
@@ -615,13 +533,13 @@ $(document).ready(function() {
             pertemp3 = "";
         }
         patient_info["使用原因"] = pertemp;
-        patient_info["剖腹產：胎次"] = pertemp1;
-        patient_info["減痛分娩：胎次"] = pertemp2;
-        patient_info["其他"] = pertemp3;
+        patient_info["使用原因-剖腹產：胎次"] = pertemp1;
+        patient_info["使用原因-減痛分娩：胎次"] = pertemp2;
+        patient_info["使用原因-其他"] = pertemp3;
 
 
         patient_info["麻醉結束時間"] = $("#EndHour").find(":selected").text() + ":" + $("#EndMin").find(":selected").text();
-        patient_info["預計使用期間"] = $("#StartMonth").find(":selected").text() + "月" + $("#StartDay").find(":selected").text() + "日";
+        patient_info["預計使用期間"] = $("#StartDate").val() + " 至 " + $("#ToEndDate").val();
 
         patient_info["已知用藥-Zfran"] = $("#Q5-1-1").find(":selected").text() + "mg";
 
@@ -891,10 +809,16 @@ $(document).ready(function() {
             patient_info["施打者"] = "";
         }
 
-
-        patient_info["下床時間"] = $("#dbedhour").find(":selected").text() + ":" + $("#dbedmin").find(":selected").text();
-        patient_info["排氣時間"] = $("#blhour").find(":selected").text() + ":" + $("#blmin").find(":selected").text();
-        patient_info["胎次"] = $("#Q5-6-1-3").val();
+        if($("#none1").prop('checked')){
+            patient_info["下床時間"] = "尚未發生";
+        }else{
+            patient_info["下床時間"] = $("#OutbedTime").val() + " " +  $("#dbedhour").find(":selected").text() + ":" + $("#dbedmin").find(":selected").text();
+        }
+        if($("#none2").prop('checked')){
+            patient_info["排氣時間"] = "尚未發生";
+        }else{
+            patient_info["排氣時間"] = $("#GasTime").val() + " " +$("#blhour").find(":selected").text() + ":" + $("#blmin").find(":selected").text();
+        }
 
         if ($("#Qn5-6-2-1").prop('checked')) {
             patient_info["PCA同意書確認"] = "已確認";
@@ -925,7 +849,7 @@ $(document).ready(function() {
         patient_info["請求次數"] = $("#Qtime5").val();
         patient_info["VAS(動)"] = $("#Qtime6").find(":selected").text();
         patient_info["VAS(靜)"] = $("#Qtime7").find(":selected").text();
-        patient_info["VAS(宮縮)"] = $("#Qtime7").find(":selected").text();
+        patient_info["VAS(宮縮)"] = $("#Qtime8").find(":selected").text();
 
         patient_info["頭暈"] = RadioCkeck("F1");
         patient_info["噁心"] = RadioCkeck("F2");
@@ -967,8 +891,9 @@ $(document).ready(function() {
         patient_info["備袋狀況"] = RadioCkeck("3");
         patient_info["U1126"] = $("#p4").html();
         patient_info["用藥資料單完成"] = RadioCkeck("5");
-
-        var transaction = db.transaction(["mList"], "readwrite");
+        
+            
+       var transaction = db.transaction(["mList"], "readwrite");
         transaction.oncomplete = function(event) {
             console.log("done");
         };
@@ -986,13 +911,45 @@ $(document).ready(function() {
             };
             //===================================
         };
+        
         var objectStore = transaction.objectStore("mList");
 
         var request = objectStore.add(patient_info);
         request.onsuccess = function(event) {
             // event.target.result == customerData[i].ssn;
         };
-        console.log(patient_info);
+        console.log(patient_info);        
+        
+        
+        if(time == 0){
+            patient_info['病歷號'] = htemp[1];
+        }else{
+            patient_info['病歷號'] = htemp[1] + "-" + (time);
+        }
+        var request2 = indexedDB.open("olddb");
+        request2.onerror = function(event) {
+            alert("Why didn't you allow my web app to use IndexedDB?!");
+            console.log("error");
+        };
+        request2.onsuccess = function(event) {
+            db = event.target.result;
+            
+            var transaction2 = db.transaction(["mList"], "readwrite");
+            var objectStore2 = transaction2.objectStore("mList");  
+            
+            var request2 = objectStore2.add(patient_info);
+            transaction2.oncomplete = function(event) {
+                console.log("done");                
+                
+                location.href = "ControlPanel2.html";
+            };
+            transaction2.onerror = function(event) {
+                console.log("add error");
+                
+                location.href = "ControlPanel2.html";
+            };                       
+            
+        };        
     });
 
 
@@ -1337,8 +1294,6 @@ $(document).ready(function() {
         }
     });
 
-
-
     $("#QF11-0,#QF11-2,#QF11-3,#QF11-4,#QF11-5,#QF11-6,#QF11-7,#QF11-8,#QF11-9,#QF11-10").change(function() {
         $("#QF11-1").prop("checked", false);
         $('#btnQF11-1').removeClass('active');
@@ -1430,8 +1385,9 @@ $(document).ready(function() {
         }
 
 
-    });
-
+    });   
+    
+    
 });
 
 $(document).on('click', '.navbar-collapse.in', function(e) {

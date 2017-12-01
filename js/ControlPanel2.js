@@ -74,7 +74,12 @@
                 $("#body").attr("style", "font-size:" + font + "px;");
             }
         });
-
+        
+        var Today = new Date();
+        var info07 = Today.getFullYear() + "-" + (Today.getMonth() + 1) + "-" + Today.getDate();
+        $("#info07").attr("value", info07);
+        
+        
         var RowCnt = 0;
 
         var db;
@@ -251,7 +256,7 @@
                 "<td>" + $("#info01").val() + "</td>" +
                 "<td>" + $("#info03").val() + "</td>" +
                 "<td>" + $("#info04").val() + "</td>" +
-                "<td>" + "" + "</td>" +
+                "<td>" + $("#info05").val() + "</td>" +
                 //"<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
                 "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + $("#info04").val() + "'>未填</a></td>" +
                 "</tr>");
@@ -262,20 +267,19 @@
                 "刀序1": "",
                 "刀序2": "",
                 "姓名": $("#info01").val(),
-                "病房": "",
+                "病房": $("#info05").val(),
                 "病歷號": $("#info04").val(),
                 "性別": Mfunction(),
                 "年齡": $("#info03").val(),
                 "診斷": $("#info08").val(),
                 "術式": $("#info09").val(),
                 "天數": "",
-                "麻VS": $("#info18").val(),
+                "麻VS": $("#info18").find(":selected").text(),
                 "備註": "",
                 "入帳": "",
             }];
 
             write_to_db(db, wstemp);
-
         });
 
         function Mfunction() {
@@ -308,7 +312,7 @@
                     type: 'binary',
                     bookType: 'html'
                 });
-
+                
                 RowCnt = -1;
                 while ($("#T" + (RowCnt + 1)).length == 1) {
                     RowCnt++;
@@ -352,15 +356,96 @@
                 //儲存病人資訊至DB
                 var patient_info = to_json(workbook);
 
-                write_to_db(db, patient_info.personal_information);
-                //TableDB = opendb("TableDB", "HtmlTemp");
+                //write_to_db(db, patient_info.personal_information);
+                var datacnt = { "123456": 1, "223456": 1 };
+
+                for (var i = 0; i < (patient_info.form.length - 1); i++) {
+                    for (var j = i + 1; j < patient_info.form.length; j++) {
+                        if (patient_info.form[i].病歷號 == patient_info.form[j].病歷號) {
+                            if (datacnt[patient_info.form[j].病歷號] == undefined)
+                                datacnt[patient_info.form[j].病歷號] = 1;
+                            patient_info.form[j].病歷號 = patient_info.form[j].病歷號 + "-" + datacnt[patient_info.form[j].病歷號];
+                            datacnt[patient_info.form[j].病歷號]++;
+                        }
+                    }
+                }
+
+                console.log(patient_info.form);
+
+                //write_to_db(db, patient_info.SheetJS);
+                //console.log(vardb);
+                var transaction = db.transaction(["mList"], "readwrite");
+                //console.log(data);
+                // Do something when all the data is added to the database.
+                transaction.oncomplete = function(event) {
+                    console.log("done");
+                    //=========================================================================
+                    var requestF1 = indexedDB.open("olddb");
+
+                    requestF1.onerror = function(event) {
+                        alert("Why didn't you allow my web app to use IndexedDB?!");
+                    };
+                    requestF1.onsuccess = function(event) {
+                        db = event.target.result;
+                        console.log(db);
+
+
+                        //===============
+
+
+                        var transaction = db.transaction(["mList"], "readwrite");
+                        //console.log(data);
+                        // Do something when all the data is added to the database.
+                        transaction.oncomplete = function(event) {
+                            console.log("done");
+                            //alert("All done!");
+                            db = opendb("TestDatabase", "病歷號");
+                        };
+
+                        transaction.onerror = function(event) {
+                            // Don't forget to handle errors!
+                            console.log("add error");
+
+                        };
+
+                        var objectStore = transaction.objectStore("mList");
+                        for (var i in patient_info.form) {
+                            var request = objectStore.add(patient_info.form[i]);
+                            request.onsuccess = function(event) {
+                                // event.target.result == customerData[i].ssn;
+                            };
+                        }
+
+                    };
+                    // This event is only implemented in recent browsers
+                    requestF1.onupgradeneeded = function(event) {
+                        db = event.target.result;
+                        // Create an objectStore for this database
+                        var objectStore = db.createObjectStore("mList", {
+                            keyPath: "病歷號"
+                        });
+                    };
+                    //===========================================
+                };
+                transaction.onerror = function(event) {
+                    // Don't forget to handle errors!
+                    console.log("add error");
+
+                };
+                var objectStore = transaction.objectStore("mList");
+                for (var i in patient_info.personal_information) {
+                    var request = objectStore.add(patient_info.personal_information[i]);
+                    request.onsuccess = function(event) {
+                        // event.target.result == customerData[i].ssn;
+                    };
+                }
                 //=========================================================================
 
 
             }; //fileReader.onload
 
             fileReader.readAsBinaryString(files[0]);
-        }); //$('#excel-file').change
+        });
 
 
         function ReadF2db(people_id) {
@@ -746,7 +831,7 @@
                         "<td>" + temp2[1] + "</td>" +
                         "<td>" + temp3[1] + "</td>" +
                         "<td>" + temp4[1] + "</td>" +
-                        "<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp3[1] + "'>未填</a></td>" +
+                        //"<td><a class='btn btn-danger1 navbar-btn' id='Fbtn" + RowCnt + "a1' href='index.html?ssn=" + temp3[1] + "'>未填</a></td>" +
                         "<td><a class='btn btn-danger2 navbar-btn' id='Fbtn" + RowCnt + "a2' href='index1.html?ssn=" + temp3[1] + "'>未填</a></td>" +
                         "</tr>");
 
