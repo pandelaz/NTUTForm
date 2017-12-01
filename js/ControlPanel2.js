@@ -792,6 +792,13 @@
                 //=============================================================
             } else if (e.target.id.search("Plusbtn") >= 0) {
                 var temp = e.target.id.split("Plusbtn");
+                if ($("#" + e.target.id).attr("disabled")) {
+                    return 0;
+                }
+                $("#" + e.target.id).attr("disabled", true);
+
+
+
                 console.log($("#T" + temp[1]).html().split("</td>"));
 
                 var temp0 = $("#T" + temp[1]).html().split("</td>")
