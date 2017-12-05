@@ -65,10 +65,7 @@ $(document).ready(function() {
     var db;
     var hhtemp = 0;
     var htemp = window.location.href.split("=");
-    var patient_info = {
-        "病歷號": "",
-        "姓名": ""
-    };
+    var patient_info = { "date": "", "病歷號": "", "姓名": "", "病房": "", "性別": "", "年齡": "", "診斷": "" };
     var time = 0;
     var request = indexedDB.open("TestDatabase");
     request.onerror = function(event) {
@@ -107,20 +104,10 @@ $(document).ready(function() {
             $("#ss02").attr("value", request.result.病房);
             $("#ss03").attr("value", request.result.性別);
             $("#ss04").attr("value", request.result.年齡);
-            $("#ss06").attr("value", request.result.Cre);
             $("#ss07").attr("value", request.result.術式);
-            $("#ss08").attr("value", request.result.身高);
-            $("#ss09").attr("value", request.result.體重);
 
-            patient_info['姓名'] = request.result.姓名;
-            patient_info['病房'] = request.result.病房;
-            patient_info['病歷號'] = request.result.病歷號;
-            patient_info['性別'] = request.result.性別;
-            patient_info['年齡'] = request.result.年齡;
+            patient_info["病歷號"] = request.result.病歷號;
             patient_info['診斷'] = request.result.診斷;
-            patient_info['術式'] = request.result.術式;
-
-
             //=================================================================================
             var request1 = indexedDB.open("Form2Database");
             request1.onerror = function(event) {
@@ -192,11 +179,11 @@ $(document).ready(function() {
 
                 var lastdata;
                 var datanumber = [];
-
+                //time = 0;
                 for (var i = 0; i < resdata.length; i++) {
                     //console.log(resdata[i].病歷號.indexOf(patient_info["病歷號"]));
                     //lastdata = 0;
-                    if (resdata[i].病歷號.indexOf(patient_info["病歷號"]) >= 0) {
+                    if (resdata[i].病歷號.indexOf(patient_info["病歷號"].substring(0, 7)) >= 0) {
                         //console.log(resdata[i].病歷號);
                         datanumber[time] = i;
                         lastdata = resdata[i];
@@ -207,8 +194,23 @@ $(document).ready(function() {
                 console.log(lastdata);
 
                 var Today = new Date();
-                var StartData = Today.getFullYear() + "-" + (Today.getMonth() + 1) + "-" + Today.getDate();
-                $("#StartDate").attr("value", StartData);
+                var datee;
+                var monthh;
+
+                if (Today.getDate().toString().length <= 1) {
+                    datee = "0" + Today.getDate();
+                } else {
+                    datee = Today.getDate();
+                }
+                if (Today.getMonth().toString().length <= 1) {
+                    monthh = "0" + (Today.getMonth() + 1);
+                } else {
+                    monthh = (Today.getMonth() + 1);
+                }
+
+                var info07 = Today.getFullYear() + "-" + monthh + "-" + datee;
+                console.log(info07);
+                document.getElementById("StartDate").value = info07;
 
                 for (var x = 2; x <= time; x++) {
                     $("#carousel-innerQ5-6").append('<div class="item"><br><p>日　期: <span id="olddata' + x + '-1"></span></p><p>時　間: <span id="olddata' + x + '-2"></span></p><p>頭　暈: <span id="olddata' + x + '-3"></span></p><p>噁　心: <span id="olddata' + x + '-4"></span></p><p>嘔　吐: <span id="olddata' + x + '-5"></span></p><p>癢　疹: <span id="olddata' + x + '-6"></span></p><p>嗜　睡: <span id="olddata' + x + '-7"></span></p><p>難　尿: <span id="olddata' + x + '-8"></span></p><p>頭　痛: <span id="olddata' + x + '-9"></span></p><p>腳　麻: <span id="olddata' + x + '-10"></span></p><p>處　置: <span id="olddata' + x + '-11"></span></p><p>EA 導管: <span id="olddata' + x + '-12"></span></p><p>衛　教: <span id="olddata' + x + '-13"></span></p><br><div class="carousel-caption"></div></div>');
@@ -222,37 +224,414 @@ $(document).ready(function() {
                 if (time < 2) {
                     $('.carousel-indicators, .carousel-control').hide();
                 }
-                if (time != 0) {
+                if (time > 0) {
+                    $("#ss01").attr("value", lastdata.姓名);
+                    $("#ss02").attr("value", lastdata.病房);
+                    $("#ss03").attr("value", lastdata.性別);
+                    $("#ss04").attr("value", lastdata.年齡);
+                    $("#ss07").attr("value", lastdata.術式);
+                    $("#ss08").attr("value", lastdata.身高);
+                    $("#ss09").attr("value", lastdata.體重);
+                    $("#ss06").attr("value", lastdata.Cre);
+
+                    if (lastdata.個人史.indexOf("藥物過敏") != -1) {
+                        $("#btnQ5-2-2-1").attr("class", "btn btn-primary Large-Width active");
+                        $("#Q5-2-2-1").attr("checked", "checked");
+                        $("#Q5-2-2-1Text").show();
+                        cnt5221 = 1;
+                        $("#QT5-2-2-1").attr("value", lastdata["藥物過敏"]);
+                    }
+                    if (lastdata.個人史.indexOf("腸胃潰瘍史") != -1) {
+                        $("#btnQ5-2-2-2").attr("class", "btn btn-primary Large-Width active");
+                        $("#Q5-2-2-2").attr("checked", "checked");
+                    }
+                    if (lastdata.個人史.indexOf("藥癮/毒癮患者") != -1) {
+                        $("#btnQ5-2-2-3").attr("class", "btn btn-primary Large-Width active");
+                        $("#Q5-2-2-3").attr("checked", "checked");
+                    }
+                    if (lastdata.個人史.indexOf("長期使用opioids") != -1) {
+                        $("#btnQ5-2-2-4").attr("class", "btn btn-primary Large-Width active");
+                        $("#Q5-2-2-4").attr("checked", "checked");
+                        $("#Q5-2-2-4Text").show();
+                        cnt5224 = 1;
+                        $("#QT5-2-2-4").attr("value", lastdata["長期使用opioids"]);
+                    }
+                    if (lastdata.個人史.indexOf("洗腎") != -1) {
+                        $("#btnQ5-2-2-5").attr("class", "btn btn-primary Large-Width active");
+                        $("#Q5-2-2-5").attr("checked", "checked");
+                    }
+
+                    switch (lastdata.使用原因) {
+                        case "術後急性疼痛":
+                            $("#btnQ5-2-3-1").attr("class", "btn btn-primary Large-Width active");
+                            $("#Q5-2-3-1").attr("checked", "checked");
+
+                            break;
+                        case "剖腹產":
+                            $("#btnQ5-2-3-2").attr("class", "btn btn-primary Large-Width active");
+                            $("#Q5-2-3-2").attr("checked", "checked");
+                            $("#Q5-2-3-2Text").show();
+                            $("#QT5-2-3-2").attr("value", lastdata["使用原因-剖腹產：胎次"]);
+
+                            break;
+                        case "減痛分娩":
+                            $("#btnQ5-2-3-3").attr("class", "btn btn-primary Large-Width active");
+                            $("#Q5-2-3-3").attr("checked", "checked");
+                            $("#Q5-2-3-3Text").show();
+                            $("#QT5-2-3-3").attr("value", lastdata["使用原因-減痛分娩：胎次"]);
+
+                            break;
+                        case "癌症疼痛":
+                            $("#btnQ5-2-3-5").attr("class", "btn btn-primary Large-Width active");
+                            $("#Q5-2-3-5").attr("checked", "checked");
+
+                            break;
+                        case "其他":
+                            $("#btnQ5-2-3-4").attr("class", "btn btn-primary Large-Width active");
+                            $("#Q5-2-3-4").attr("checked", "checked");
+                            $("#Q5-2-3-4Text").show();
+                            $("#QT5-2-3-4").attr("value", lastdata["使用原因-其他"]);
+
+                            break;
+                    }
+
                     var EndHour = lastdata.麻醉結束時間.substring(0, 2);
                     var EndMin = lastdata.麻醉結束時間.substring(3, 5);
                     $("#EndHour option[value=" + EndHour + "]").attr("selected", "selected");
                     $("#EndMin option[value=" + EndMin + "]").attr("selected", "selected");
 
 
-                    var StartData = lastdata.預計使用期間.substring(0, 10);
+                    var StartDate = lastdata.預計使用期間.substring(0, 10);
                     var ToEndDate = lastdata.預計使用期間.substring(13, 23);
-                    $("#StartDate").attr("value", StartData);
+                    $("#StartDate").attr("value", StartDate);
                     $("#ToEndDate").attr("value", ToEndDate);
 
+                    var Zfran = lastdata["已知用藥-Zfran"].substr(0, 1);
+                    $("#Q5-1-1 option[value=" + Zfran + "]").attr("selected", "selected");
+
+                    if (lastdata["已知用藥-OR"].indexOf("無") != -1) {
+                        $("#btnQ5-1-2-1-5").attr("class", "btn btn-primary active");
+                        $("#Q5-1-2-1-5").attr("checked", "checked");
+                    } else {
+                        var OR = lastdata["已知用藥-OR"].split("+");
+                        if (lastdata["已知用藥-OR"].indexOf("morphine") != -1) {
+                            $("#btnQ5-1-2-1-1").attr("class", "btn btn-primary active");
+                            $("#Q5-1-2-1-1").attr("checked", "checked");
+                            $("#Q5-1-2-1-1Text").show();
+                            cnt51211 = 1;
+                            if (OR.length == 1) {
+                                $("#QT5-1-2-1-1").attr("value", OR[0].substring(9, (OR[0].length - 3)));
+                            } else {
+                                $("#QT5-1-2-1-1").attr("value", OR[0].substring(9, (OR[0].length - 4)));
+                            }
+                        }
+                        if (lastdata["已知用藥-OR"].indexOf("keto") != -1) {
+                            $("#btnQ5-1-2-1-2").attr("class", "btn btn-primary active");
+                            $("#Q5-1-2-1-2").attr("checked", "checked");
+                            $("#Q5-1-2-1-2Text").show();
+                            cnt51212 = 1;
+                            var keto2 = 0;
+                            for (var keto = 0; keto < (OR.length - 1); keto++) {
+                                if (OR[keto].indexOf("keto") > 0) {
+                                    keto2 = keto;
+                                }
+                            }
+                            if (keto2 == 0) {
+                                $("#QT5-1-2-1-2").attr("value", OR[0].substring(5, (OR[0].length - 3)));
+                            } else {
+                                $("#QT5-1-2-1-2").attr("value", OR[keto2].substring(6, (OR[keto2].length - 4)));
+                            }
+                        }
+                        if (lastdata["已知用藥-OR"].indexOf("Tencam 1支") != -1) {
+                            $("#btnQ5-1-2-1-3").attr("class", "btn btn-primary active");
+                            $("#Q5-1-2-1-3").attr("checked", "checked");
+                        }
+                        if (OR[OR.length - 1].indexOf("morphine") == -1 && OR[OR.length - 1].indexOf("keto") == -1 && OR[OR.length - 1].indexOf("Tencam 1支") == -1) {
+                            $("#btnQ5-1-2-1-4").attr("class", "btn btn-primary active");
+                            $("#Q5-1-2-1-4").attr("checked", "checked");
+                            $("#Q5-1-2-1-4Text").show();
+                            cnt51214 = 1;
+                            if (OR.length == 1) {
+                                $("#QT5-1-2-1-3").attr("value", OR[OR.length - 1].substr(0, OR[OR.length - 1].length));
+                            } else {
+                                $("#QT5-1-2-1-3").attr("value", OR[OR.length - 1].substr(1, OR[OR.length - 1].length));
+                            }
+                        }
+                    }
+
+                    if (lastdata["已知用藥-POR"].indexOf("無") != -1) {
+                        $("#btnQ5-1-4-1-5").attr("class", "btn btn-primary active");
+                        $("#Q5-1-2-1-5").attr("checked", "checked");
+                    } else {
+                        var POR = lastdata["已知用藥-POR"].split("+");
+                        if (lastdata["已知用藥-POR"].indexOf("morphine") != -1) {
+                            $("#btnQ5-1-4-1-1").attr("class", "btn btn-primary active");
+                            $("#Q5-1-4-1-1").attr("checked", "checked");
+                            $("#Q5-1-4-1-1Text").show();
+                            cnt51411 = 1;
+                            if (POR.length == 1) {
+                                $("#QT5-1-4-1-1").attr("value", POR[0].substring(9, (POR[0].length - 3)));
+                            } else {
+                                $("#QT5-1-4-1-1").attr("value", POR[0].substring(9, (POR[0].length - 4)));
+                            }
+                        }
+                        if (lastdata["已知用藥-POR"].indexOf("keto") != -1) {
+                            $("#btnQ5-1-4-1-2").attr("class", "btn btn-primary active");
+                            $("#Q5-1-4-1-2").attr("checked", "checked");
+                            $("#Q5-1-4-1-2Text").show();
+                            cnt51412 = 1;
+                            var keto2 = 0;
+                            for (var keto = 0; keto < (POR.length - 1); keto++) {
+                                if (POR[keto].indexOf("keto") > 0) {
+                                    keto2 = keto;
+                                }
+                            }
+                            if (keto2 == 0) {
+                                $("#QT5-1-4-1-2").attr("value", POR[0].substring(5, (POR[0].length - 3)));
+                            } else {
+                                $("#QT5-1-4-1-2").attr("value", POR[keto2].substring(6, (POR[keto2].length - 4)));
+                            }
+                        }
+                        if (lastdata["已知用藥-POR"].indexOf("Tencam 1支") != -1) {
+                            $("#btnQ5-1-4-1-3").attr("class", "btn btn-primary active");
+                            $("#Q5-1-4-1-3").attr("checked", "checked");
+                        }
+                        if (POR[POR.length - 1].indexOf("morphine") == -1 && POR[POR.length - 1].indexOf("keto") == -1 && POR[POR.length - 1].indexOf("Tencam 1支") == -1) {
+                            $("#btnQ5-1-4-1-4").attr("class", "btn btn-primary active");
+                            $("#Q5-1-4-1-4").attr("checked", "checked");
+                            $("#Q5-1-4-1-4Text").show();
+                            cnt51414 = 1;
+                            if (POR.length == 1) {
+                                $("#QT5-1-4-1-4").attr("value", POR[POR.length - 1].substr(0, POR[POR.length - 1].length));
+                            } else {
+                                $("#QT5-1-4-1-4").attr("value", POR[POR.length - 1].substr(1, POR[POR.length - 1].length));
+                            }
+                        }
+                    }
+
+                    $("#Q5-3-1-1").attr("value", lastdata.機號);
+                    $("#Q5-3-1-2").attr("value", lastdata.鎖牌號碼);
+                    switch (lastdata.止痛方式) {
+                        case "IVPCA":
+                            $("#btnQ5-3-2-1").attr("class", "btn btn-primary active");
+                            $("#Q5-3-2-1").attr("checked", "checked");
+                            $("#Q5-3-1").show();
+                            if (lastdata.止痛藥物.length > 0) {
+                                switch (lastdata.止痛藥物) {
+                                    case "Morphine 1mg/ml":
+                                        $("#btnQ5-3-3-1").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-3-1").attr("checked", "checked");
+                                        break;
+                                    case "Fentanyl 10mcg/ml":
+                                        $("#btnQ5-3-3-2").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-3-2").attr("checked", "checked");
+                                        break;
+                                    default:
+                                        $("#btnQ5-3-3-3").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-3-3").attr("checked", "checked");
+                                        $("#QT5-3-1").show();
+                                        $("#Q5-3-3-3-1").attr("value", lastdata.止痛藥物);
+                                }
+                            }
+                            if (lastdata["機器設定-Loading dose"].length > 0 || lastdata["機器設定-PCA dose"].length > 0 || lastdata["機器設定-Infusion dose"].length > 0 || lastdata["機器設定-Lock-out interval"].length > 0 || lastdata["機器設定-4-hr limit"].length > 0) {
+                                if (lastdata["機器設定-Loading dose"] == "3 mg" && lastdata["機器設定-PCA dose"] == "1 mg" && lastdata["機器設定-Infusion dose"] == "0 mg" && lastdata["機器設定-Lock-out interval"] == "5 min" && lastdata["機器設定-4-hr limit"] == "20 mg") {
+                                    $("#btnQ5-3-4-1").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-4-1").attr("checked", "checked");
+                                } else if (lastdata["機器設定-Loading dose"] == "3 mg" && lastdata["機器設定-PCA dose"] == "2 mg" && lastdata["機器設定-Infusion dose"] == "0 mg" && lastdata["機器設定-Lock-out interval"] == "10 min" && lastdata["機器設定-4-hr limit"] == "30 mg") {
+                                    $("#btnQ5-3-4-2").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-4-2").attr("checked", "checked");
+                                } else if (lastdata["機器設定-Loading dose"] == "2 mg" && lastdata["機器設定-PCA dose"] == "1 mg" && lastdata["機器設定-Infusion dose"] == "0 mg" && lastdata["機器設定-Lock-out interval"] == "5 min" && lastdata["機器設定-4-hr limit"] == "15 mg") {
+                                    $("#btnQ5-3-4-3").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-4-3").attr("checked", "checked");
+                                } else {
+                                    $("#btnQ5-3-4-4").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-4-4").attr("checked", "checked");
+                                    $("#QT5-3-3-1,#QT5-3-3-2,#QT5-3-3-3,#QT5-3-3-4,#QT5-3-3-5").show();
+                                    $("#Q5-3-4-4-1").attr("value", lastdata["機器設定-Loading dose"].substring(0, (lastdata["機器設定-Loading dose"].length - 3)));
+                                    $("#Q5-3-4-4-2").attr("value", lastdata["機器設定-PCA dose"].substring(0, (lastdata["機器設定-PCA dose"].length - 3)));
+                                    $("#Q5-3-4-4-3").attr("value", lastdata["機器設定-Infusion dose"].substring(0, (lastdata["機器設定-Infusion dose"].length - 3)));
+                                    $("#Q5-3-4-4-4").attr("value", lastdata["機器設定-Lock-out interval"].substring(0, (lastdata["機器設定-Lock-out interval"].length - 4)));
+                                    $("#Q5-3-4-4-5").attr("value", lastdata["機器設定-4-hr limit"].substring(0, (lastdata["機器設定-4-hr limit"].length - 3)));
+                                }
+                            }
+                            break;
+                        case "PCEA":
+                            $("#btnQ5-3-2-2").attr("class", "btn btn-primary active");
+                            $("#Q5-3-2-2").attr("checked", "checked");
+                            $("#Q5-3-2").show();
+                            $("#Q5-3-3").show();
+                            $("#Q5-3-6").show();
+                            if (lastdata.止痛藥物.length > 0) {
+                                switch (lastdata.止痛藥物) {
+                                    case "Marcaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL: 400mL":
+                                        $("#btnQ5-3-5-1").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-1").attr("checked", "checked");
+                                        break;
+                                    case "Marcaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL + Morphine 0.01 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-2").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-2").attr("checked", "checked");
+                                        break;
+                                    case "Marcaine 0.66 mg/mL + Morphine 0.01 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-3").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-3").attr("checked", "checked");
+                                        break;
+                                    case "Marcaine 1 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-4").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-4").attr("checked", "checked");
+                                        break;
+                                    case "Chirocaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL: 400mL":
+                                        $("#btnQ5-3-5-5").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-5").attr("checked", "checked");
+                                        break;
+                                    case "Chirocaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL + Morphine 0.01 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-6").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-6").attr("checked", "checked");
+                                        break;
+                                    case "Chirocaine 1 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-7").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-7").attr("checked", "checked");
+                                        break;
+                                    default:
+                                        $("#btnQ5-3-5-8").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-8").attr("checked", "checked");
+                                        $("#QT5-3-2").show();
+                                        $("#QT5-3-5-8-1").attr("value", lastdata.止痛藥物);
+                                }
+                            }
+                            if (lastdata["機器設定-Loading dose"].length > 0 || lastdata["機器設定-PCA dose"].length > 0 || lastdata["機器設定-Infusion dose"].length > 0 || lastdata["機器設定-Lock-out interval"].length > 0 || lastdata["機器設定-4-hr limit"].length > 0) {
+                                if (lastdata["機器設定-Loading dose"] == "0 ml" && lastdata["機器設定-PCA dose"] == "3 ml" && lastdata["機器設定-Infusion dose"] == "4 ml" && lastdata["機器設定-Lock-out interval"] == "20 min" && lastdata["機器設定-4-hr limit"] == "35 mg") {
+                                    $("#btnQ5-3-6-1").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-6-1").attr("checked", "checked");
+                                } else if (lastdata["機器設定-Loading dose"] == "0 ml" && lastdata["機器設定-PCA dose"] == "6 ml" && lastdata["機器設定-Infusion dose"] == "6 ml" && lastdata["機器設定-Lock-out interval"] == "15 min" && lastdata["機器設定-4-hr limit"] == "80 mg") {
+                                    $("#btnQ5-3-6-2").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-6-2").attr("checked", "checked");
+                                } else {
+                                    $("#btnQ5-3-6-3").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-6-3").attr("checked", "checked");
+                                    $("#QT5-3-4-1,#QT5-3-4-2,#QT5-3-4-3,#QT5-3-4-4,#QT5-3-4-5").show();
+                                    $("#Q5-3-6-3-1").attr("value", lastdata["機器設定-Loading dose"].substring(0, (lastdata["機器設定-Loading dose"].length - 3)));
+                                    $("#Q5-3-6-3-2").attr("value", lastdata["機器設定-PCA dose"].substring(0, (lastdata["機器設定-PCA dose"].length - 3)));
+                                    $("#Q5-3-6-3-3").attr("value", lastdata["機器設定-Infusion dose"].substring(0, (lastdata["機器設定-Infusion dose"].length - 3)));
+                                    $("#Q5-3-6-3-4").attr("value", lastdata["機器設定-Lock-out interval"].substring(0, (lastdata["機器設定-Lock-out interval"].length - 4)));
+                                    $("#Q5-3-6-3-5").attr("value", lastdata["機器設定-4-hr limit"].substring(0, (lastdata["機器設定-4-hr limit"].length - 3)));
+                                }
+                            }
+                            $("#Q5-3-8-1").attr("value", lastdata.位置);
+                            $("#Q5-3-8-2").attr("value", lastdata.fix);
+                            $("#Q5-3-8-3").attr("value", lastdata.施打者);
+
+                            break;
+                        case "PCEA+PIB":
+                            $("#btnQ5-3-2-3").attr("class", "btn btn-primary active");
+                            $("#Q5-3-2-3").attr("checked", "checked");
+                            $("#Q5-3-2").show();
+                            $("#Q5-3-4").show();
+                            $("#Q5-3-6").show();
+                            if (lastdata.止痛藥物.length > 0) {
+                                switch (lastdata.止痛藥物) {
+                                    case "Marcaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL: 400mL":
+                                        $("#btnQ5-3-5-1").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-1").attr("checked", "checked");
+                                        break;
+                                    case "Marcaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL + Morphine 0.01 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-2").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-2").attr("checked", "checked");
+                                        break;
+                                    case "Marcaine 0.66 mg/mL + Morphine 0.01 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-3").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-3").attr("checked", "checked");
+                                        break;
+                                    case "Marcaine 1 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-4").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-4").attr("checked", "checked");
+                                        break;
+                                    case "Chirocaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL: 400mL":
+                                        $("#btnQ5-3-5-5").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-5").attr("checked", "checked");
+                                        break;
+                                    case "Chirocaine 0.66 mg/mL + Fentanyl 1.25 mcg/mL + Morphine 0.01 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-6").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-6").attr("checked", "checked");
+                                        break;
+                                    case "Chirocaine 1 mg/mL: 400mL":
+                                        $("#btnQ5-3-5-7").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-7").attr("checked", "checked");
+                                        break;
+                                    default:
+                                        $("#btnQ5-3-5-8").attr("class", "btn btn-primary active");
+                                        $("#Q5-3-5-8").attr("checked", "checked");
+                                        $("#QT5-3-2").show();
+                                        $("#QT5-3-5-8-1").attr("value", lastdata.止痛藥物);
+                                }
+                            }
+                            if (lastdata["機器設定-Loading dose"].length > 0 || lastdata["機器設定-PCA dose"].length > 0 || lastdata["機器設定-Infusion dose"].length > 0 || lastdata["機器設定-Lock-out interval"].length > 0 || lastdata["機器設定-4-hr limit"].length > 0) {
+                                if (lastdata["機器設定-Loading dose"] == "0 ml" && lastdata["機器設定-PCA dose"] == "3 ml" && lastdata["機器設定-Infusion dose"] == "4 ml" && lastdata["機器設定-Lock-out interval"] == "20 min" && lastdata["機器設定-4-hr limit"] == "40 mg") {
+                                    $("#btnQ5-3-7-1").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-7-1").attr("checked", "checked");
+                                } else if (lastdata["機器設定-Loading dose"] == "0 ml" && lastdata["機器設定-PCA dose"] == "6 ml" && lastdata["機器設定-Infusion dose"] == "8 ml" && lastdata["機器設定-Lock-out interval"] == "15 min" && lastdata["機器設定-4-hr limit"] == "80 mg") {
+                                    $("#btnQ5-3-7-2").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-7-2").attr("checked", "checked");
+                                } else {
+                                    $("#btnQ5-3-7-3").attr("class", "btn btn-primary active");
+                                    $("#Q5-3-7-3").attr("checked", "checked");
+                                    $("#QT5-3-5-1,#QT5-3-5-2,#QT5-3-5-3,#QT5-3-5-4,#QT5-3-5-5").show();
+                                    $("#Q5-3-7-3-1").attr("value", lastdata["機器設定-Loading dose"].substring(0, (lastdata["機器設定-Loading dose"].length - 3)));
+                                    $("#Q5-3-7-3-2").attr("value", lastdata["機器設定-PCA dose"].substring(0, (lastdata["機器設定-PCA dose"].length - 3)));
+                                    $("#Q5-3-7-3-3").attr("value", lastdata["機器設定-Infusion dose"].substring(0, (lastdata["機器設定-Infusion dose"].length - 3)));
+                                    $("#Q5-3-7-3-4").attr("value", lastdata["機器設定-Lock-out interval"].substring(0, (lastdata["機器設定-Lock-out interval"].length - 4)));
+                                    $("#Q5-3-7-3-5").attr("value", lastdata["機器設定-4-hr limit"].substring(0, (lastdata["機器設定-4-hr limit"].length - 3)));
+                                }
+                            }
+                            $("#Q5-3-8-1").attr("value", lastdata.位置);
+                            $("#Q5-3-8-2").attr("value", lastdata.fix);
+                            $("#Q5-3-8-3").attr("value", lastdata.施打者);
+
+                            break;
+                        case "C/S(8-8)":
+                            $("#btnQ5-3-2-4").attr("class", "btn btn-primary active");
+                            $("#Q5-3-2-4").attr("checked", "checked");
+                            $("#Q5-3-5").show();
+                            $("#Q5-3-6").show();
+
+                            $("#Q5-3-8-1").attr("value", lastdata.位置);
+                            $("#Q5-3-8-2").attr("value", lastdata.fix);
+                            $("#Q5-3-8-3").attr("value", lastdata.施打者);
+
+                            break;
+                    }
 
                     var c = "2017-11-02 11:15";
-                    var OutbedTimeyear = lastdata.下床時間.substring(0, 4);
-                    var OutbedTimemonth = lastdata.下床時間.substring(5, 7);
-                    var OutbedTimeday = lastdata.下床時間.substring(8, 10);
-                    var dbedhour = lastdata.下床時間.substring(11, 13);
-                    var dbedmin = lastdata.下床時間.substring(14, 16);
-                    $("#OutbedTime").attr("value", OutbedTimeyear + "-" + OutbedTimemonth + "-" + OutbedTimeday);
-                    $("#dbedhour option[value=" + dbedhour + "]").attr("selected", "selected");
-                    $("#dbedmin option[value=" + dbedmin + "]").attr("selected", "selected");
+                    if (lastdata.下床時間 == "尚未發生") {
+                        $("#btnnone1").attr("class", "btn btn-primary active");
+                        $("#none1").attr("checked", "checked");
+                    } else {
+                        var OutbedTimeyear = lastdata.下床時間.substring(0, 4);
+                        var OutbedTimemonth = lastdata.下床時間.substring(5, 7);
+                        var OutbedTimeday = lastdata.下床時間.substring(8, 10);
+                        var dbedhour = lastdata.下床時間.substring(11, 13);
+                        var dbedmin = lastdata.下床時間.substring(14, 16);
+                        $("#OutbedTime").attr("value", OutbedTimeyear + "-" + OutbedTimemonth + "-" + OutbedTimeday);
+                        $("#dbedhour option[value=" + dbedhour + "]").attr("selected", "selected");
+                        $("#dbedmin option[value=" + dbedmin + "]").attr("selected", "selected");
+                        $("#btnnone1").attr("class", "btn btn-primary");
+                        $("#none1").attr("checked", false);
+                    }
 
-                    var GasTimeyear = lastdata.排氣時間.substring(0, 4);
-                    var GasTimemonth = lastdata.排氣時間.substring(5, 7);
-                    var GasTimeday = lastdata.排氣時間.substring(8, 10);
-                    var blhour = lastdata.排氣時間.substring(11, 13);
-                    var blmin = lastdata.排氣時間.substring(14, 16);
-                    $("#GasTime").attr("value", GasTimeyear + "-" + GasTimemonth + "-" + GasTimeday);
-                    $("#blhour option[value=" + blhour + "]").attr("selected", "selected");
-                    $("#blmin option[value=" + blmin + "]").attr("selected", "selected");
+                    if (lastdata.排氣時間 == "尚未發生") {
+                        $("#btnnone2").attr("class", "btn btn-primary active");
+                        $("#none2").attr("checked", "checked");
+                    } else {
+                        var GasTimeyear = lastdata.排氣時間.substring(0, 4);
+                        var GasTimemonth = lastdata.排氣時間.substring(5, 7);
+                        var GasTimeday = lastdata.排氣時間.substring(8, 10);
+                        var blhour = lastdata.排氣時間.substring(11, 13);
+                        var blmin = lastdata.排氣時間.substring(14, 16);
+                        $("#GasTime").attr("value", GasTimeyear + "-" + GasTimemonth + "-" + GasTimeday);
+                        $("#blhour option[value=" + blhour + "]").attr("selected", "selected");
+                        $("#blmin option[value=" + blmin + "]").attr("selected", "selected");
+                        $("#btnnone2").attr("class", "btn btn-primary");
+                        $("#none2").attr("checked", false);
+                    }
 
                     if (lastdata.PCA同意書確認 == "已確認") {
                         $("#btnQn5-6-2").addClass("active");
@@ -262,8 +641,28 @@ $(document).ready(function() {
                         $("#Qn5-6-2-1").attr("checked", false);
                     }
 
+
+                    if (lastdata["PFE(PCA)"].indexOf("術訪") != -1) {
+                        $("#btnQn5-6-3-1").attr("class", "btn btn-primary active");
+                        $("#Qn5-6-3-1").attr("checked", "check");
+                    }
+                    if (lastdata["PFE(PCA)"].indexOf("完成") != -1) {
+                        $("#btnQn5-6-3-2").attr("class", "btn btn-primary active");
+                        $("#Qn5-6-3-2").attr("checked", "check");
+                    }
+
+
+                    $("#Qtime3").attr("value", lastdata.已輸液量);
+                    $("#Qtime4").attr("value", lastdata.有效次數);
+                    $("#Qtime5").attr("value", lastdata.請求次數);
+
+                    $("#Qtime6 option[value=" + lastdata["VAS(動)"] + "]").attr("selected", "selected");
+                    $("#Qtime7 option[value=" + lastdata["VAS(靜)"] + "]").attr("selected", "selected");
+                    $("#Qtime8 option[value=" + lastdata["VAS(宮縮)"] + "]").attr("selected", "selected");
+
                     for (var i = time; i > 0; i--) {
                         var j = time - i;
+                        var olddata14 = resdata[datanumber[j]]["病人狀況-日期"] + " " + resdata[datanumber[j]]["病人狀況-時間"] + "\n\n" + resdata[datanumber[j]].其他交班事項 + "\n\n備袋：" + resdata[datanumber[j]].備袋;
                         $("#olddata" + i + "-1").append(resdata[datanumber[j]]["病人狀況-日期"]);
                         $("#olddata" + i + "-2").append(resdata[datanumber[j]]["病人狀況-時間"]);
                         $("#olddata" + i + "-3").append(resdata[datanumber[j]].頭暈);
@@ -277,9 +676,22 @@ $(document).ready(function() {
                         $("#olddata" + i + "-11").append(resdata[datanumber[j]].處置);
                         $("#olddata" + i + "-12").append(resdata[datanumber[j]].EA導管);
                         $("#olddata" + i + "-13").append(resdata[datanumber[j]].衛教);
-                        $("#olddata" + i + "-14").append(resdata[datanumber[j]].其他交班事項);
+                        $("#olddata" + i + "-14").append(olddata14);
                         $("#olddata" + i + "-15").append(resdata[datanumber[j]].U1126);
                     }
+
+
+                    if (lastdata.備袋狀況 == "無備袋") {
+                        $("#btnQ3-1").attr("class", "btn btn-primary active");
+                        $("#Q3-1").attr("checked", "check");
+                    } else if (lastdata.備袋狀況 == "已用") {
+                        $("#btnQ3-2").attr("class", "btn btn-primary active");
+                        $("#Q3-2").attr("checked", "check");
+                    } else if (lastdata.備袋狀況 == "已取回") {
+                        $("#btnQ3-3").attr("class", "btn btn-primary active");
+                        $("#Q3-3").attr("checked", "check");
+                    }
+
 
                     if (lastdata.用藥資料單完成 == "用藥資料單完成") {
                         $("#btnQ5-1").addClass("active");
@@ -425,14 +837,24 @@ $(document).ready(function() {
 
 
     $("#saveinfo").click(function(event) {
+        var Today = new Date();
+
 
         if (hhtemp != 0 && hhtemp != undefined) {
             patient_info["病歷號"] = hhtemp;
         } else {
             patient_info["病歷號"] = htemp[1];
         }
-        //event.preventDefault();
+        //event.preventDefault();        
 
+        patient_info['姓名'] = $("#ss01").val();
+        patient_info['病房'] = $("#ss02").val();
+        patient_info['性別'] = $("#ss03").val();
+        patient_info['年齡'] = $("#ss04").val();
+        patient_info['術式'] = $("#ss07").val();
+
+        patient_info["身高"] = $("#ss08").val();
+        patient_info["體重"] = $("#ss09").val();
         patient_info["Cre"] = $("#ss06").val();
 
 
@@ -608,9 +1030,9 @@ $(document).ready(function() {
         }
         if ($("#Q5-1-4-1-4").prop('checked')) {
             if (pertemp == "") {
-                pertemp = $("#QT5-1-4-1-3").val();
+                pertemp = $("#QT5-1-4-1-4").val();
             } else {
-                pertemp = pertemp + " + " + $("#QT5-1-4-1-3").val();
+                pertemp = pertemp + " + " + $("#QT5-1-4-1-4").val();
             }
         } else {
             pertemp = pertemp + "";
@@ -710,19 +1132,19 @@ $(document).ready(function() {
                 patient_info["機器設定-PCA dose"] = "3 ml";
                 patient_info["機器設定-Infusion dose"] = "4 ml";
                 patient_info["機器設定-Lock-out interval"] = "20 min";
-                patient_info["機器設定-4-hr limit"] = "35 ml";
+                patient_info["機器設定-4-hr limit"] = "35 mg";
             } else if ($("#Q5-3-6-2").prop('checked')) {
                 patient_info["機器設定-Loading dose"] = "0 ml";
                 patient_info["機器設定-PCA dose"] = "6 ml";
                 patient_info["機器設定-Infusion dose"] = "6 ml";
                 patient_info["機器設定-Lock-out interval"] = "15 min";
-                patient_info["機器設定-4-hr limit"] = "80 ml";
+                patient_info["機器設定-4-hr limit"] = "80 mg";
             } else if ($("#Q5-3-6-3").prop('checked')) {
                 patient_info["機器設定-Loading dose"] = $("#Q5-3-6-3-1").val() + " ml";
                 patient_info["機器設定-PCA dose"] = $("#Q5-3-6-3-2").val() + " ml";
                 patient_info["機器設定-Infusion dose"] = $("#Q5-3-6-3-3").val() + " ml";
                 patient_info["機器設定-Lock-out interval"] = $("#Q5-3-6-3-4").val() + " min";
-                patient_info["機器設定-4-hr limit"] = $("#Q5-3-6-3-5").val() + " ml";
+                patient_info["機器設定-4-hr limit"] = $("#Q5-3-6-3-5").val() + " mg";
             } else {
                 patient_info["機器設定-Loading dose"] = "";
                 patient_info["機器設定-PCA dose"] = "";
@@ -760,19 +1182,19 @@ $(document).ready(function() {
                 patient_info["機器設定-PCA dose"] = "3 ml";
                 patient_info["機器設定-Infusion dose"] = "4 ml";
                 patient_info["機器設定-Lock-out interval"] = "20 min";
-                patient_info["機器設定-4-hr limit"] = "40 ml";
+                patient_info["機器設定-4-hr limit"] = "40 mg";
             } else if ($("#Q5-3-7-2").prop('checked')) {
                 patient_info["機器設定-Loading dose"] = "0 ml";
                 patient_info["機器設定-PCA dose"] = "6 ml";
                 patient_info["機器設定-Infusion dose"] = "8 ml";
                 patient_info["機器設定-Lock-out interval"] = "15 min";
-                patient_info["機器設定-4-hr limit"] = "80 ml";
+                patient_info["機器設定-4-hr limit"] = "80 mg";
             } else if ($("#Q5-3-7-3").prop('checked')) {
                 patient_info["機器設定-Loading dose"] = $("#Q5-3-7-3-1").val() + " ml";
                 patient_info["機器設定-PCA dose"] = $("#Q5-3-7-3-2").val() + " ml";
                 patient_info["機器設定-Infusion dose"] = $("#Q5-3-7-3-3").val() + " ml";
                 patient_info["機器設定-Lock-out interval"] = $("#Q5-3-7-3-4").val() + " min";
-                patient_info["機器設定-4-hr limit"] = $("#Q5-3-7-3-5").val() + " ml";
+                patient_info["機器設定-4-hr limit"] = $("#Q5-3-7-3-5").val() + " mg";
             } else {
                 patient_info["機器設定-Loading dose"] = "";
                 patient_info["機器設定-PCA dose"] = "";
@@ -807,12 +1229,13 @@ $(document).ready(function() {
             patient_info["施打者"] = "";
         }
 
-        if ($("#none1").prop('checked')) {
+        if ($("#none1").prop('checked') || $("#OutbedTime").val() == "") {
             patient_info["下床時間"] = "尚未發生";
         } else {
             patient_info["下床時間"] = $("#OutbedTime").val() + " " + $("#dbedhour").find(":selected").text() + ":" + $("#dbedmin").find(":selected").text();
         }
-        if ($("#none2").prop('checked')) {
+
+        if ($("#none2").prop('checked') || $("#GasTime").val() == "") {
             patient_info["排氣時間"] = "尚未發生";
         } else {
             patient_info["排氣時間"] = $("#GasTime").val() + " " + $("#blhour").find(":selected").text() + ":" + $("#blmin").find(":selected").text();
@@ -883,6 +1306,18 @@ $(document).ready(function() {
 
         patient_info["衛教"] = CheckboxCkeck("F10");
 
+        var Year = Today.getFullYear();
+        var Month = Today.getMonth() + 1;
+        var Day = Today.getDate();
+        var Hours = Today.getHours();
+        var Minutes = Today.getMinutes();
+        var Second = Today.getSeconds();
+        if (Month < 10) Month = "0" + Month;
+        if (Day < 10) Day = "0" + Day;
+        if (Hours < 10) Hours = "0" + Hours;
+        if (Minutes < 10) Minutes = "0" + Minutes;
+        if (Second < 10) Second = "0" + Second;
+        patient_info["date"] = Year + "-" + Month + "-" + Day + " " + Hours + ":" + Minutes + ":" + Second;
 
         patient_info["其他交班事項"] = $("#TQ1").val();
         patient_info["備袋"] = $("#p2").html();
@@ -918,18 +1353,11 @@ $(document).ready(function() {
         };
         console.log(patient_info);
 
-        var href1 = document.location.href;
-        var hrefsplit = href1.split("?");
-        if (hrefsplit.indexOf("-") > 0) {
-            var hrefsplit2 = hrefsplit.split("-");
-            time = parseInt(hrefsplit2[1]);
-        } else {
-            time = 2;
-        }
+
         if (time == 0) {
             patient_info['病歷號'] = htemp[1];
         } else {
-            patient_info['病歷號'] = htemp[1] + "-" + (time);
+            patient_info['病歷號'] = htemp[1].substring(0, 7) + "-" + (time);
         }
         var request2 = indexedDB.open("olddb");
         request2.onerror = function(event) {

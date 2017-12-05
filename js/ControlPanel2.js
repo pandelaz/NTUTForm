@@ -76,10 +76,23 @@
         });
 
         var Today = new Date();
-        var info07 = Today.getFullYear() + "-" + (Today.getMonth() + 1) + "-" + Today.getDate();
-        $("#info07").attr("value", info07);
+        var datee;
+        var monthh;
 
+        if (Today.getDate().toString().length <= 1) {
+            datee = "0" + Today.getDate();
+        } else {
+            datee = Today.getDate();
+        }
+        if (Today.getMonth().toString().length <= 1) {
+            monthh = "0" + (Today.getMonth() + 1);
+        } else {
+            monthh = (Today.getMonth() + 1);
+        }
 
+        var info07 = Today.getFullYear() + "-" + monthh + "-" + datee;
+        console.log(info07);
+        document.getElementById("info07").value = info07;
         var RowCnt = 0;
 
         var db;
@@ -92,7 +105,7 @@
 
 
         db = opendb("TestDatabase", "病歷號");
-        console.log(db);
+        //console.log(db);
 
         //================================================
         function opendb(dbname, KeyPathStr) {
@@ -102,7 +115,7 @@
             };
             request.onsuccess = function(event) {
                 db = event.target.result;
-                console.log(db);
+                //console.log(db);
                 //=======================================
                 var transaction = db.transaction(["mList"]);
                 var objectStore = transaction.objectStore("mList");
@@ -112,20 +125,52 @@
                     alert("not found!");
                 };
                 request1.onsuccess = function(event) {
-                    $("#htmlout").html(request1.result.HtmlTemp);
-                    $("#btnQ0-1-1").hide();
-                    console.log(db);
+                    //console.log(request1.result);
+                    if (request1.result != undefined) {
+                        $("#htmlout").html(request1.result.HtmlTemp);
+                        $("#btnQ0-1-1").hide();
+                    }
+                    //console.log(db);
+                    //=======================================
+                    var transaction2 = db.transaction(["nList"]);
+                    var objectStore2 = transaction2.objectStore("nList");
+                    var request2 = objectStore2.getAll();
+                    request2.onerror = function(event) {
+                        // Handle errors!
+                        alert("not found!");
+                    };
+                    request2.onsuccess = function(event) {
+                        //console.log("get ok");
+                        //console.log(event.target.result[0].doctor);
+                        if (event.target.result[0] != undefined) {
+                            var htmlstr1 = event.target.result[0].doctor;
+                            var sptmp = htmlstr1.split("\n");
+                            //console.log(sptmp);
+
+                            for (var t in sptmp) {
+                                if (sptmp[t].indexOf(",") >= 0) {
+                                    var sptmp2 = sptmp[t].split(",");
+                                    $("#info18").append("<option value='" + sptmp2[1] + "'>" + sptmp2[1] + "</option>");
+                                }
+                            }
+                        }
+
+                    };
+                    //=======================================
                 };
                 //=======================================
+
             };
             request.onupgradeneeded = function(event) {
                 db = event.target.result;
+                var objectStore1 = db.createObjectStore("nList", { keyPath: "doctor" });
                 var objectStore = db.createObjectStore("mList", { keyPath: KeyPathStr });
+
             };
         }
         //================================================
         function write_to_db(vardb, data) {
-            console.log(vardb);
+            //console.log(vardb);
             var transaction = vardb.transaction(["mList"], "readwrite");
             //console.log(data);
             // Do something when all the data is added to the database.
@@ -312,6 +357,35 @@
                     type: 'binary',
                     bookType: 'html'
                 });
+                var htmlstr1 = XLSX.write(workbook, {
+                    sheet: "doctor_name",
+                    type: 'binary',
+                    bookType: 'csv'
+                });
+                //console.log(db);
+                //=======================================
+                var transaction = db.transaction(["nList"], "readwrite");
+                var objectStore = transaction.objectStore("nList"); //vardb.transaction(["mList"], "readwrite");
+                var doctmp = { "doctor": htmlstr1 };
+                var request = objectStore.add(doctmp);
+                request.onsuccess = function(event) {
+                    // event.target.result == customerData[i].ssn;
+                    //location.assign(curl);
+                    console.log("save ok");
+                };
+                //=======================================
+
+
+                var sptmp = htmlstr1.split("\n");
+                console.log(sptmp);
+
+                for (var t in sptmp) {
+                    if (sptmp[t].indexOf(",") >= 0) {
+                        var sptmp2 = sptmp[t].split(",");
+                        $("#info18").append("<option value='" + sptmp2[1] + "'>" + sptmp2[1] + "</option>");
+                    }
+                }
+
 
                 RowCnt = -1;
                 while ($("#T" + (RowCnt + 1)).length == 1) {
@@ -350,7 +424,19 @@
                 //console.log(temp[temp.length - 1]);
                 document.getElementById('htmlout').innerHTML = htmlstr;
                 $("#s0").height("auto");
-                console.log(htmlstr);
+                //console.log(htmlstr);
+                //=======================================
+                var transaction5 = db.transaction(["mList"], "readwrite");
+                var objectStore5 = transaction5.objectStore("mList"); //vardb.transaction(["mList"], "readwrite");
+                var doctmp5 = { "HtmlTemp": htmlstr, "病歷號": "HTML" };
+                var request5 = objectStore5.add(doctmp5);
+                request5.onsuccess = function(event) {
+                    // event.target.result == customerData[i].ssn;
+                    //location.assign(curl);
+                    console.log("html save ok");
+                };
+                //=======================================
+
 
                 //=========================================================================
                 //儲存病人資訊至DB
@@ -358,19 +444,20 @@
 
                 //write_to_db(db, patient_info.personal_information);
                 var datacnt = { "123456": 1, "223456": 1 };
-
-                for (var i = 0; i < (patient_info.form.length - 1); i++) {
-                    for (var j = i + 1; j < patient_info.form.length; j++) {
-                        if (patient_info.form[i].病歷號 == patient_info.form[j].病歷號) {
-                            if (datacnt[patient_info.form[j].病歷號] == undefined)
-                                datacnt[patient_info.form[j].病歷號] = 1;
-                            patient_info.form[j].病歷號 = patient_info.form[j].病歷號 + "-" + datacnt[patient_info.form[j].病歷號];
-                            datacnt[patient_info.form[j].病歷號]++;
+                if (patient_info.form != undefined) {
+                    for (var i = 0; i < (patient_info.form.length - 1); i++) {
+                        for (var j = i + 1; j < patient_info.form.length; j++) {
+                            if (patient_info.form[i].病歷號 == patient_info.form[j].病歷號) {
+                                if (datacnt[patient_info.form[j].病歷號] == undefined)
+                                    datacnt[patient_info.form[j].病歷號] = 1;
+                                patient_info.form[j].病歷號 = patient_info.form[j].病歷號 + "-" + datacnt[patient_info.form[j].病歷號];
+                                datacnt[patient_info.form[j].病歷號]++;
+                            }
                         }
                     }
-                }
 
-                console.log(patient_info.form);
+                    console.log(patient_info.form);
+                }
 
                 //write_to_db(db, patient_info.SheetJS);
                 //console.log(vardb);
@@ -863,12 +950,6 @@
 
                 };
                 //=======================================
-
-
-
-
-
-
 
             }
         });
